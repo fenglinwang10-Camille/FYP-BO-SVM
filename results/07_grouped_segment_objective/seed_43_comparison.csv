@@ -1,3 +1,0 @@
-seed,objective,best_iteration,test_segment_accuracy,test_segment_macro_f1,test_recall_N,test_recall_F,test_recall_S
-43,nf_focused,35,0.89,0.8868820039551746,0.8,0.65,1.0
-43,segment_accuracy,40,0.87,0.8682992659886113,0.75,0.65,1.0

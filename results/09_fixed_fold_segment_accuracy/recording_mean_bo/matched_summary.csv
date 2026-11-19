@@ -1,3 +1,0 @@
-method,accuracy_mean,accuracy_sd,recall_F_mean
-feature_mean,0.834,0.03911521443121587,0.6
-majority_vote,0.868,0.030331501776206228,0.62

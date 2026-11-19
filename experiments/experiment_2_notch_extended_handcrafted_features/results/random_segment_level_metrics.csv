@@ -1,2 +1,0 @@
-method,metric_level,accuracy,macro_recall,macro_f1,seizure_sensitivity,recall_Z,recall_O,recall_N,recall_F,recall_S
-Random Search,segment,0.84,0.8400000000000001,0.8381141209275071,0.95,0.9,0.8,0.9,0.65,0.95

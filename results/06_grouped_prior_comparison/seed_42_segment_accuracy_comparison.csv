@@ -1,5 +1,0 @@
-prior,status,best_cv_score,segment_accuracy,segment_macro_f1,segment_recall_N,segment_recall_F,segment_recall_S
-uniform,complete,0.8775000000000001,0.9,0.8992661140029561,0.95,0.7,0.95
-normal,complete,0.885,0.83,0.8207040064182921,1.0,0.45,0.95
-exponential,complete,0.8825,0.82,0.8188838143780378,0.75,0.65,0.95
-gamma,complete,0.8875,0.9,0.8993779006615977,0.9,0.8,0.95

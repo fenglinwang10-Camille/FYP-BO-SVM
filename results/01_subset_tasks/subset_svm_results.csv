@@ -1,4 +1,0 @@
-task,classes,feature_setting,cv_accuracy,test_accuracy,best_params,confusion_matrix,recall_Z,recall_S,f_low,f_high,window_size,overlap,recall_F
-Z_vs_S,Z/S,entropy_hjorth,1.0,1.0,"{""select__k"": 29, ""svm__C"": 10.0, ""svm__gamma"": 0.01}","[[180, 0], [0, 180]]",1.0,1.0,0.5,32.3296314073404,4.510110776913838,0.5,
-F_vs_S,F/S,nf_enhanced,0.9972222222222222,1.0,"{""select__k"": 55, ""svm__C"": 10.0, ""svm__gamma"": 0.05}","[[180, 0], [0, 180]]",,1.0,0.5,32.3296314073404,4.510110776913838,0.5,1.0
-Z_vs_F_vs_S,Z/F/S,nf_enhanced,0.9824074074074075,0.987037037037037,"{""select__k"": 35, ""svm__C"": 100.0, ""svm__gamma"": 0.1}","[[175, 5, 0], [2, 178, 0], [0, 0, 180]]",0.9722222222222222,1.0,0.5,32.3296314073404,4.510110776913838,0.5,0.9888888888888889

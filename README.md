@@ -1,6 +1,6 @@
 # FYP BO-SVM
 
-实验项目，研究 Bayesian optimisation 在 EEG 预处理和 RBF-SVM 参数选择中的表现。仓库包含实验代码、Bonn 数据文件、保存的结果、分析脚本、实验笔记本和 PNG 图件。
+实验项目，研究 Bayesian optimisation 在 EEG 预处理和 RBF-SVM 参数选择中的表现。仓库包含实验代码、Bonn 数据文件、保存的结果、分析脚本、PNG 图件。
 
 ## 在另一台设备上开始
 
@@ -58,7 +58,7 @@ git push
 | `README_NESTED_EXPERIMENT.md` | 新实验的固定协议、输出和运行说明 |
 | `parameter_priors.py` | 四种预处理参数映射 |
 | `Dataset/` | 项目实际使用的 500 个 Bonn EEG 片段 |
-| `results/09_fixed_fold_segment_accuracy/` | 当前 55 维主实验及明确命名的补充实验 |
+| `results/09_fixed_fold_segment_accuracy/` | 保留的 55 维 BO/RS、四种映射及相关分析结果 |
 | `figures/chapter5/` | 实际实验的搜索曲线、参数可视化、混淆矩阵和 GP 诊断图 |
 | `chapter4_draft/` | 保留的实验协议审计、搜索历史统计和训练集频谱分析，目录名沿用原项目 |
 | `tmp/analyze_search_behaviour.py` | 已保存搜索日志的阶段与映射分析 |
@@ -74,7 +74,7 @@ git push
 
 原有重复划分实验保留为探索性结果：
 
-主实验使用 55 维特征、片段固定五折验证、片段级 accuracy 目标，每次搜索评价 50 个配置。Uniform BO 和 RS 已保存 seeds 42–46 的配对结果，四种映射各有五组 BO 结果。固定参考在 seeds 42 和 44 上已保存结果。其他版本的结果目录保留了历史实验，具体协议见 `results/README_RESULTS.md`。
+原重复划分实验使用 55 维特征、片段固定五折验证、片段级 accuracy 目标，每次搜索评价 50 个配置。Uniform BO 和 RS 已保存 seeds 42–46 的配对结果，四种映射各有五组 BO 结果。固定参考在 seeds 42 和 44 上已保存结果。未采用的旧协议和补充实验已删除，保留范围见 `results/README_RESULTS.md`。
 
 `figures/chapter5/` 中的图 5.1 展示五组 uniform BO，图 5.2 和 5.3 展示 seed 44，图 5.4 展示 seed 44 的四种映射。其他参数可视化的 seed 和实验口径见图片及对应脚本。
 

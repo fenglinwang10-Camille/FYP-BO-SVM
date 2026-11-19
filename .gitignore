@@ -59,7 +59,6 @@ venv/
 /tmp/*
 !/tmp/analyze_search_behaviour.py
 !/tmp/build_chapter5_seed44_figures.py
-!/tmp/regenerate_grouped_classwise_recall_plot.py
 /tmp_pdf_pages/
 /tmp_pdf_review.txt
 

@@ -1,3 +1,0 @@
-objective,best_iteration,validation_macro_f1,window_accuracy,window_macro_f1,window_recall_N,window_recall_F,window_recall_S,segment_accuracy,segment_macro_f1,segment_recall_N,segment_recall_F,segment_recall_S
-N/F weighted,20,0.8374577589687204,0.8475,0.8468269472300596,0.8375,0.6375,0.95,0.88,0.8769749063866712,1.0,0.6,0.95
-macro-F1,39,0.8382615435874042,0.85,0.8494721089294085,0.8375,0.65,0.95,0.89,0.8879159636606445,1.0,0.65,0.95
