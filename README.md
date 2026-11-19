@@ -53,6 +53,9 @@ git push
 | --- | --- |
 | `grouped_bo_optimizer.py` | 当前片段固定五折验证的 BO 实验 |
 | `grouped_method_comparison.py` | 与随机搜索及固定参考的比较 |
+| `nested_bo_rs.py` | 外层五折、内层五折的 BO/RS 配对实验，共享 16 个初始候选 |
+| `run_nested_experiment.ps1` | 后台启动或断点续跑新实验 |
+| `README_NESTED_EXPERIMENT.md` | 新实验的固定协议、输出和运行说明 |
 | `parameter_priors.py` | 四种预处理参数映射 |
 | `Dataset/` | 项目实际使用的 500 个 Bonn EEG 片段 |
 | `results/09_fixed_fold_segment_accuracy/` | 当前 55 维主实验及明确命名的补充实验 |
@@ -66,6 +69,10 @@ git push
 数据出处见 [Bonn 官方下载页](https://neurophysicsbonn.de/downloads)。使用数据时引用 Andrzejak 等人，Physical Review E 64, 061907 (2001)，DOI 10.1103/PhysRevE.64.061907。
 
 ## 当前实验状态
+
+新增实验使用外层五折评估和内层五折选参，BO 与 RS 共享前 16 个候选及分数，每种方法共 50 次评价。特征、搜索边界和投票规则沿用原设置。运行 `powershell -ExecutionPolicy Bypass -File .\run_nested_experiment.ps1` 可在后台开始或续跑，完成后自动生成五折汇总。输出单独写入 `results/10_nested_cv_shared_initialization/`，运行状态以该目录中的文件为准。详见 `README_NESTED_EXPERIMENT.md`。
+
+原有重复划分实验保留为探索性结果：
 
 主实验使用 55 维特征、片段固定五折验证、片段级 accuracy 目标，每次搜索评价 50 个配置。Uniform BO 和 RS 已保存 seeds 42–46 的配对结果，四种映射各有五组 BO 结果。固定参考在 seeds 42 和 44 上已保存结果。其他版本的结果目录保留了历史实验，具体协议见 `results/README_RESULTS.md`。
 

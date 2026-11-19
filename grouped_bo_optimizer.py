@@ -232,7 +232,7 @@ def _recording_folds(y, groups, random_state):
 
 def _cross_validate_training_segments(
     signals, labels, segment_ids, params, objective_mode="segment_accuracy",
-    random_state=RANDOM_STATE, feature_cache=None,
+    random_state=RANDOM_STATE, feature_cache=None, fixed_folds=None,
 ):
     """Evaluate one candidate without accessing held-out test segments."""
     feature_key = tuple(float(params[name]) for name in ("f_low", "f_high", "window_size"))
@@ -245,7 +245,11 @@ def _cross_validate_training_segments(
     fold_metrics = []
     fold_segment_metrics = []
     fold_segment_counts = []
-    for train_ids, validation_ids in _recording_folds(y, groups, random_state):
+    folds = (
+        _recording_folds(y, groups, random_state)
+        if fixed_folds is None else fixed_folds
+    )
+    for train_ids, validation_ids in folds:
         train_index = np.flatnonzero(np.isin(groups, train_ids))
         validation_index = np.flatnonzero(np.isin(groups, validation_ids))
         train_groups = set(groups[train_index].tolist())

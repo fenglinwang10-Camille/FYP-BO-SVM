@@ -6,3 +6,4 @@ scikit-optimize==0.10.2
 matplotlib==3.10.8
 PyWavelets==1.8.0
 Pillow==12.2.0
+joblib==1.5.3

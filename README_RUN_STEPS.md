@@ -1,5 +1,11 @@
 # Current Bonn EEG BO-SVM Pipeline
 
+The new nested five-fold experiment with shared BO/RS initialization is described
+in `README_NESTED_EXPERIMENT.md`. Start or resume it in the background with
+`powershell -ExecutionPolicy Bypass -File .\run_nested_experiment.ps1`.
+It writes to `results/10_nested_cv_shared_initialization/`. The commands below
+document the earlier repeated-holdout experiment; their results remain intact.
+
 The current experiment uses the five-class Bonn EEG recordings, an 80/20
 stratified outer split by original recording, five CV folds fixed at the
 recording level, 55 `nf_enhanced` features, and an RBF-SVM. Bayesian

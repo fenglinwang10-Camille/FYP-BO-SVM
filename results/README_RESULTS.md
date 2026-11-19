@@ -1,6 +1,16 @@
 # Results Folder Index
 
-## Current: 09_fixed_fold_segment_accuracy
+## New nested evaluation: 10_nested_cv_shared_initialization
+
+Outer five-fold evaluation with fixed inner five-fold CV and paired BO/RS
+searches. Both methods share 16 initial candidates and scores, then evaluate
+34 additional candidates each. Outer/inner split seeds and search seeds are
+separate. Existing preprocessing, features and voting are retained. See
+`../README_NESTED_EXPERIMENT.md` for the protocol and background launcher.
+`run_status.json` records completion; `summary.json` is written after all five
+outer folds finish. This remains a reanalysis of previously inspected recordings.
+
+## Earlier repeated holdouts: 09_fixed_fold_segment_accuracy
 
 This is the current recording-fixed grouped-CV protocol with
 `segment_accuracy` as the BO objective. Each completed run must contain
