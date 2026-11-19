@@ -1,0 +1,5 @@
+method,phase,candidates,candidate_cv_median_pct,candidate_cv_mean_pct,candidates_below_70,median_distance,median_distance_excluding_selected,interior_candidates_excluding_selected,median_distance_interior_excluding_selected,candidates_with_boundary_value
+RS,1_16,80,81.5,79.428125,8,0.81679855,0.81971113,77,0.81971113,0
+RS,17_50,170,81.5,78.279412,25,0.84135911,0.84269827,168,0.84269827,0
+BO,1_16,80,80.875,75.828125,17,1.0015159,1.0072795,79,1.0072795,0
+BO,17_50,170,84.625,82.304412,11,0.95490602,0.97252851,25,0.88992178,144

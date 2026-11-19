@@ -1,0 +1,28 @@
+{
+  "purpose": "Exploratory fixed-configuration, training-CV-only feature selection",
+  "objective": "recording-level accuracy after window majority vote",
+  "cv_split_protocol": "recording_fixed_v2",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "feature_setting": "nf_enhanced",
+  "feature_counts": [
+    55,
+    35,
+    20
+  ],
+  "selection": "SelectKBest(f_classif) after scaling, fit within each training fold",
+  "reference_parameters": {
+    "f_low": 1.0,
+    "f_high": 40.0,
+    "window_size": 5.0,
+    "C": 10.0,
+    "gamma": 0.01
+  },
+  "held_out_test_evaluations": 0,
+  "note": "Outer training sets overlap; SD is descriptive. No BO retuning."
+}

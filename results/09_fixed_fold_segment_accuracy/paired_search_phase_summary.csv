@@ -1,0 +1,6 @@
+seed,bo_best_cv_pct_at_50,bo_first_eval_at_87_5_pct,bo_first_eval_at_88_pct,bo_first_eval_at_88_5_pct,bo_first_eval_at_88_75_pct,bo_candidate_median_cv_pct_eval_17_50,bo_candidates_below_70_pct_eval_17_50,rs_best_cv_pct_at_50,rs_first_eval_at_87_5_pct,rs_first_eval_at_88_pct,rs_first_eval_at_88_5_pct,rs_first_eval_at_88_75_pct,rs_candidate_median_cv_pct_eval_17_50,rs_candidates_below_70_pct_eval_17_50,bo_minus_rs_best_cv_at_50_pp,candidates_per_method_eval_17_50
+42,90.25,22,22,25,25,83.625,2,88.5,13,13,13,>50,79.875,7,1.75,34
+43,87.0,>50,>50,>50,>50,84.125,2,89.75,15,15,15,15,79.75,9,-2.75,34
+44,90.5,12,12,22,22,85.75,2,88.0,3,3,>50,>50,82.5,4,2.5,34
+45,88.75,41,41,41,41,84.875,2,88.75,1,1,24,24,82.75,0,0.0,34
+46,88.0,9,9,>50,>50,84.75,3,88.75,7,49,49,49,81.375,5,-0.75,34

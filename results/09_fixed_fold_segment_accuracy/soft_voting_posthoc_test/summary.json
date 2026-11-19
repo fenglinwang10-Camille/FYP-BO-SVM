@@ -1,0 +1,10 @@
+{
+  "hard_accuracy_mean": 0.868,
+  "soft_accuracy_mean": 0.8800000000000001,
+  "hard_accuracy_sd": 0.030331501776206228,
+  "soft_accuracy_sd": 0.04527692569068708,
+  "paired_accuracy_difference_mean": 0.012000000000000033,
+  "hard_recall_F_mean": 0.62,
+  "soft_recall_F_mean": 0.67,
+  "note": "Post-hoc exploratory comparison on previously inspected test sets. BO parameters selected for hard voting, not retuned for soft voting. SVC probability calibration uses internal window-level CV."
+}

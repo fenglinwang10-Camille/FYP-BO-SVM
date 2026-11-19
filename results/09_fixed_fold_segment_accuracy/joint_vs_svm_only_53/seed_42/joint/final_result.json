@@ -1,0 +1,68 @@
+{
+  "seed": 42,
+  "method": "joint",
+  "n_features": 53,
+  "n_calls": 50,
+  "n_initial": 16,
+  "parameters": {
+    "f_low": 1.887067498662027,
+    "f_high": 38.37480519657554,
+    "window_size": 4.4399777976287025,
+    "C": 37.652495018311846,
+    "gamma": 0.06158459876169439
+  },
+  "best_cv_accuracy": 0.875,
+  "best_iteration": 3,
+  "test_metrics": {
+    "accuracy": 0.93,
+    "macro_recall": 0.93,
+    "macro_f1": 0.930137397903765,
+    "per_class_recall": {
+      "Z": 0.95,
+      "O": 0.95,
+      "N": 0.85,
+      "F": 0.95,
+      "S": 0.95
+    },
+    "confusion_matrix": [
+      [
+        19,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        19,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        17,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        19,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        19
+      ]
+    ]
+  },
+  "test_evaluations": 1,
+  "search_seconds": 736.4287412997801,
+  "limitation": "Development-exposed overlapping outer splits; not new independent confirmation."
+}

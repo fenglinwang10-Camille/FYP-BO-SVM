@@ -1,0 +1,219 @@
+0 [0x00007438] INFO pdflatex null - this process (16360) started by pwsh in directory C:\Users\王枫淋\Desktop\FYP\chapter4_draft\revised_setup_20261109 with command line: C:\Users\王枫淋\AppData\Local\Programs\MiKTeX\miktex\bin\x64\pdflatex.exe -interaction=nonstopmode -halt-on-error preview.tex
+1 [0x00007438] INFO pdflatex null - running on Windows 10.0.26200
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Setup
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+4 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+4 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+4 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+4 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+4 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+5 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+5 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+5 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+5 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+5 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+5 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+5 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+5 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+5 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+5 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+5 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+5 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+5 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+7 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+7 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+7 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+7 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+7 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+8 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+8 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+8 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+8 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+8 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+9 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+9 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+9 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+9 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+9 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+9 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+9 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+9 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+9 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+9 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+9 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+9 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+9 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+9 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+9 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+9 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+9 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+9 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+9 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+10 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+10 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+10 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+10 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+10 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+10 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+10 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+10 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+10 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+10 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+10 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+10 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+10 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+10 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+10 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+10 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+10 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+11 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+11 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+11 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+11 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+11 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+11 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+11 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+11 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+11 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+11 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+12 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+12 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+12 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+12 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+12 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+12 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+12 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+12 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+12 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+12 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+12 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+12 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+12 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+12 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+19 [0x00007438] INFO pdflatex null - this process (16360) finishes with exit code 1
+20 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+20 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+20 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+20 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+20 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+21 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+21 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+21 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+21 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+21 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+21 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+21 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+21 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+21 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+21 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+21 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+21 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+21 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+21 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+21 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+21 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+21 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+21 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+21 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+21 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+22 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+22 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+22 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+22 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+22 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+22 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+22 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+22 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+22 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+22 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+22 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+22 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+22 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+22 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+22 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+22 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+22 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+22 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+22 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+22 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+23 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+23 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+23 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+23 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+23 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+23 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+23 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+23 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+23 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+23 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+23 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+23 [0x00007438] ERROR trace.pdflatex.core null - Function: RegOpenKeyExW
+23 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+23 [0x00007438] ERROR trace.pdflatex.core null - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+23 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+26 [0x00007438] ERROR trace.pdflatex.core null - 拒绝访问。
+
+26 [0x00007438] ERROR trace.pdflatex.core null - Function: CreateDirectoryW
+26 [0x00007438] ERROR trace.pdflatex.core null - Result: 5
+26 [0x00007438] ERROR trace.pdflatex.core null - Data: path="C:\Users\王枫淋\AppData\Roaming\MiKTeX\2.9"
+26 [0x00007438] ERROR trace.pdflatex.core null - Source: Libraries\MiKTeX\Core\win\win.cpp:271

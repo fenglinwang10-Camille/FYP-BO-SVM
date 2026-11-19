@@ -1,0 +1,7 @@
+feature_setting,method,test_accuracy,Recall_N,Recall_F,seizure_sensitivity,N_to_F,F_to_N,total_NF_confusion,parameters
+original_features,SVM without BO,0.7536363636363637,0.7136363636363636,0.4954545454545455,0.9818181818181818,39,86,125,"{""f_low"": 0.5, ""f_high"": 40.0, ""window_size"": 2.0, ""C"": 10.0, ""gamma"": 0.1}"
+original_features,SVM with BO,0.8075,0.7875,0.5875,1.0,12,29,41,"{""f_low"": 5.0, ""f_high"": 60.0, ""window_size"": 5.0, ""C"": 4.104259495916657, ""gamma"": 0.0542007834592451}"
+entropy_hjorth_features,SVM without BO,0.7654545454545455,0.6681818181818182,0.55,0.9727272727272728,58,75,133,"{""f_low"": 0.5, ""f_high"": 40.0, ""window_size"": 2.0, ""C"": 10.0, ""gamma"": 0.1}"
+entropy_hjorth_features,SVM with BO,0.83,0.7875,0.6125,1.0,13,26,39,"{""f_low"": 5.0, ""f_high"": 60.0, ""window_size"": 5.0, ""C"": 4.104259495916657, ""gamma"": 0.0542007834592451}"
+expanded_features,SVM without BO,0.7645454545454545,0.6818181818181818,0.5409090909090909,0.9863636363636363,57,78,135,"{""f_low"": 0.5, ""f_high"": 40.0, ""window_size"": 2.0, ""C"": 10.0, ""gamma"": 0.1}"
+expanded_features,SVM with BO,0.8375,0.8,0.625,1.0,13,24,37,"{""f_low"": 5.0, ""f_high"": 60.0, ""window_size"": 5.0, ""C"": 4.104259495916657, ""gamma"": 0.0542007834592451}"

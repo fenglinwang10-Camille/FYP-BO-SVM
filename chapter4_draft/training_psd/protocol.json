@@ -1,0 +1,30 @@
+{
+  "split_source": "results\\09_fixed_fold_segment_accuracy\\seed_42\\uniform\\grouped_split_manifest.json",
+  "split_sha256": "98d066d0a9e2988cd02e4c55a909a41de10e71b63c6e33f2d9df1027b78cacd0",
+  "training_recordings": 400,
+  "test_signals_read": false,
+  "counts": {
+    "Z": 80,
+    "O": 80,
+    "N": 80,
+    "F": 80,
+    "S": 80
+  },
+  "preprocessing": "None; Welch subtracts each spectral segment mean (constant detrending).",
+  "welch": {
+    "fs": 173.61,
+    "window": "hann",
+    "nperseg": 1024,
+    "noverlap": 512,
+    "nfft": 1024,
+    "detrend": "constant",
+    "return_onesided": true,
+    "scaling": "density",
+    "average": "mean"
+  },
+  "averaging": "Arithmetic mean across recording PSDs before logarithmic plotting.",
+  "frequency_resolution_hz": 0.169541015625,
+  "summary": "Integrals of class-mean PSD, with linear interpolation at interval endpoints; fractions of 0-Nyquist power.",
+  "purpose": "Post-search descriptive analysis; does not establish optimal cutoff values.",
+  "difference_from_features": "1024 samples for full-recording illustration; classifier feature Welch uses min(256, window length)."
+}

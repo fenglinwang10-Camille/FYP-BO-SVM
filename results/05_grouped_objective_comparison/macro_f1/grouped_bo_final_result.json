@@ -1,0 +1,129 @@
+{
+  "objective_mode": "macro_f1",
+  "bo_evaluations_used": 50,
+  "random_state": 42,
+  "cv_folds": 5,
+  "n_initial_points": 16,
+  "best_iteration": 39,
+  "best_validation_score": 0.8382615435874042,
+  "best_validation_accuracy": 0.8387499999999999,
+  "best_validation_macro_f1": 0.8382615435874042,
+  "best_parameters": {
+    "f_low": 0.5,
+    "f_high": 60.0,
+    "window_size": 5.0,
+    "C": 10.210726192989572,
+    "gamma": 0.019983754952640924
+  },
+  "class_weight": "balanced",
+  "feature_setting": "nf_enhanced",
+  "feature_columns": 55,
+  "window_overlap": 0.0,
+  "train_feature_shape": [
+    1600,
+    55
+  ],
+  "test_feature_shape": [
+    400,
+    55
+  ],
+  "window_level_test_metrics": {
+    "accuracy": 0.85,
+    "macro_recall": 0.85,
+    "macro_f1": 0.8494721089294085,
+    "per_class_recall": {
+      "Z": 0.925,
+      "O": 0.8875,
+      "N": 0.8375,
+      "F": 0.65,
+      "S": 0.95
+    },
+    "confusion_matrix": [
+      [
+        74,
+        4,
+        0,
+        0,
+        2
+      ],
+      [
+        7,
+        71,
+        0,
+        2,
+        0
+      ],
+      [
+        3,
+        0,
+        67,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        27,
+        52,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        76
+      ]
+    ]
+  },
+  "segment_level_test_metrics": {
+    "accuracy": 0.89,
+    "macro_recall": 0.89,
+    "macro_f1": 0.8879159636606445,
+    "per_class_recall": {
+      "Z": 1.0,
+      "O": 0.85,
+      "N": 1.0,
+      "F": 0.65,
+      "S": 0.95
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        17,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        7,
+        13,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        19
+      ]
+    ]
+  },
+  "test_evaluations": 1
+}

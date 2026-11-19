@@ -1,0 +1,133 @@
+{
+  "objective_mode": "segment_accuracy",
+  "cv_split_protocol": "recording_fixed_v2",
+  "parameter_prior": "normal",
+  "bo_evaluations_used": 50,
+  "random_state": 44,
+  "cv_folds": 5,
+  "n_initial_points": 16,
+  "best_iteration": 32,
+  "best_validation_score": 0.9075,
+  "best_validation_accuracy": 0.8283333333333334,
+  "best_validation_macro_f1": 0.8279353766874825,
+  "best_validation_segment_accuracy": 0.9075,
+  "best_validation_segment_macro_f1": 0.906554508278598,
+  "best_parameters": {
+    "f_low": 4.999980111613308,
+    "f_high": 43.24580421615912,
+    "window_size": 3.739361551907217,
+    "C": 100.0,
+    "gamma": 0.020646866651117927
+  },
+  "class_weight": "balanced",
+  "feature_setting": "nf_enhanced",
+  "feature_columns": 55,
+  "window_overlap": 0.0,
+  "train_feature_shape": [
+    2400,
+    55
+  ],
+  "test_feature_shape": [
+    600,
+    55
+  ],
+  "window_level_test_metrics": {
+    "accuracy": 0.7816666666666666,
+    "macro_recall": 0.7816666666666667,
+    "macro_f1": 0.7810920345828483,
+    "per_class_recall": {
+      "Z": 0.8666666666666667,
+      "O": 0.7583333333333333,
+      "N": 0.7166666666666667,
+      "F": 0.5833333333333334,
+      "S": 0.9833333333333333
+    },
+    "confusion_matrix": [
+      [
+        104,
+        13,
+        3,
+        0,
+        0
+      ],
+      [
+        24,
+        91,
+        1,
+        4,
+        0
+      ],
+      [
+        4,
+        0,
+        86,
+        30,
+        0
+      ],
+      [
+        6,
+        0,
+        43,
+        70,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        118
+      ]
+    ]
+  },
+  "segment_level_test_metrics": {
+    "accuracy": 0.83,
+    "macro_recall": 0.8300000000000001,
+    "macro_f1": 0.8235331042685343,
+    "per_class_recall": {
+      "Z": 1.0,
+      "O": 0.75,
+      "N": 0.9,
+      "F": 0.5,
+      "S": 1.0
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        15,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        18,
+        2,
+        0
+      ],
+      [
+        1,
+        0,
+        9,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        20
+      ]
+    ]
+  },
+  "test_evaluations": 1
+}

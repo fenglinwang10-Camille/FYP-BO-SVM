@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "id": "eeg-bo-overview",
+    "title": "EEG classification implementation overview",
+    "system": {
+      "name": "BO-controlled EEG classification",
+      "one_liner": "Training-only parameter selection followed by held-out testing."
+    },
+    "family": "systems",
+    "kind": "architecture",
+    "figure_kind": "whole-system",
+    "column": "double",
+    "width_pt": 480,
+    "max_height_pt": 260,
+    "template": "control-loop",
+    "direction": "left-right",
+    "palette": "blue-outline",
+    "font": "helvetica",
+    "language": "en",
+    "step_markers": "none",
+    "version": 1,
+    "caption_draft": "Implementation workflow of the Bayesian optimisation-controlled EEG classification pipeline. Solid blue arrows show data processing and evaluation; dashed orange arrows show parameter selection and feedback.",
+    "open_questions": [],
+    "notes": "A4 thesis width, 169.3 mm. The diagram is a concise implementation overview. Solid blue arrows show processing/evaluation; dashed orange arrows show selection/feedback. Held-out segments remain outside the optimisation loop."
+  },
+  "containers": [
+    {
+      "id": "bo",
+      "label": "Bayesian optimisation",
+      "kind": "solid",
+      "role": "boundary",
+      "title_position": "top-center"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "recordings",
+      "label": "Bonn EEG segments\n(five classes)",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "split",
+      "label": "Segment-level\ndata split",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "training",
+      "label": "Training segments\n(fixed cross-validation)",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "test",
+      "label": "Held-out test\nsegments",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "candidate",
+      "label": "Candidate parameters",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "preprocessing",
+      "label": "Filtering and\nwindowing",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "features",
+      "label": "Feature extraction",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "svm",
+      "label": "Standardisation\nand RBF-SVM",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "validation",
+      "label": "Mean segment-level\nvalidation accuracy",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "gp-ei",
+      "label": "GP update and EI",
+      "kind": "module",
+      "role": "existing",
+      "parent": "bo"
+    },
+    {
+      "id": "selected",
+      "label": "Selected\nconfiguration",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "refit",
+      "label": "Refit on all\ntraining data",
+      "kind": "module",
+      "role": "existing"
+    },
+    {
+      "id": "evaluation",
+      "label": "Final test\nevaluation",
+      "kind": "module",
+      "role": "existing"
+    }
+  ],
+  "edges": [
+    {
+      "id": "recordings-split",
+      "from": "recordings",
+      "to": "split",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "split-training",
+      "from": "split",
+      "to": "training",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "split-test",
+      "from": "split",
+      "to": "test",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "training-preprocessing",
+      "from": "training",
+      "to": "preprocessing",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "preprocessing-features",
+      "from": "preprocessing",
+      "to": "features",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "features-svm",
+      "from": "features",
+      "to": "svm",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "candidate-preprocessing",
+      "from": "candidate",
+      "to": "preprocessing",
+      "kind": "control",
+      "style": "dashed",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal",
+      "label": "Filter cutoffs and\nwindow length"
+    },
+    {
+      "id": "candidate-svm",
+      "from": "candidate",
+      "to": "svm",
+      "kind": "control",
+      "style": "dashed",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal",
+      "label": "C and \u03b3"
+    },
+    {
+      "id": "svm-validation",
+      "from": "svm",
+      "to": "validation",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "head": "filled",
+      "route": "orthogonal",
+      "label": "Majority voting"
+    },
+    {
+      "id": "validation-gp",
+      "from": "validation",
+      "to": "gp-ei",
+      "kind": "feedback",
+      "style": "dashed",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "next-candidate",
+      "from": "gp-ei",
+      "to": "candidate",
+      "kind": "feedback",
+      "style": "dashed",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "select",
+      "from": "validation",
+      "to": "selected",
+      "kind": "control",
+      "style": "dashed",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal",
+      "label": "After budget\nexhaustion"
+    },
+    {
+      "id": "selected-refit",
+      "from": "selected",
+      "to": "refit",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "refit-evaluation",
+      "from": "refit",
+      "to": "evaluation",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    },
+    {
+      "id": "test-evaluation",
+      "from": "test",
+      "to": "evaluation",
+      "kind": "data",
+      "style": "solid",
+      "weight": "normal",
+      "head": "filled",
+      "route": "orthogonal"
+    }
+  ],
+  "legend": {
+    "mode": "explicit",
+    "placement": "below",
+    "title": "",
+    "items": [
+      {
+        "id": "data-flow",
+        "label": "Data processing and evaluation",
+        "swatch": {
+          "kind": "line",
+          "role": "stroke",
+          "line_style": "solid",
+          "head": "filled"
+        }
+      },
+      {
+        "id": "parameter-flow",
+        "label": "Parameter selection and feedback",
+        "swatch": {
+          "kind": "line",
+          "role": "accent",
+          "line_style": "dashed",
+          "head": "filled"
+        }
+      }
+    ]
+  },
+  "notes": "Solid blue arrows show data processing and evaluation. Dashed orange arrows show parameter selection and feedback. Held-out test segments do not enter the BO loop."
+}

@@ -1,0 +1,33 @@
+{
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "budget": 50,
+  "initial": 16,
+  "features": 53,
+  "wavelet": "db4",
+  "level": 3,
+  "fixed_preprocessing": {
+    "f_low": 1.0,
+    "f_high": 40.0,
+    "window_size": 5.0
+  },
+  "gp": "Constant * ARD Matern 5/2 + Gaussian observation noise; normalized targets",
+  "acquisition": "EI",
+  "initial_design": "shared initial C/gamma; first full configuration shared; remaining joint preprocessing uniform",
+  "metric": "Mean fold record accuracy after majority vote",
+  "test_policy": "one selected configuration per run",
+  "interpretation": "Paired development-stage outer evaluation; previous test exposure and overlapping splits acknowledged",
+  "hashes": {
+    "C:\\Users\\\u738b\u67ab\u6dcb\\Desktop\\FYP\\compare_joint_preprocessing_bo.py": "50fe6a1027af323fd46e4a89b62e950202ef95ad843a0e47c870fca6cc0fe4bb",
+    "features.py": "5ccdcd97c6252e4bd73b9d74b4dbd734759278e35dc1a57c5c0cc94a0a5a94e9",
+    "preprocessing.py": "9693906ce891b2fee1894c5bdddfa887713a8a52d13e1a2c3240c8cbd95e157b",
+    "grouped_bo_optimizer.py": "53840101df5b8009f31a268b98dc40ca850849528394462089a0ff6177af4f5c",
+    "compare_feature_deduplication.py": "62494a449f781ec29a61c712c35f5f799bf5f3349b275ebe0d9c898e61dfa695",
+    "analyze_grouped_features.py": "4b42352ade7dd9bec62e2c68919a689af0336a534d18983a4816635821f9f054"
+  }
+}

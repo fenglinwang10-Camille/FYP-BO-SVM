@@ -1,0 +1,1515 @@
+PAGE 1
+ 
+Contents lists available at ScienceDirect
+Chaos, Solitons and Fractals
+journal homepage: www.elsevier.com/locate/chaos  
+EEG driven seizure classification framework leveraging variational mode 
+decomposition technique and entropy features based Bayesian optimized 
+SVM
+Kandasamy C.P. a, Vinodh Kumar Elumalai a,∗, Balaji E. b
+a School of Electrical Engineering, Vellore Institute of Technology, Vellore, Tamilnadu, 632014, India
+b School of Computer Science Engineering and Information Systems, Vellore Institute of Technology, Vellore, Tamilnadu, 632014, India
+A R T I C L E  I N F O
+Keywords:
+Seizure diagnosis
+Bayesian optimized SVM
+Variational mode decomposition
+Neighborhood component analysis
+ReliefF
+Entropy features
+ A B S T R A C T
+EEG signal can capture spatial and temporal shifts in electrical activity of the brain, thereby acting as a 
+prominent biomarker to diagnose seizure. Nevertheless, as EEG recordings are generally high-dimensional and 
+noisy, manual examination of any such abnormalities in EEG patterns to diagnose seizure is a time consuming 
+and tedious task for a neurologist. Therefore, it is important to devise an effective decision support system 
+which can uncover the abnormalities in the EEG signals. In this study, we present an EEG based seizure 
+classification framework which leverages the potentials of variational mode decomposition (VMD) technique 
+and a Bayesian optimized support vector machine (BOSVM) to classify the type of generalized motor and 
+non-motor seizures. Unlike existing methods that rely on statistical or time–frequency features, this study 
+exploits entropy metrics extracted from VMD-decomposed EEG modes for seizure classification. To select the 
+most discriminative features, we harness both neighborhood component analysis (NCA) technique and ReliefF 
+algorithm and apply feature fusion method to train the classifier models. For addressing the class imbalance 
+problem in the dataset, an adaptive synthetic (ADASYN) sampling, which can augment the synthetic samples to 
+minority classes, is adopted. Experiments conducted on a publicly available temple university hospital (TUH) 
+dataset substantiate that the proposed framework achieves an average classification accuracy of 98.37% and 
+offers improved generalization and robustness compared to the state-of-the-art machine learning classifier 
+models.
+1. Introduction
+Epilepsy is a common chronic brain disorder that affects around 65 
+million people worldwide. Epilepsy is typically characterized by peri-
+odic seizures which manifest uncontrolled jerking movement, muscle 
+contractions and convulsions [1]. Hence, it is crucial to diagnose the 
+onset of seizure at the early stage so as to facilitate appropriate medi-
+cation for epilepsy. In this regard, electroencephalogram (EEG) signals 
+have been the cornerstone for seizure diagnosis for their inexpensive, 
+non-invasive and long-time monitoring approach [2,3]. Since EEG can 
+reflect the regular brain activity, the electrical signatures of seizures 
+along with the severity, frequency and duration can be effectively 
+identified using EEG. Moreover, for its excellent temporal resolution, 
+EEG can capture the swift changes in brain activity, thereby assisting 
+to identify the type and origin of seizures. Unlike other neuroimaging 
+techniques including MRI and PET scans, EEG is not only cost effective 
+∗ Corresponding author.
+E-mail addresses: kandasamy.cp2023@vitstudent.ac.in (Kandasamy C.P.), vinodhkumar.e@vit.ac.in (Vinodh Kumar E.), balaji.e@vit.ac.in (Balaji E.).
+but also portable, thereby enabling the subjects to be monitored in their 
+daily life environment [4].
+Typically, EEG signals exhibit seizure as spike-wave discharges for 
+a very short intervals [5]. The EEG recordings contain motion artifacts 
+because of physiological activity including perspiration. Consequently, 
+for the stochastic nature of EEG signals, it is time-consuming and 
+labor intensive for the neurologists to detect the seizure from EEG 
+recordings via manual observation [6]. Moreover, the appropriate 
+seizure diagnosis largely depends on the experience and expertise of 
+the neurologists, leading to the possibility of misdiagnosis. Therefore, 
+to assist the neurologists to diagnosis the seizure and automate the 
+seizure detection procedure in a clinical setting, several researchers 
+have explored devising a seizure decision support system using machine 
+learning algorithms [7].
+https://doi.org/10.1016/j.chaos.2025.116779
+Received 25 January 2025; Received in revised form 26 May 2025; Accepted 17 June 2025
+Chaos, Solitons and Fractals 199 (2025) 116779 
+Available online 12 July 2025 
+0960-0779/© 2025 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
+PAGE 2
+Kandasamy C.P. et al.
+Table 1
+Survey of existing EEG driven ML based seizure classification techniques.
+ Author & Year Dataset Channel Subject S.F. Feature 
+Selection
+Classifier Contribution Limitation  
+ Ahmad et al (2024) [8] Bonn 
+UCI
+1 
+–
+5 
+5
+173.61 Hz 
+–
+Correlation 
+coefficients 
+analysis
+BTBC Presented an ES 
+detection scheme using a 
+coefficient and distance 
+correlation based 
+dimensionality reduction 
+method with BTBC model
+Patient specific 
+approach was adopted 
+for ES detection which 
+limits the scope of the 
+method
+ 
+ Abou-Abbas et al (2023) [9] TUSZ 
+(v1.5.1)
+19 341 250 Hz Stable FS RF Proposed a patient 
+independent seizure 
+diagnosis model using 
+statistical, frequency and 
+entropy features with RF 
+model
+Methodology adopted is 
+computationally 
+intensive and time 
+consuming
+ 
+ Wu et al (2023) [10] TUSZ 
+(v1.5.0)
+20 
+Bipolar
+1227 
+Events
+100 Hz LDA & RF Penalized 
+ensemble 
+model
+Put forward a feature 
+extraction method called 
+multi-class specific bands 
+common spatial pattern 
+for multi-class 
+classification
+For low SNR, the 
+adopted CEEMDAN 
+approach may obscure 
+the original signal, 
+increasing the 
+complexity
+ 
+ Qin et al (2023) [11] Bonn 
+Hauz 
+Khas
+1 
+–
+5 
+10
+173.61 Hz 
+200 Hz
+Weighted 
+MRMR
+Deep forest Adopted VMD technique 
+and deep forest method 
+for binary and multi-class 
+classifications of epileptic 
+EEG signals
+The study is limited to 
+selected three classes of 
+ES.
+ 
+ Zhang et al (2022) [12] Bonn 
+TUSZ 
+(v1.5.2)
+1 
+2
+5 
+306
+173.61 Hz 
+–
+– NLTWSVM Harnessed the potential 
+of VMD, NLTWSVM and 
+statistical features for 
+multi-class classification 
+of ES
+Statistical features 
+ignore spatial structure 
+and fail to capture 
+transient changes
+ 
+ Tuncer et al (2022) [13] TUSZ 
+(v1.5.2)
+4 bipolar 23 250 Hz CFS KNN,SVM,
+RF
+Studied the impact of 
+wavelet based features 
+and focal-generalized 
+classification method
+The statistical features 
+considered in the study 
+are sensitive to noise
+ 
+ Yadav et al (2021) [14] CHB-MIT 
+Bonn 
+Hauz 
+Khas
+1 
+1 
+1
+24 
+5 
+10
+256 Hz 
+173.61 Hz 
+200 Hz
+ANOVA BR-SNN Examined the efficacy of 
+BR-SNNs along with data 
+augmentation to handle 
+unbalanced classification 
+problem
+The approach followed 
+for feature selection 
+has not been discussed
+ 
+ Khosla et al (2021) [15] TUSZ 
+(v1.5.1)
+19 421 
+Events
+250 Hz RFE SVM Investigated the impact 
+of recurrence plots and 
+SVM for automatic 
+seizure diagnosis
+Optimal channel 
+selection needs to be 
+integrated to minimize 
+the computational 
+burden
+ 
+ Thomas et al (2020) [16] TUSZ 19 343 
+Events
+250 Hz PSO ANN Presented an ES 
+diagnosis scheme using 
+tunable-Q wavelet 
+transform combined with 
+PSO based ANN model
+The non-stationary 
+nature of EEG is not 
+given due weightage in 
+feature extraction
+ 
+ Saric et al (2022) [17] TUSZ 16 315 250 Hz – MLP-ANN Investigated FPGA based 
+real-time ES diagnosis by 
+exploiting the 
+time–frequency features 
+of EEG and potential of 
+MLP-ANN
+Time–frequency 
+features are sensitive to 
+noise and assume the 
+signal is stationary over 
+a short window
+ 
+S.F. — Sampling Frequency; BTBC — Bagged Tree-based classifier; RF — Random Forest; LDA — Linear discriminant Analysis; SNR — Signal-to-Noise Ratio; TUSZ — Temple 
+University Hospital Seizure Dataset; CEEMDAN — Complete ensemble empirical mode decomposition with adaptive noise; MRMR — minimum Redundancy Maximum Relevance; 
+CFS — Correlation-based Feature Selection;KNN — K-Neural Network; NLTWSVM — Non Linear Twin Support Vector Machine; BR-SNN — Bayesian regularized shallow neural 
+network; PSO — Particle Swarm Optimization; RFE — Recursive Feature Elimination; ANN — Artificial Neural Network; MLP-ANN — Multi-Layer Neural Network Architecture
+1.1. Challenges in EEG based seizure classification
+EEG based seizure type classification is an ongoing field of research 
+due to the complexity and variability of EEG patterns related with 
+various seizure types. For instance, EEG signals will typically be influ-
+enced by noise or artifacts due to muscle activity and eye movements, 
+obscuring the seizure patterns. Certain types of seizure, including 
+generalized and focal seizures, may exhibit overlapping characteristics 
+on EEG and are hard to detect and classify accurately. Moreover, 
+certain seizures like absence seizure may manifest subtle differences 
+in EEG which are hard to recognize even for skilled clinicians, thereby 
+increasing the complexity to classify the seizure [18]. In this direction, 
+by decoding the subtle differences in the EEG signals, ML can provide 
+substantial support to automate the seizure diagnosis and predict the 
+impact of particular anti-epileptic drugs. In this direction, a few of 
+the notable ML algorithms reported on EEG based seizure diagnosis is 
+critically evaluated and reported in Table  1. From EEG viewpoint, some 
+of the commonly adopted techniques in the existing studies for feature 
+representation are discrete wavelet transform [8,13,19], continuous 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+2 
+PAGE 3
+Kandasamy C.P. et al.
+Fig. 1. Classification of seizure types based on ILAE.
+wavelet transform [17], tunable-Q wavelet transform [16], recurrence 
+plots [15], multi-class specific bands common spatial pattern [10].
+1.2. Motivation and research gap
+In spite of the considerable research attention paid to EEG based 
+seizure diagnosis, as reported in Table  1, the open research problems 
+that need further investigation are as follows. Firstly, the EEG signals 
+manifest large inter-subject variability for the differences in age, class 
+of seizure and brain structure. Secondly, as the EEG signals are not 
+only nonlinear but also non-stationary, the conventional decomposition 
+techniques such as DWT and CWT may fail to capture the subtle 
+variations in the EEG signals. In addition, EEG signals are generally 
+contaminated with noise due to muscle cross-talk and motion artifacts, 
+which DWT may falter to efficiently separate the true signal from noise, 
+resulting in distorted feature vector and error-prone classification. As 
+proven in the literature, DWT suffers from several limitations including 
+fixed time–frequency resolution, sensitivity to noise and non-adaptive 
+nature to the signals. Consequently, for effective feature extraction, 
+EEG signals require an adaptive decomposition technique that can 
+handle the nonlinearity and non-stationarity of the signals. Another 
+under-explored research domain in the ML based seizure diagnosis 
+is the potential of entropy features. Although the efficacy of entropy 
+features to decode the other physiological signals such as ECG, EOG 
+and EMG have been successfully proven in the literature, the impact 
+of entropy features from EEG signals to diagnose seizure needs further 
+investigation. Motivated to address the aforementioned research gaps, 
+this study presents an entropy features based seizure sub-type classi-
+fications by leveraging the potentials of VMD technique and optimal 
+feature selection algorithms augmented with BOSVM classifier model. 
+Unlike most of the existing techniques that utilized time domain and 
+frequency domain features for ML training, as an alternate set of fea-
+tures for EEG representation for seizure diagnosis, this study formulates 
+a motor and non-motor seizure classification framework using entropy 
+features from EEG signals and examines the efficacy of the proposed 
+VMD augmented BOSVM framework on a publicly available Temple 
+University Hospital Seizure (TUSZ) dataset.
+1.3. Proposed scheme and contributions
+This article presents a novel EEG based seizure classification frame-
+work by combining the advantages of VMD and BOSVM techniques. 
+The proposed approach effectively handles the non-linear dynamics 
+of EEG signals through VMD and identifies the motor and non-motor 
+seizures through BOSVM model with good accuracy. Compared with 
+other signal decomposition techniques, VMD method can effectively 
+deal with the modal aliasing effect and decompose the EEG signals into 
+IMFs that characterize the local feature information. Moreover, VMD 
+offers enhanced time–frequency representation of the time series signal, 
+which is highly relevant to seizure diagnosis for identifying the spikes 
+in the brain activity recordings. Extracting the robust entropy features 
+from the significant IMFs, this study trains the multi-class SVM model to 
+classify the seizures based on ILAE types. The hyper-parameters of the 
+SVM model are optimized using the Bayesian optimization approach 
+and 10-fold cross validation method is applied to address the overfitting 
+problem in the classifier model. The potential of the proposed approach 
+is tested on a publicly available TUSZ dataset which contains the largest 
+EEG recordings of several seizure classes. Experimental results substan-
+tiate the potential of the proposed VMD augmented BOSVM model to 
+classify the seizures by capturing the subtle variations through entropy 
+metrics. Moreover, to offer interpretability on the impact of features on 
+the classifier prediction, this study adopts the explainable AI technique 
+called local interpretable model-agnostic explanations (LIME), which 
+focuses largely on individual predictions. In this direction, the major 
+contributions of this investigation are as follows.
+• We harness the potentials of VMD and BOSVM techniques to han-
+dle the non-stationary characteristics of EEG signals and classify 
+the type of seizure by training the classifier model using the en-
+tropy features, which not only enhances the generalization ability 
+of the ML classifiers but also minimizes the false predictions.
+• Decomposing the EEG signals into band-limited IMFs using VMD 
+technique, this study performs the spectral analysis of the IMFs 
+to identify the salient modes of scalp EEG signals that contain 
+significant power content. Consequently, the highly distinguish-
+able IMFs are utilized to extract the prominent feature vector for 
+classifier training.
+• To minimize the computational burden on the classifier model, 
+this study adopts NCA and ReliefF feature selection algorithms 
+and fuses the prominent features to train the classifier model. 
+Moreover, to minimize the class imbalance problem in the dataset 
+considered for experimentation, we leverage ADASYN technique 
+which can enhance the classifier sensitivity towards the minority 
+class, thereby ensuring balanced view towards all possible classes.
+The organization of the rest of the paper is as follows. Section 2 
+presents an overview of seizure classes and the dataset considered 
+in this study for analysis. Section 3 describes the seizure classifica-
+tion framework using the BOSVM classifier model. Section 4 explains 
+the implementation details and performance analysis of the proposed 
+framework. Finally, Section 5 gives the concluding remarks of the paper 
+along with the scope for further study.
+2. Seizure overview
+An abrupt and uncontrolled electrical disturbances in the brain 
+cause epileptic seizures which affect the sensations, behavior and con-
+sciousness of the subjects. Majorly, according to ILAE, the seizures are 
+classified into three categories namely: focal, generalized and unknown 
+onset. Fig.  1 illustrates the representative brain images of the three 
+classes of seizures. Accurate diagnosis of type of epileptic seizure is 
+paramount for appropriate medication and treatment. Focal seizures, 
+which originate on one side of the brain, can further be categorized 
+into simple partial seizure and complex partial seizure. Similarly, gen-
+eralized seizures, which affect both sides of the brain, can be classified 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+3 
+PAGE 4
+Kandasamy C.P. et al.
+Fig. 2. Symptoms of seizure.
+into tonic, clonic, atonic, absence, and myoclonic seizures. The bases 
+on which generalized seizures are categorized are the motor and non-
+motor symptoms that encompass movement. Typical motor symptoms 
+are jerking movements (clonic), rigid muscles (tonic), weak muscles 
+(atonic) and momentary muscle twitching (myoclonic). Fig.  2 depicts 
+the common motor and non-motor symptoms of seizures.
+To diagnose and classify the type of seizure, EEG signals play 
+a critical role because typically seizures are manifested by abnor-
+mal neural activity in the brain. EEG is the gold standard to probe 
+neural functions both in research and clinical environments for its non-
+invasive, portable, and cost effective approach. Moreover, EEG offers 
+high temporal resolution and can effectively reflect the patterns in 
+the brainwaves and help to decode the deviations including rhyth-
+mic discharges and spikes associated with seizures. Hence, EEG based 
+assessment is a promising seizure diagnosis technique which can guar-
+antee early intervention and minimize potential cognitive dysfunction. 
+Fig.  3 depicts the EEG acquisition modality using scalp EEG electrodes 
+which can help to distinguish the seizure types. Specifically, to identify 
+the types of seizures according to ILAE guidelines, this study utilizes the 
+Temple university hospital seizure dataset to assess the efficacy of the 
+proposed framework. In the next section, we brief about the dataset and 
+the protocols followed for acquiring the EEG data for seizure diagnosis.
+2.1. Dataset description
+This study utilizes the TUSZ v2.0.3 publicly available dataset, which 
+is the largest multi-class seizure dataset, collected at Temple University 
+Hospital from 2002 to 2012 [20]. TUSZ (Temple University Seizure 
+Dataset) is a unique dataset that contains EEG recordings of 300 
+subjects with larger than 3000 seizure events along with their labels. 
+For EEG signal acquisition, international 10/20 electrode system was 
+adopted. Fig.  4 illustrates the electrode system followed for recording 
+the EEG signals. The electrodes were evenly located on the scalp with 
+the space between electrodes varying either 10% or 20% the distance 
+from front (nasion) to back (inion) [21]. In this study, we primarily 
+consider the following six seizure events present in the TUSZ dataset: 
+1. Focal Non-specific Seizure (FNSZ) 2. Complex Partial Seizure (CPSZ) 
+3. Absence Seizure (ABSZ) 4. Generalized Non-specific Seizure (GNSZ) 
+5. Tonic Seizure (TNSZ) and 6. Tonic-clonic Seizure (TCSZ). The demo-
+graphic details of the subjects participated in the data acquisition are 
+presented in Table  2. In this investigation, we majorly target to classify 
+the seizure type by exploiting the hidden features through the adaptive 
+decomposition and spectral analysis. TUSZ dataset contains the scalp 
+EEG recordings collected at different sampling rates varying from 250 
+to 512 Hz. The data were acquired according to the international 10–20 
+electrode system. To decode the brain function, TUSZ utilized two 
+unipolar montages namely average reference (AR) and linked ears ref-
+erence (LE) as shown in Fig.  4. While AR method offers a balanced view 
+of the brain function by minimizing the reference-specific artifacts, LE 
+provides the precision needed to detect focal abnormalities.
+The raw EEG signals of the six seizure classes are illustrated in Table 
+3. As the EEG signals manifest high nonlinearity and non-stationary 
+dynamics, it is crucial to preprocess the signals before extracting the 
+features for classifier training. Hence, we adopt initial preprocessing 
+steps including data normalization and filtering. To remove high fre-
+quency noise and DC drift caused by muscle artifacts, a bandpass filter 
+(1–40 Hz) is implemented. Moreover, the signals are normalized using 
+Z-score normalization technique so as to mitigate the impact of baseline 
+drift and spikes.
+3. Materials and methods
+3.1. Proposed BOSVM framework for seizure classification
+Fig.  5 illustrates the proposed EEG based seizure classification 
+framework which harnesses the potentials of VMD and entropy features 
+of the decomposed EEG signals. In the TUSZ dataset, as the EEG signals 
+acquired for different seizure types are not standardized while acquir-
+ing the data, it is crucial to preprocess the original EEG signals. Firstly, 
+the EEG signals are preprocessed to remove the high frequency noise 
+and motion artifacts. Subsequently, through windowing technique the 
+EEG segments that reflect the focal and generalized seizures in the 
+form of spikes are extracted from the raw data. For identifying the 
+prominent spectral information and feature extraction, the EEG signals 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+4 
+PAGE 5
+Kandasamy C.P. et al.
+Fig. 3. EEG acquisition modality for seizure diagnosis.
+Table 2
+Demographic details of subjects in TUSZ database.
+ Type of 
+seizure
+Description Generalized 
+class
+ILAE type # subjects # seizure 
+occurrences
+Duration (s) 
+ FNSZ Focal seizure event which has 
+dearth of information to 
+compute the particular type
+Focal seizure Focal seizures 150 1835 121 120  
+ CPSZ Seizure event that occurs 
+during unconsciousness and is 
+diagnosed solely based on 
+clinical symptoms
+Focal 
+impaired 
+awareness
+41 365 36 320  
+ ABSZ Absence seizure results in brief 
+lapses in awareness generally 
+for not more than 10 s
+Generalized 
+seizure
+Absence 12 99 850  
+ TNSZ Tonic seizure occur during 
+sleep and manifest sudden 
+muscle stiffening
+Tonic 3 62 1200  
+ GNSZ Seizure event that 
+encompasses both hemispheres
+Generalized 81 583 59 717  
+ TCSZ Clonic seizure exhibit 
+rhythmic and repetitive 
+muscle contraction
+Clonic 12 48 5540  
+Fig. 4. EEE montages for signal acquisition (a) Linked ear (b) average reference.
+Chaos, Solitons and Fractals 199 (2025) 116779 
+5 
+PAGE 6
+Kandasamy C.P. et al.
+Table 3
+Raw EEG signals and their respective seizure types.
+are decomposed using the VMD technique and the spectral analysis 
+of the IMFs are performed to identify the prominent entropy features 
+for classifier training. The optimal entropy features selected using the 
+NCA and ReliefF algorithms are fused to train the BOSVM classifier 
+model. To address the overfitting issue, the proposed approach adopts 
+10 fold cross validation technique and the efficacy of BOSVM classifier 
+model has been benchmarked with those of the baseline models. In the 
+next section, we elaborate the details of the implementation and the 
+techniques adopted.
+3.2. VMD for signal denoising and decomposition
+VMD is an adaptive signal decomposition technique which is highly 
+suitable for nonlinear and non-stationary signals. As the EEG signals 
+manifest non-linear and non-stationary dynamics, this study adopts 
+VMD technique to decompose the brain activity signal into the so 
+called intrinsic mode functions (IMFs) or a group of band-limited 
+modes [22]. Each IMF is characterized by an amplitude-modulated 
+frequency-modulated (AM-FM) signal. Leveraging variational optimiza-
+tion technique to solve the constrained optimization problem, VMD 
+computes the band limited modes automatically around a central fre-
+quency and decomposes the signal into IMFs [23]. Through a La-
+grangian multiplier, VMD introduces the constraint that the aggregate 
+of the IMFs should result in the original signal. Hence, VMD is used 
+not only for decomposing the signal but also for denoising the high 
+frequency contents from the original signal. The key benefit of VMD 
+over other decomposition techniques such as EMD is that VMD elimi-
+nates the mode mixing issue and is robust against noise, thus offering 
+computationally efficient approach for real-time signal processing. To 
+minimize the optimization task, VMD operates in frequency domain 
+and updates the modes iteratively by adjusting the frequency spectrum 
+of the signal based on the center frequency. Hence, through iterative 
+updates of modes, the Lagrange multiplier and center frequencies, the 
+VMD technique terminates when the frequencies and modes reach 
+constant values.
+Solving the constrained variational problem, VMD decomposes the 
+EEG signal into a group of band-limited IMFs and effectively separates 
+the noise components from the EEG signals. Moreover, VMD miti-
+gates the impact of mode mixing problem which is common in other 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+6 
+PAGE 7
+Kandasamy C.P. et al.
+Fig. 5. Proposed BOSVM framework with VMD for EEG based seizure classification.
+techniques such as EMD. For a signal 𝑥(𝑡), the constrained variational 
+problem can be described as follows.
+𝑚𝑖𝑛
+{𝑚𝑘},{𝑤𝑘}
+{ 𝑀∑
+𝑘=1
+‖‖‖‖
+𝛿𝑡
+[(
+𝛿(𝑡) + 𝑗
+𝜋𝑡
+)
+∗ 𝑚𝑘(𝑡)
+]
+𝑒−𝑗𝑤𝑘𝑡‖‖‖‖
+2
+2
+}
+(1)
+𝑠.𝑡
+𝑀∑
+𝑘=1
+𝑚𝑘 = 𝑥(𝑡)
+where 𝑚𝑘 ∶= 𝑚1, 𝑚2, … ., 𝑚𝑘 and 𝑤𝑘 ∶= 𝑤1, 𝑤2, … ., 𝑤𝑘 indicate the 
+IMFs and center frequencies, respectively. 𝛿(𝑡) represent the Dirac distri-
+bution. To handle the aforementioned variational problem augmented 
+with constraint, VMD adopts a quadratic penalty factor (𝛽) and the 
+Lagrangian multiplier 𝜆 to transform the constrained optimization into 
+unconstrained one. The penalty factor (𝛽) assures the quality of signal 
+reconstruction, particularly when the signal is corrupted with Gaussian 
+noise. To compute the solution of the Lagrangian function in Eq. (2), 
+VMD utilizes the alternate direction method of multipliers (ADMM) 
+technique and iteratively updates the IMFs and center frequencies as 
+follows.
+𝐿({𝑚𝑘}, {𝑤𝑘}, 𝜆) = 𝛽
+𝑀∑
+𝑘=1
+‖‖‖‖‖
+𝛿𝑡
+[(
+𝛿(𝑡) + 𝑗
+𝜋𝑡
+)
+∗ 𝑚𝑘(𝑡)
+]
+𝑒−𝑗𝑤𝑘𝑡
+‖‖‖‖‖
+2
+2
++
+‖‖‖‖‖‖
+𝑥(𝑡) −
+𝑀∑
+𝑘=1
+𝑚𝑘
+‖‖‖‖‖‖
+2
+2
++
+⟨
+𝜆(𝑡), 𝑥(𝑡) −
+𝑀∑
+𝑘=1
+𝑚𝑘
+⟩
+(2)
+According to ADMM, the modes(𝑚𝑘) and center frequencies(𝑤𝑘) of the 
+signal are updated as follows. 
+̂ 𝑚𝑛+1
+𝑘 (𝑤) =
+̂ 𝑥(𝑤) − ∑
+𝑖≠𝑘 ̂ 𝑚𝑖(𝑤) +
+̂𝜆(𝑤)
+2
+1 + 2𝛽(𝑤 − 𝑤𝑘)2 (3)
+𝑤𝑛+1
+𝑘 =
+∫ ∞
+0 𝑤 || ̂ 𝑚𝑘(𝑤)||
+2 𝑑𝑤
+∫ ∞
+0
+|| ̂ 𝑚𝑘(𝑤)||
+2 𝑑𝑤
+(4)
+Chaos, Solitons and Fractals 199 (2025) 116779 
+7 
+PAGE 8
+Kandasamy C.P. et al.
+Table 4
+Entropy measures and their significance to extract the distinguishable information from time series data.
+ Feature Description Mathematical notation  
+ Increment entropy Exhibits the degree of unpredictability by 
+examining the subtle changes between consecutive 
+data points
+𝐼𝑛𝑐𝐸𝑛 = − 1
+𝑛−1
+∑(2𝑞+1)𝑛
+𝑚=1 𝑃 (𝑤𝑚)𝑙𝑜𝑔𝑃 (𝑤𝑚)  
+ Cosine similarity entropy Measures the degree of similarity in the 
+consecutive signal segments
+𝐶𝑜𝑠𝑖𝐸𝑛 = −[𝐺(𝑛)(𝑟𝑐𝑒 )𝑙𝑜𝑔2𝐺(𝑛)(𝑟𝑐𝑒 ) + (1 −
+𝐺(𝑛)(𝑟𝑐𝑒 ))𝑙𝑜𝑔2(1 − 𝐺(𝑛)(𝑟𝑐𝑒 ))]
+ 
+ Phase entropy Extracts the phase differences in the brain signals 
+to capture the dynamics of neural oscillations
+𝑃 ℎ𝑎𝑠𝐸𝑛 = −1
+𝑙𝑜𝑔𝑛
+∑𝑛
+𝑗=1 𝑃 (𝑗)𝑙𝑜𝑔𝑃 (𝑗);
+𝑃 (𝑗) = 𝑆𝜃 [𝑗]∑𝑛
+𝑗=1 𝑆𝜃 [𝑗]
+ 
+ Attention entropy Measures the impact of attention on the neural 
+activity to differentiate cognitive states
+𝐴𝑡𝐸𝑛 =
+𝑓𝑚𝑎𝑥𝑖,𝑚𝑎𝑥𝑖 +𝑓𝑚𝑖𝑛𝑖,𝑚𝑖𝑛𝑖 +𝑓𝑚𝑎𝑥𝑖,𝑚𝑖𝑛𝑖 +𝑓𝑚𝑖𝑛𝑖,𝑚𝑎𝑥𝑖
+4  
+ Grided distribution entropy Quantifies the variability of EEG signals by 
+segmenting the signals into grids structures
+𝐺𝑑𝐸𝑛 = − ∑𝑚2
+𝑖=1 𝑃𝑖𝑙𝑜𝑔𝑃𝑖; 𝑃𝑖 = 𝑎
+𝑀−1  
+ Bubble entropy Provides the local variability in the EEG signals by 
+examining the clusters of signal amplitudes in a 
+specific time window
+𝐵𝑢𝑏𝑙𝐸𝑛 = (𝐻 𝑛+1
+𝑠𝑤 − 𝐻 𝑛+1
+𝑠𝑤
+)∕𝑙𝑜𝑔(𝑛 + 1∕𝑛 − 1)  
+ Entropy of entropy Manifests nonlinearity through the distribution of 
+entropy values over time
+𝐸𝑛𝐸𝑛 = 𝑓𝑒𝑛𝑡(𝐸)𝐸 = {𝐸{𝑆1}, 𝐸{𝑆2}...𝐸{𝑆𝑛}}  
+ Slope entropy Analyzes the local dynamics of EEG signals 
+through changes in the slopes between consecutive 
+data samples
+𝑆𝑙𝑜𝑝𝐸𝑛 = − ∑𝑀
+𝑚=1 𝑃 𝑖
+𝑚𝑙𝑜𝑔2𝑃 𝑖
+𝑚  
+For any 𝜔 ≥ 0, the Lagrangian multiplier is updated based on the dual 
+ascent method as given in Eq. (5). 
+̂𝜆𝑛+1(𝑤) = ̂𝜆𝑛(𝑤) + 𝜏
+(
+̂ 𝑥(𝑤) −
+𝑀∑
+𝑘=1
+̂ 𝑚𝑛+1
+𝑘 (𝑤)
+)
+(5)
+where 𝜏 indicates the update factor, which is typically set close to 0. 
+Upon reaching the maximum number of iterations or achieving the 
+changes in mode functions and center frequencies below the specified 
+threshold as given in Eq. (6), VMD yields the IMFs and the resid-
+ual component. The steps involved in the VMD are presented as a 
+pseudocode in Algorithm 1. 
+𝑀∑
+𝑘=1
+‖‖‖ ̂ 𝑚𝑛+1
+𝑘 − ̂ 𝑚𝑘
+‖‖‖
+2
+2
+‖‖‖ ̂ 𝑚𝑛
+𝑘
+‖‖‖
+2
+2
+(6)
+Algorithm 1 VMD for signal decomposition
+1: Input:
+2: x(t): EEG signal
+3: M: Modes of input signal (IMFs)
+4: 𝛽: Penalty factor
+5: 𝜖: Tolerance
+6: 𝑁𝑖: Number of iterations
+7: Output: Frequency modes {𝑚1, 𝑚2, ..., 𝑚𝑘}
+8: Assign 𝑚1
+𝑘, 𝑤1
+𝑘, ̂𝜆1
+9: while 𝑛 ≤ 𝑁𝑖 or Eq.  (6) is not satisfied do do
+10:  for 𝑘 = 1 to 𝑀 do
+11:   Update the modes ( ̂ 𝑚𝑘(𝑤)) using Eq.  (3)
+12:   Update the center frequencies (𝑤𝑘) using Eq.  (4)
+13:  end for
+14:  Update the Lagrangian multiplier ̂𝜆 using Eq.  (5)
+15:  n=n+1
+16:   end while
+3.3. Feature extraction
+This study adopts the entropy features to train the ML classifier 
+model for seizure prediction. Entropy features can offer valuable in-
+sights into the nature and dynamics of EEG signals, thereby help-
+ing to distinguish the different states of seizure. For instance, the 
+dispersion entropy can detect the subtle changes in the EEG signal, 
+which conventional statistical measures may fail to discover. More-
+over, statistical measures are typically centered on spread and central 
+tendencies, which may fail to represent the underlying non-linear and 
+non-stationary characteristics of the brain signals [24]. Unlike statisti-
+cal metrics that are largely susceptible to noise, entropy features are 
+highly robust against noise because they ignore irrelevant variations 
+caused by noise and capture the cardinal structure of the data [25]. 
+Compared to conventional features, entropy features can manifest pre-
+cise summary of signals complexity without losing vital information, 
+thereby offering dimensionality reduction. It is also proven in the 
+literature that augmenting entropy features in the ML pipelines not only 
+enhances the generalization ability but also minimizes the false predic-
+tions. This study extracts eight entropy measures given in Table  4 to 
+capture the hidden features of the seizure classes. Table  4 presents the 
+importance of the entropy measures computed from the decomposed 
+EEG signals and their respective mathematical expressions.
+3.4. Feature selection
+3.4.1. Neighborhood component analysis
+Neighborhood component analysis (NCA), a non-parametric tech-
+nique for dimensionality reduction, is a supervised feature selection 
+technique that optimizes the transformation matrix by preserving the 
+crucial neighborhood relationships for classification [26,27]. NCA adopts 
+optimization technique such as stochastic gradient descent (SGD) to 
+compute the transformation matrix. Unlike other dimensionality reduc-
+tion techniques such as PCA, NCA does not make any assumptions on 
+data distribution, enabling it to be extended to any type of classification 
+problem [28]. The primary steps of NCA are as follows. Computing the 
+Mahalanobis distance metric for linear transformation of the input data 
+points into a sub-space, NCA minimizes a loss function to optimize the 
+transformation matrix, resulting in fewer dimensions of feature space 
+compared to original data points.
+Consider the training set with 𝑛 observations of a multi-class classi-
+fication problem be 
+𝑇 = {(𝑥𝑖, 𝑦𝑖), 𝑖 = 1, 2, … .𝑛} (7)
+where 𝑥𝑖 represent the 𝑝-dimensional feature vector, 𝑦𝑖 ∈ {1 , 2, ..𝐿}
+indicates the respective class labels and 𝐿 depicts the number of classes. 
+The distance function 𝑑𝑤, represented in terms of feature weights, for 
+any two observations 𝑥𝑖 and 𝑥𝑗 is 
+𝑑𝑤(𝑥𝑖, 𝑥𝑗 ) =
+𝐷∑
+𝑟=1
+𝑤2
+𝑟
+‖‖‖𝑥𝑖 − 𝑥𝑗
+‖‖‖ (8)
+Chaos, Solitons and Fractals 199 (2025) 116779 
+8 
+PAGE 9
+Kandasamy C.P. et al.
+where 𝑤𝑟 depict the feature weights. To maximize the classification 
+accuracy, leave-one-out method is applied on the training set 𝑇 . Firstly, 
+a random point in 𝑇 is chosen to be a reference point with its corre-
+sponding label. The reference point of 𝑥 from 𝑇 is selected such that ∑𝑛
+𝑖=1 𝑝𝑖 = 1 for 𝑥𝑖. the probability of 𝑥𝑗 selected as a reference point for 
+𝑥𝑖 is as follows. 
+𝑝𝑖𝑗 =
+𝑘(𝑑𝑤(𝑥𝑖, 𝑥𝑗 ))
+∑𝑛
+𝑖=1 𝑘(𝑑𝑤(𝑥𝑖, 𝑥𝑗 )) (9)
+where 𝑘 indicates a kernel function, which can be 𝑘(𝑧) = 𝑒𝑥𝑝(− 𝑧
+𝜎 ). In the 
+kernel function, 𝜎 indicates kernel width. The probability of 𝑥𝑖 correctly 
+categorized to its true class is 
+𝑝𝑖 =
+𝑛∑
+𝑗=1,𝑗≠𝑖
+𝑝𝑖𝑗 𝑦𝑖𝑗 (10)
+where 𝑦𝑖𝑗 will result in 1 for 𝑦𝑖 = 𝑦𝑗 otherwise zero. Eq. (10) represents 
+the average leave-one-out classification accuracy computed for the 
+entire training data. As the goal is to achieve higher classification 
+accuracy, NCA solves for 𝑊  that can maximize the probability in 
+Eq. (10). To address overfitting issue for higher dimensional data, the 
+regularization parameter 𝜆 is introduced into the objective function and 
+the following objective function is minimized. 
+̂𝑊 = argmax
+𝑤
+1
+𝑅
+𝑅∑
+𝑖=1
+𝑝𝑖 − 𝜆
+𝑁∑
+𝑚=1
+𝑤2
+𝑚 (11)
+where 𝑤𝑚 and 𝑅 depict the feature weights and the number of trials, 
+respectively. To solve the objective function in Eq. (11), optimization 
+techniques such as SGD can be used. The argument corresponding to 
+maximum ̂𝑊  is the weight vector which offers the highest classification 
+accuracy. Hence, according to the weights obtained by solving the 
+objective function, the optimal feature set is chosen by comparing the 
+feature weight with a threshold value.
+3.4.2. ReliefF-feature selection technique
+ReliefF is a filter based feature selection method that is widely 
+used in supervised learning tasks with noisy and high dimensional 
+dataset. Harnessing the neighborhood information to extract the key 
+features which are best suitable to differentiate the classes, ReliefF can 
+reduce the influence of redundant features by allocating low weights 
+to them [29,30]. Moreover, as ReliefF is a non-parametric method that 
+does not require any particular distribution of data, it can be used to 
+handle imbalance in class distribution. The goal of ReliefF algorithm 
+is to compute the weights of predictors iteratively by assigning higher 
+weights to features which result in larger separation between different 
+classes.
+3.5. Class imbalance — ADASYN
+To deal with the imbalance seizure dataset, this study leverages 
+an adaptive synthetic (ADASYN) sampling approach, which is a class 
+of oversampling technique. As a variant of Synthetic minority over-
+sampling technique (SMOTE), ADASYN generates synthetic samples 
+according to the level of difficulty in discerning the minority sam-
+ples [31]. Unlike SMOTE that focuses on generating the synthetic 
+samples evenly across the minority class, ADASYN aims to generate 
+synthetic samples where the class samples are hard to classify. Con-
+sequently, ADASYN realizes a refined decision boundary and enhances 
+the sensitivity for the minority class. Moreover, by assisting the models 
+to learn from challenging samples through dynamic weighting strategy, 
+ADASYN can significantly improve the generalization ability of the 
+classifier model on unseen data [32]. The core idea in ADASYN is 
+to utilize a weighted distribution for minority class samples based 
+on their difficulty level in learning and generate artificial samples 
+of the minority classes to mitigate overfitting to particular samples. 
+Consequently, the ADASYN technique helps to enhance the classifier 
+sensitivity towards the minority class, thereby ensuring balanced view 
+towards all possible classes. Algorithm 2 presents the pseudo code 
+of ADASYN technique to handle the class imbalance problem in the 
+seizure classification.
+Algorithm 2 Pseudocode of ADASYN
+1: Input:
+2: Training dataset 𝐷𝑡𝑟
+3: 𝑁𝑠 and 𝑁𝑙 — Number of samples in minority and majority classes, 
+respectively
+4: 𝑑𝑡 – Threshold for degree of class imbalance ratio
+5: 𝛼𝑖 — The amount of majority samples present in K-nearest 
+neighbors of minority sample
+6: 𝛽 ∈ [0 , 1] — A factor to indicate the desired balanced level after 
+generating synthetic data
+7: Output: Balanced dataset 𝐷𝑡𝑏
+8: Compute degree of class imbalance: 𝑑𝑖 = 𝑁𝑠
+𝑁𝑙
+9: while 𝑑𝑖 < 𝑑𝑡 do
+10: Calculate the no. of samples to be synthesized 𝐺 = (𝑁𝑠 − 𝑁𝑙) × 𝛽
+11: For all samples in minority class, compute K nearest neighbors 
+according to Euclidean distance: 𝑟𝑖 = 𝛥𝑖
+𝐾
+12: Normalize ̂ 𝑟𝑖 = 𝑟𝑖∑
+𝑘 = 1 𝑁
+𝑠
+𝑟𝑖
+13: Find the amount of samples to be generated 𝑔𝑖 = ̂ 𝑟𝑖 × 𝐺
+14: For every example ∈ minority class, create 𝑔𝑖 synthetic data
+15: end while
+3.6. Multi-class SVM classifier
+SVM, a class of supervised ML algorithm, targets to compute a hy-
+perplane which can separate the input data into classes by maximizing 
+the boundaries between the classes. When the input data are not lin-
+early separable, SVM adopts a kernel function that can reorganize the 
+input data into a higher-dimensional space, which can be handled by 
+a linear hyperplane. With the goal of maximizing the margin between 
+the classes, SVM solves the following Quadratic optimization problem. 
+min
+𝜔,𝑏,𝛽
+{
+1
+2 ‖𝜔‖2 + 𝐶
+𝑛∑
+𝑘=1
+𝛽𝑘
+}
+(12)
+such that
+𝑦𝑘 = 𝑤𝑇 𝜑(𝑥𝑘) + 𝑏 ≥ 1 − 𝛽𝑘, 𝑘 = 1, 2, … , 𝑛
+𝛽 ≥ 0, 𝑘 = 1, 2, … , 𝑛
+where 𝐶 is the penalty factor to balance between margin separation 
+and classifier error. When the input data manifests high nonlinearity, 
+SVM adopts a kernel function that can transform the input data points 
+into high-dimensional space. The kernel function integrated in the SVM 
+model for high-dimensional mapping is as follows. 
+𝑦𝑘 = 𝑠𝑖𝑔𝑛
+( 𝑛∑
+𝑘=1
+𝑦𝑘𝛼𝑘𝐾(𝑥𝑘, 𝑥) + 𝑏
+)
+(13)
+In this study, as EEG signals manifest high nonlinearity, we adopt a ra-
+dial basis function to classify the seizure types. The primary motivation 
+for utilizing RBF kernel in this study is its non-linear decision bound-
+aries and fewer hyper-parameters. For multi-class seizure classification, 
+we implement the following RBF Gaussian kernel. 
+𝐾(𝑥𝑚, 𝑥𝑛) = 𝑒𝑥𝑝(−𝛾‖𝑥𝑚 − 𝑥𝑛‖2) for 𝛾 > 0 (14)
+While training and testing the SVM model, it is paramount to select 
+the optimal values of the kernel function 𝛾 and the penalty factor 
+𝐶 to balance between the complexity and accuracy of the classifier 
+model [33,34]. Hence, this study utilizes Bayesian optimization (BO) 
+technique to compute the optimal hyper-parameters of multi-class SVM 
+model.
+Chaos, Solitons and Fractals 199 (2025) 116779 
+9 
+PAGE 10
+Kandasamy C.P. et al.
+3.7. Bayesian optimization
+The primary objective is to automate the task of computing the 
+optimal SVM hyper-parameters through a probabilistic model of the 
+cost function. Typically, utilizing a surrogate model or a Gaussian pro-
+cess, Bayesian optimization iteratively determines the optimal hyper-
+parameters, striking a balance between exploitation and exploration. 
+Unlike the conventional techniques such as grid search and random 
+search, Bayesian optimization offers numerous benefits while tuning 
+classifier models, including higher sample efficiency, more flexibil-
+ity in initializing search space and more robust optimization in the 
+presence of noise. Moreover, Bayesian approach aids in computing 
+the optimal values and effectively avoids the local optima. Another 
+interesting feature of BO is that it requires minimal function evaluations 
+to compute the optimal parameters, thereby enabling efficient and 
+systematic optimization in case of high-dimensional domain. The major 
+steps of BO are as follows. Firstly, the range of the hyper-parameters 
+(𝐶 and 𝛾) and the objective functions are defined. Secondly, through 
+a probabilistic model, the objective functions are evaluated according 
+to the outcome the surrogate model are updated iteratively. Finally, 
+using the acquisition function, the next set of hyper-parameters are 
+evaluated and this process is repeated until the stopping criterion 
+(specified iterations or marginal improvement) is met. Algorithm 3 
+presents the steps involved in the Bayesian optimization to optimize 
+the hyper-parameters of SVM classifier.
+Algorithm 3 Pseudocode of Bayesian optimization of SVM
+1: Input:
+2: 𝑓 (𝜃) -Objective function (cross-validation error for SVM)
+3: Hyperparameter space: 𝛩 = {C ∈ [𝐶𝑚𝑖𝑛, 𝐶𝑚𝑎𝑥], 𝛾 ∈ [𝛾𝑚𝑖𝑛, 𝛾𝑚𝑎𝑥]}
+4: D = (𝜃𝑖, 𝑓 (𝜃𝑖)) — Initial dataset, 𝐴(𝜃) — Acquisition function (AF), 
+𝑀 — Number of iterations
+5: Output: Optimal hyperparameters: 𝜃∗
+6: Compute objective function 𝑓 (𝜃) for initial random samples of 𝜃
+from 𝛩.
+7: Fit a surrogate model on the dataset D
+8: for t = 1 to 𝑀 do:
+9:  Calculate the next hyperparameters set 𝜃𝑛 by maximizing the AF
+𝜃𝑛 = argmin
+𝜃∈𝛩
+𝑎(𝜃)
+10:  Evaluate the AF and expected improvement (EI)
+𝑎(𝜃) = 𝐸[𝑚𝑎𝑥(0, 𝑓𝑜𝑝𝑡 − 𝜇(𝜃))]
+𝑓𝑜𝑝𝑡 = 𝑚𝑖𝑛{𝑓 (𝜃𝑖)|𝜃𝑖 ∈ 𝐷}
+11:  Determine the probability of improvement (PI)
+𝑎(𝜃) = 𝛷((𝑓𝑜𝑝𝑡 − 𝜇(𝜃))∕𝜎(𝜃))
+12:  Calculate 𝑓 (𝜃𝑛) using the hyperparameters 𝜃𝑛 and update dataset
+D = D ∪ (𝜃𝑛, 𝑓(𝜃𝑛))
+13:  Based on the new dataset D, update the surrogate model.
+14: Return the optimal parameters of SVM:
+𝜃∗ = argmin
+𝜃∈𝐷
+𝑓 (𝜃)
+4. Results and discussion
+The proposed VMD augmented BOSVM classifier model for seizure 
+classification is implemented in MATLAB 2024. Analyzing the raw 
+data in TUSZ reveals that the EEG recordings are not standardized 
+and have unequal data samples for different seizure classes. Hence, 
+firstly, we perform pre-processing of EEG signals before extracting the 
+prominent feature vectors for classifier training. Specifically, as the 
+frequencies less than 40 Hz are crucial for diagnosing the seizures, 
+the raw EEG signals are filtered using a low-pass filter with a cut-off 
+frequency of 50 Hz. Then, through windowing technique, the EEG seg-
+ments that contain the abnormal neural activity, depicting the seizure 
+classes, are extracted from the raw data. The data samples available 
+for the FNSZ and GNSZ classes are 10,046 s and 8774 s, respectively. 
+Fig. 6. Exemplary EEG signal decomposition using VMD technique.
+Similarly, the EEG recordings present for other classes such as TNSZ, 
+TCSZ, ABSZ and CPSZ are 5032 s, 3396 s, 2098 s, and 1256 s, re-
+spectively. The aforementioned data samples clearly reveal that the 
+dataset is highly imbalanced and requires effective technique to handle 
+class-imbalance problem in classification. Hence, this study adopts an 
+ADASYN technique to mitigate the sensitivity of the classes that have 
+higher samples. After pre-processing and segmenting the EEG signals, 
+we implement a VMD technique majorly to denoise the signals and to 
+decompose the brain signals into seizure-related frequency components 
+in the form of IMFs. Each IMF depicts a particular frequency band and 
+the spectral analysis of IMFs helps to uncover high-energy spikes in 
+specific frequency bands, representing seizure event. Fig.  6 illustrates 
+the representative five level decomposition of the EEG signals using 
+VMD technique. By eliminating noisy or nonessential frequency modes, 
+VMD can effectively reconstruct the refined version of the EEG signals. 
+Fig.  7 depicts the raw EEG signal and the cleaner version of the same 
+reconstructed using the VMD technique. Hence, this study adopts VMD 
+for two primary roles namely denoising and decomposing the EEG 
+signals. After decomposing the brain signals into specific frequency 
+bands, we perform the spectral evaluation of the decomposed IMFs to 
+minimize the computational burden on the classifier model. Through 
+spectral analysis, this study uncovers the IMFs that have significant 
+power content. Fig.  8 illustrates the spectral plot of the IMFs for the 
+six seizure classes considered for study. The dominant IMFs of each 
+of the seizure classes are utilized to compute the entropy features for 
+classifier training.
+From the IMFs that contain large power content, the eight entropy 
+features, as listed in Table  4, are extracted. Fig.  9 shows the statistical 
+distribution of the eight entropy features of six seizure classes for two 
+prominent EEG channels namely FP1 and FP2. From the box plot, we 
+can notice that among the six classes the standard deviation of entropy 
+features for CPSZ class is the least. Moreover, the spread of the entropy 
+features of other five classes vary significantly. Therefore, to identify 
+the prominent entropy features and eliminate the redundant features, 
+we implement two supervised feature selection techniques: 1. NCA and 
+2. ReliefF. Fig.  10a illustrates the feature weight plot which helps to 
+visualize the contribution of each entropy features towards the learned 
+transformation. We can observe from the feature weight plot that the 
+irrelevant features have zero weight. Hence, only relevant features 
+from NCA are considered for further processing. Fig.  10b depicts the 
+optimization process of NCA to identify the prominent features. Based 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+10 
+PAGE 11
+Kandasamy C.P. et al.
+Fig. 7. Denoising EEG signal through VMD.
+Fig. 8. Representative spectral plot of the decomposed IMFs of seizure classes (a) ABSZ (b) CPSZ (c) FNSZ (d) GNSZ (e) TCSZ (f) TNSZ.
+Chaos, Solitons and Fractals 199 (2025) 116779 
+11 
+PAGE 12
+Kandasamy C.P. et al.
+Fig. 9. Statistical distribution of the entropy features of seizure types (a) ABSZ (b) CPSZ (c) FNSZ (d) GPSZ (e) TCSZ (f) TNSZ.
+Fig. 10. (a) Feature weight plot of NCA depicting the insignificant features close to zero (b) NCA fitness function plot manifesting the optimization process towards prominent 
+feature selection.
+on the feature weights, predictor importance scores (PIC) of NCA and 
+ReliefF algorithms are illustrated in Fig.  11 to select the prominent 
+features based on thresholding technique. In our study, based on the 
+PIC of NCA and ReliefF algorithms, we select a threshold of 0.03 for PIC 
+to arrive at the highly distinguishable entropy features. Hence, fusing 
+the features from NCA and ReliefF algorithms, this study formulates an 
+optimal entropy feature vector for training the ML classifier models.
+4.1. Classifier training and testing
+Table  5 presents the parameter settings of the BOSVM classifier 
+model along with the baseline ML models such as KNN, DA, LDA 
+and ANN. As the seizure classification based on EEG contains highly 
+inseparable nonlinear data, we adopt a RBF Gaussian kernel function 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+12 
+PAGE 13
+Kandasamy C.P. et al.
+Fig. 11. Bar plot representing the predictor importance scores of (a) NCA (b) ReliefF.
+Table 5
+Parameter settings of classifier models.
+ Model Learning parameters Values  
+ 
+BO-SVM
+Kernal function Gaussian  
+ Scale 1  
+ Box constraint level 1  
+ Multi-class approach One-vs-one  
+ Optimizer Bayesian  
+ 
+KNN
+Number of neighbors 1  
+ Distance metric Euclidean  
+ Distance weight Equal  
+ Optimizer Bayesian  
+ DA Type Diagonal linear 
+ Optimizer Bayesian  
+ LDA Covariance structure Diagonal  
+ 
+ANN
+Number of fully connected layers 1  
+ First layer size 100  
+ Activation ReLU  
+ Iteration limit 1000  
+in BOSVM model for its excellent generalization property and computa-
+tional efficiency. Through Bayesian optimization technique, this study 
+identifies the optimal SVM hyperparameters by balancing exploration 
+and exploitation. The following search space ranges are utilized to 
+select optimal hyperparameters for better performance of the model: i. 
+Multiclass coding : One vs. All ii. Box Constraint level (𝐶): 0.001–1000 
+iii. Kernel scale (𝛾) : 1–100 iv. Kernel Function : Gaussian and v. 
+Iterations: 30. Based on the BO optimization process, the optimal hyper-
+parameters of SVM model that offer the best classification accuracy are 
+found to be 𝐶 = 990  and 𝛾 = 89 .98. For fair evaluation of BOSVM, 
+the optimization approach in other classifiers such as KNN, DA, and 
+LDA are chosen to be Bayesian technique as well. Dividing the dataset 
+into 80:20 ratio for training and testing, we evaluate the performance 
+of the classifier models. For brevity, the confusion matrices of BOSVM 
+along with those of KNN and LDA classifiers are illustrated in Fig. 
+12. The confusion matrices manifest that the seizure misclassification 
+rate of BOSVM is the least of all the classifier models. Moreover, to 
+visualize the misclassified data points, the prediction results of the 
+BOSVM, KNN and LDA classifier models are illustrated through scatter 
+plots in Fig.  13. From the scatter plots, we can also observe that the 
+BOSVM manages to offer correct prediction of seizure classes with the 
+least misclassification rate. The effective classification of BOSVM to 
+predict the seizure classes is also substantiated through the ROC curves 
+illustrated in Fig.  14. To quantify the efficacy of the classifier models, 
+this study computes the performance metrics given in Table  6.
+Table  7 presents the performance metrics of the classifier models 
+to predict the six classes of seizure. With an average classification 
+accuracy of 98.37%, BOSVM manages to classify the seizure classes 
+effectively with the least misclassification rate of all the models. More-
+over, to assess the performance of the classifiers on unseen data, 5 fold 
+Table 6
+Metrics to quantify the performance of classifier models.
+ Metrics Mathematical expression for metrics  
+ Accuracy 𝐴𝑐𝑐 =
+(
+𝑇𝑃 +𝑇𝑁
+𝑇𝑃 +𝐹𝑁 +𝑇𝑁 +𝐹𝑁
+)
+∗ 100  
+ Precision 𝑃 𝑟𝑒𝑐 =
+(
+𝑇𝑃
+𝑇𝑃 +𝐹𝑃
+)
+∗ 100  
+ Specificity 𝑆𝑝𝑒𝑐 =
+(
+𝑇𝑁
+𝑇𝑃 +𝐹𝑃
+)
+∗ 100  
+ Sensitivity 𝑆𝑒𝑛 =
+(
+𝑇𝑃
+𝑇𝑃 +𝐹𝑁
+)
+∗ 100  
+ Negative predictive value 𝑁𝑃 =
+(
+𝑇𝑁
+𝑇𝑁 +𝐹𝑁
+)
+∗ 100  
+ False discovery rate 𝐹 𝐷 =
+(
+𝐹𝑃
+𝐹𝑃 +𝑇𝑃
+)
+∗ 100  
+ Kappa statistics 𝐾𝑎𝑝 =
+(
+2(𝑇𝑃 ∗𝑇𝑁 −𝐹𝑁 ∗𝐹𝑃 )
+(𝑇𝑃 +𝐹𝑃 )∗(𝐹𝑃 +𝑇𝑁 )+(𝑇𝑃 +𝐹𝑁 )∗(𝐹𝑁 +𝑇𝑁 )
+)
+ 
+ F1-Score 𝐹 1 = 2∗𝑇𝑃
+2∗𝑇𝑃 +𝐹𝑁 +𝐹𝑃
+ 
+ Error rate 𝐸𝑟𝑟 =
+(
+𝐹𝑃 +𝐹𝑁
+𝑇𝑃 +𝐹𝑁 +𝑇𝑁 +𝐹𝑃
+)
+∗ 100  
+and 10 fold cross validation techniques are adopted and the statistical 
+distribution of classifier accuracy is illustrated as a box plot in Fig.  15. 
+From the box plot, it can be observed that the BOSVM offers the highest 
+accuracy. The computational complexity of the classifier models is 
+also computed and presented in Table  8. Although the training time 
+of BOSVM is marginally higher than that of KNN, the classification 
+performance of BOSVM is better than that of the KNN model.
+4.2. Ablation experiments
+To assess the role of VMD technique and Bayesian optimization on 
+the seizure classification problem, we perform ablation experiments. 
+From the performance metrics for the ablation experiments given in 
+Table  9, we can note that augmenting VMD technique for signal de-
+composition and denoising improves the classifier accuracy by 5.71% 
+and F1 score by 17%. Similarly, adopting Bayesian optimization with 
+the classifier to tune the SVM hyperparameters increases the classifier 
+accuracy by 1.7% and F1 score by 6%. It is important to note from 
+these results that even though augmenting BO technique and VMD with 
+the classifier model increases the computational burden, the classifier 
+accuracy and generalization capability, reflected through F1 score, are 
+considerably improved. The primary reason for the enhanced classifier 
+performance can be attributed to the adaptive signal decomposition 
+(VMD) and optimal hyperparameter selection using BO technique.
+4.3. Impact of ADASYN on class imbalance
+Since the dataset considered in this study does not have equal sam-
+ples for the seizure classes, we adopt ADASYN technique to generate 
+the synthetic samples for the minority classes so as to avoid the bias in 
+the classifier performance towards the majority samples. Subsequently, 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+13 
+PAGE 14
+Kandasamy C.P. et al.
+Fig. 12. Confusion matrices of classifier models (a) KNN (b) LDA and (c) BOSVM.
+Table 7
+Performance metrics of various classifier for seizure classification.
+ Classifier Class %ACC %PRE %SEN %SPE %NPV %ERR %FDR F1-S Kappa 
+ 
+DA
+ABSZ 92.68 83.33 71.43 97.06 94.29 7.32 16.67 0.77 0.73  
+ CPSZ 96.34 81.25 100 95.65 100 3.66 18.75 0.90 0.89  
+ FNSZ 97.56 100 85.71 100 97.14 2.44 0 0.92 0.91  
+ GNSZ 92.68 72.22 92.86 92.65 98.44 7.32 27.78 0.81 0.77  
+ TCSZ 95.12 90.91 76.92 98.55 95.77 4.88 9.09 0.83 0.80  
+ TNSZ 89.02 69.23 64.29 94.12 92.75 10.98 30.77 0.67 0.61  
+ 
+KNN
+ABSZ 93.9 90.91 66.67 98.53 94.37 6.1 9.09 0.8 0.76  
+ CPSZ 96.34 81.25 100 95.65 100 3.66 18.75 0.9 0.89  
+ FNSZ 95.12 85.71 85.71 97.06 97.06 4.88 14.29 0.86 0.83  
+ GNSZ 96.34 92.31 85.71 98.53 97.10 3.66 7.69 0.89 0.87  
+ TCSZ 91.46 71.43 76.92 94.2 95.59 8.54 28.57 0.74 0.69  
+ TNSZ 95.12 85.71 85.71 97.06 97.06 4.88 14.29 0.86 0.83  
+ 
+LDA
+ABSZ 93.9 100 64.29 100 93.15 6.1 0 0.78 0.75  
+ CPSZ 96.34 81.25 100 95.65 100 3.66 18.75 0.90 0.89  
+ FNSZ 96.34 86.67 92.86 97.06 98.51 3.66 13.33 0.9 0.87  
+ GNSZ 89.02 62.5 76.92 91.3 95.45 10.98 37.5 0.69 0.62  
+ TCSZ 93.9 80 85.71 95.59 97.01 6.1 20 0.83 0.79  
+ TNSZ 91.46 81.81 64.29 97.06 92.96 8.54 18.18 0.72 0.67  
+ 
+ANN
+ABSZ 96.34 86.67 92.86 97.06 98.51 3.66 13.33 0.9 0.87  
+ CPSZ 98.78 100 92.31 100 98.57 1.22 0 0.96 0.95  
+ FNSZ 92.68 83.33 71.43 97.06 94.29 7.32 16.67 0.77 0.73  
+ GNSZ 100 100 100 100 100 0 0 1 1  
+ TCSZ 96.34 91.67 84.62 98.55 97.14 3.66 8.33 0.88 0.86  
+ TNSZ 95.12 81.25 92.86 95.59 98.48 4.88 18.75 0.87 0.84  
+ 
+BOSVM
+ABSZ 97.56 87.5 100 97.06 100 2.34 12.5 0.93 0.92  
+ CPSZ 98.78 92.86 100 98.55 100 1.22 7.14 0.96 0.96  
+ FNSZ 97.56 100 85.71 100 97.14 2.34 0 0.92 0.91  
+ GNSZ 100 100 100 100 100 0 0 1 1  
+ TCSZ 97.56 92.86 92.86 98.53 98.53 2.34 7.14 0.93 0.91  
+ TNSZ 98.78 100 92.86 100 98.55 1.22 0 0.96 0.96  
+Chaos, Solitons and Fractals 199 (2025) 116779 
+14 
+PAGE 15
+Kandasamy C.P. et al.
+Fig. 13. Scatter plot illustrating the classification performance of (a) KNN (b) DA and (c) BOSVM.
+Table 8
+Computational complexity of the classifier models.
+ Parameters BOSVM DA KNN LDA ANN 
+ Training time (s) 2.45 5.08 2.29 5.48 6.19  
+ Prediction speed (obs/s) ∼760 ∼1150 ∼600 ∼1100 ∼370 
+Table 9
+Performance of the classifier model for the ablation experiments.
+ Model %ACC %SEN %PRE F1-S Model size 
+ Without VMD 92.66 81.66 85.55 0.78 90 kB  
+ Without BO 96.67 88.89 90.28 0.89 102 kB  
+ With VMD+BO 98.37 95.23 95.53 0.95 45 kB  
+this study computes the sensitivity of the classifier models to assess the 
+impact of ADASYN technique. As the sensitivity reflects the potential 
+of a classifier model to predict the true positives, ADASYN helps to en-
+hance the sensitivity for the minority class by augmenting the synthetic 
+samples. Consequently, ADASYN minimizes the tendency of the classi-
+fier to be biased towards the majority class by balancing the dataset 
+without compromising the overall accuracy. Fig.  16 illustrates the box 
+plot exhibiting the sensitivity of the classifier models with and without 
+ADASYN technique. It is clearly evident that the ADASYN effectively 
+improves the sensitivity of the classifier models considerably.
+4.4. LIME-explainable AI results
+To improve the interpretability of the seizure classification system 
+to predict the classes, we integrate the state-of-the-art XAI technique 
+namely LIME (Local Interpretable Model-Agnostic Explanation). With 
+the focus on interpreting individual predictions, LIME computes the 
+input features which contribute substantially for the predictions. Fig. 
+17 illustrates the representative LIME values for the BOSVM classifier 
+predictions. The LIME values plot illustrates the features that make 
+positive and negative contributions to the predictions for a particular 
+data point. For instance, from Fig.  17, it can be observed that excluding 
+the bubble-, grid- and cosine entropy of second channel, other entropy 
+measures contribute positively to the prediction. Hence, the LIME 
+values offer localized insights into the decision making of the classifier 
+models.
+4.5. Discussion
+EEG signals acquired along the scalp manifests the spontaneous 
+electrical activity of the brain. Hence, EEG has been a primary tool for 
+diagnosing several neuro-disorders including seizure. Manual analysis 
+of EEGs for diagnosing seizure is typically time consuming because 
+the recordings will generally last for hours. Hence, this study has 
+presented a ML based seizure classification framework based on the 
+EEG signals. To deal with the non-stationary dynamics of EEG, this 
+study has adopted a VMD technique to decompose the neural signal into 
+IMFs and implemented a spectral analysis of decomposed modes for 
+extracting the prominent IMFs for feature extraction. Unlike most of the 
+current techniques that adopted time-, frequency- and time–frequency 
+features for classifier training, we explored the entropy features that 
+remain largely unexplored. The findings of our investigation substanti-
+ate that entropy features can act as a robust feature vector to classify 
+the stages of seizure. Moreover, to identify the optimal entropy fea-
+tures for classifier training, a feature fusion approach which combines 
+the prominent features obtained using NCA and ReliefF algorithms is 
+leveraged. Experimental results corroborate that the proposed BOSVM 
+classifier model offers an average seizure classification accuracy of 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+15 
+PAGE 16
+Kandasamy C.P. et al.
+Fig. 14. Region of convergence (ROC) curve of (a) KNN (b) DA and (c) BOSVM.
+Table 10
+Comparing the proposed classifier framework performance with the existing classifier results.
+ Reference & Year Dataset Features Feature selection Classifier Accuracy 
+ Zhang et al (2022) [12] TUSZ Statistical Filter method NLTWSVM 98.0%  
+ Tuncer et al (2022) [13] TUSZ Statistical Correlation method SVM 90.3%  
+ Abbas et al (2023) [9] TUSZ Nonlinear Graph based feature selection RF 91.55%  
+ Wu et al (2023) [10] TUSZ Time & frequency LDA & RF Penalized ensemble model 96.14%  
+ Proposed model TUSZ Entropy NCA & ReliefF BO-SVM 98.37%  
+Fig. 15. Box plot of the classifier performance depicting the statistical distribution of 
+accuracy.
+98.37% for the six classes of seizure considered for the study. To 
+benchmark the performance of the proposed framework, the results of 
+the BOSVM model is compared with the existing results that utilized 
+TUSZ dataset for classification and are presented in Table  10. It can 
+be observed from Table  10 that compared to the recent results of ML 
+models put forward by Wu et al. [10], the proposed approach achieves 
+2.55% improvement in classification accuracy. Moreover, compared 
+to the results of Zhang et al. [12] that adopted statistical features 
+for classifier training, the proposed approach offers marginally better 
+performance. Similarly, compared to the graph based nonlinear feature 
+selection approach adopted in Abbas et al. [9], our approach leverages 
+the optimal entropy features and offers 6.82% increase in classifier 
+accuracy. It is important to note that most of the existing techniques 
+reported in Table  10 failed to handle the class imbalance problem in 
+seizure classification. However, this study adopts an ADASYN technique 
+Chaos, Solitons and Fractals 199 (2025) 116779 
+16 
+PAGE 17
+Kandasamy C.P. et al.
+Fig. 16. Box plot depicting the sensitivity of the classifier models with and without 
+ADASYN technique.
+Fig. 17. Representative prediction results of LIME-XAI to explain the interpretability 
+of the classifier model.
+and minimizes the class imbalance problem by generating the synthetic 
+samples and enhancing the sensitivity of the classifier models. With 
+respect to the feasibility of implementing the proposed approach on 
+an embedded device, it is important to note that the SVM parameter 
+optimization is performed before deploying the model. Hence, the final 
+deployed model can perform the classification with minimal latency 
+and can be implemented through edge platforms such as Cortex-M pro-
+cessors/NVIDIA Jetson devices, thereby making it feasible for realtime 
+seizure classification.
+4.6. Limitations of the proposed framework
+Although the proposed seizure classification framework offers sig-
+nificant insights into the potentials of entropy features to effectively 
+categorize the seizure using BOSVM model, it is important to discuss 
+the limitations of the this investigation. Firstly, extracting influential 
+features from EEG signals typically require the domain expertise and 
+considerable time and effort. Secondly, the data considered in this study 
+were acquired in a controlled setting; consequently, the efficacy of the 
+proposed approach to handle diverse noise levels in real-time setting 
+needs to be further evaluated. Moreover, when EEG signals are acquired 
+at different sampling rate and signal quality, the model needs to be 
+retrained to ensure the generalizability of the classifier.
+5. Conclusion
+This study has presented an EEG based seizure classification frame-
+work by leveraging the potentials of VMD and BOSVM model. The 
+nonlinear and non-stationary dynamics of EEG is handled through a 
+VMD technique such that the neuro signals are decomposed into band-
+limited frequency modes for extracting the feature vector. By adopting 
+the spectral evaluation of the decomposed EEG modes, this study has 
+identified the prominent IMFs that can be utilized for entropy feature 
+extraction. With the primary goal of demonstrating the potential of 
+entropy features to categorize the seizures, we have harnessed the 
+Bayesian optimized SVM classifier model and trained the classifier 
+based on the optimal entropy features identified using the NCA and Re-
+liefF algorithms. Subsequently, an ADASYN technique is implemented 
+to handle the class imbalance problem such that the sensitivity of the 
+classifier towards the major sample class is mitigated. The experimental 
+validation on the publicly available seizure dataset substantiates that 
+the proposed approach can achieve an average classification accuracy 
+of 98.37% and provide higher generalization feature compared to the 
+state-of-the-art classifier models. Exploiting the benefits of entropy 
+features and feature fusion method, the proposed BOSVM classifier 
+framework sets a foundation for accurate and interpretable seizure 
+classification systems in clinical environments. While the classification 
+results of the proposed framework are promising, future research can 
+further evaluate the potential of multi-modal fusion technique that 
+fuses the neural recording from different sources including EEG and 
+MRI. Testing the performance of the proposed approach on more 
+diverse dataset and expanding the feature analysis will help to improve 
+the generalization ability of the classifier model. Moreover, to minimize 
+the computational burden on the classifier models, the optimal EEG 
+channels that contain the prominent information for predicting the 
+seizure can be explored.
+CRediT authorship contribution statement
+Kandasamy C.P.: Writing – original draft, Validation, Software. 
+Vinodh Kumar Elumalai: Writing – review & editing, Supervision, Re-
+sources, Methodology. Balaji E.: Writing – review & editing, Resources, 
+Investigation, Data curation.
+Declaration of competing interest
+The authors declare that they have no known competing finan-
+cial interests or personal relationships that could have appeared to 
+influence the work reported in this paper.
+Data availability
+Data will be made available on request.
+References
+[1] Xu J, Yan K, Deng Z, Yang Y, Liu J-X, Wang J, Yuan S. EEG-based epileptic 
+seizure detection using deep learning techniques: A survey. Neurocomputing 
+2024;610:128644.
+[2] Yıldız İ, Garner R, Lai M, Duncan D. Unsupervised seizure identification on EEG. 
+Comput Methods Programs Biomed 2022;215:106604.
+[3] Djemal A, Kallel AY, Ouni C, El Baccouch R, Bouchaala D, Feki FK, Triki CC, 
+Fakhfakh A, Kanoun O. Fast processing and classification of epileptic seizures 
+based on compressed EEG signals. Comput Biol Med 2025;184:109346.
+[4] Shanmugam S, Dharmar S. Implementation of a non-linear SVM classification for 
+seizure EEG signal analysis on FPGA. Eng Appl Artif Intell 2024;131:107826.
+[5] McCallan N, Davidson S, Ng KY, Biglarbeigi P, Finlay D, Lan BL, McLaughlin J. 
+Epileptic multi-seizure type classification using electroencephalogram signals 
+from the Temple University Hospital Seizure Corpus: A review. Expert Syst Appl 
+2023;121040.
+[6] Golmohammadi M, Shah V, Obeid I, Picone J. Deep learning approaches for 
+automated seizure detection from scalp electroencephalograms. Signal Process 
+Med Biol.: Emerg Trends Res Appl 2020;235–76.
+[7] Peng R, Zhao C, Jiang J, Kuang G, Cui Y, Xu Y, Du H, Shao J, Wu D. TIE-EEGNet: 
+Temporal information enhanced EEGNet for seizure subtype classification. IEEE 
+Trans Neural Syst Rehabil Eng 2022;30:2567–76.
+Chaos, Solitons and Fractals 199 (2025) 116779 
+17 
+PAGE 18
+Kandasamy C.P. et al.
+[8] Ahmad I, Yao C, Li L, Chen Y, Liu Z, Ullah I, Shabaz M, Wang X, Huang K, 
+Li G, et al. An efficient feature selection and explainable classification method 
+for EEG-based epileptic seizure detection. J Inf Secur Appl 2024;80:103654.
+[9] Abou-Abbas L, Henni K, Jemal I, Mitiche A, Mezghani N. Patient-independent 
+epileptic seizure detection by stable feature selection. Expert Syst Appl 
+2023;232:120585.
+[10] Wu D, Li J, Dong F, Liu J, Jiang L, Cao J, Wu X, Zhang X. Classification of 
+seizure types based on multi-class specific bands common spatial pattern and 
+penalized ensemble model. Biomed Signal Process Control 2023;79:104118.
+[11] Qin X, Xu D, Dong X, Cui X, Zhang S. EEG signal classification based on improved 
+variational mode decomposition and deep forest. Biomed Signal Process Control 
+2023;83:104644.
+[12] Zhang S, Liu G, Xiao R, Cui W, Cai J, Hu X, Sun Y, Qiu J, Qi Y. A combination 
+of statistical parameters for epileptic seizure detection and classification using 
+VMD and NLTWSVM. Biocybern Biomed Eng 2022;42(1):258–72.
+[13] Tuncer E, Bolat ED. Channel based epilepsy seizure type detection from elec-
+troencephalography (EEG) signals with machine learning techniques. Biocybern 
+Biomed Eng 2022;42(2):575–95.
+[14] Yadav VP, Sharma KK. Variational mode decomposition-based seizure classifica-
+tion using Bayesian regularized shallow neural network. Biocybern Biomed Eng 
+2021;41(2):402–18.
+[15] Khosla A, Khandnor P, Chand T. EEG-based automatic multi-class classification 
+of epileptic seizure types using recurrence plots. Expert Syst 2022;39(5):e12923.
+[16] Thomas George S, Subathra M, Sairamya N, Susmitha L, Joel Premkumar M. 
+Classification of epileptic eeg signals using pso based artificial neural network 
+and tunable-q wavelet transform. Biocybern. Biomed Eng. 2020;40(2):709–28.
+[17] Sarić R, Jokić D, Beganović N, Pokvić LG, Badnjević A. FPGA-based real-time 
+epileptic seizure classification using artificial neural network. Biomed Signal 
+Process Control 2020;62:102106.
+[18] Joshi RK, Kumar V, Agrawal M, Rao A, Mohan L, Jayachandra M, Pandya HJ. 
+Spatiotemporal analysis of interictal EEG for automated seizure detection and 
+classification. Biomed Signal Process Control 2023;79:104086.
+[19] Jing J, Pang X, Pan Z, Fan F, Meng Z. Classification and identification of 
+epileptic EEG signals based on signal enhancement. Biomed Signal Process 
+Control 2022;71:103248.
+[20] Harati A, Lopez S, Obeid I, Picone J, Jacobson M, Tobochnik S. The TUH EEG 
+CORPUS: A big data resource for automated EEG interpretation. In: 2014 IEEE 
+signal processing in medicine and biology symposium. SPMB, IEEE; 2014, p. 1–5.
+[21] Golmohammadi M, Harati Nejad Torbati AH, Lopez de Diego S, Obeid I, 
+Picone J. Automatic analysis of EEGs using big data and hybrid deep learning 
+architectures. Front Hum Neurosci 2019;13:76.
+[22] Dragomiretskiy K, Zosso D. Variational mode decomposition. IEEE Trans Signal 
+Process 2013;62(3):531–44.
+[23] Qiao B, Liu J, Wu P, Teng Y. Wind power forecasting based on variational 
+mode decomposition and high-order fuzzy cognitive maps. Appl Soft Comput 
+2022;129:109586.
+[24] Abed SA, Khalil ZH. Reliability allocation in complex systems using fuzzy logic 
+modules. Babylon J Math 2023;2023:78–83.
+[25] Prabhavathy T, Elumalai VK, Balaji E. Hand gesture classification framework 
+leveraging the entropy features from sEMG signals and VMD augmented 
+multi-class SVM. Expert Syst Appl 2024;238:121972.
+[26] Malan N, Sharma S. Motor imagery EEG spectral-spatial feature optimization 
+using dual-tree complex wavelet and neighbourhood component analysis. IRBM 
+2022;43(3):198–209.
+[27] Raghu S, Sriraam N. Classification of focal and non-focal EEG signals using 
+neighborhood component analysis and machine learning algorithms. Expert Syst 
+Appl 2018;113:18–32.
+[28] Yang W, Wang K, Zuo W. Neighborhood component feature selection for 
+high-dimensional data. J Comput 2012;7(1):161–8.
+[29] Robnik-Šikonja M, Kononenko I. Theoretical and empirical analysis of ReliefF 
+and RReliefF. Mach Learn 2003;53:23–69.
+[30] Huang W, Guan Q, Luo J, Zhang J, Zhao J, Liang D, Huang L, Zhang D. New 
+optimized spectral indices for identifying and monitoring winter wheat diseases. 
+IEEE J Sel Top Appl Earth Obs Remote Sens 2014;7(6):2516–24.
+[31] López-García A, Blasco-Blasco O, Liern-García M, Parada-Rico SE. Early detection 
+of students’ failure using machine learning techniques. Oper Res Perspect 
+2023;11:100292.
+[32] Abdelkhalek A, Mashaly M. Addressing the class imbalance problem in net-
+work intrusion detection systems using data resampling and deep learning. J 
+Supercomput 2023;79(10):10611–44.
+[33] Al-Masroub R, Fiadh MS. Minimal prime and semiprime submodules. Babylon J 
+Math 2023;2023:84–7.
+[34] Abed SA, Ali AH, Mohamad OA, Aljanabi M. Reliability allocation and opti-
+misation by using Kuhn–Tucker and geometric programming for series-parallel 
+system. Int J Comput Aided Eng Technol 2022;16(4):488–96.
+Chaos, Solitons and Fractals 199 (2025) 116779 
+18 

@@ -1,0 +1,5 @@
+mapping,seeds,mean_best_cv_at_16_pct,mean_best_cv_at_50_pct,sample_sd_final_best_cv_pp,mean_best_so_far_over_50_evals_pct,mean_best_gain_eval_17_50_pp,last_improvement_eval_min,last_improvement_eval_max,last_improvement_eval_median,candidates_below_70_eval_17_50,candidate_count_eval_17_50,candidate_pct_below_70_eval_17_50,runs_reaching_87_5_pct,median_eval_at_87_5_pct_among_reached,runs_reaching_88_0_pct,median_eval_at_88_0_pct_among_reached,runs_reaching_88_75_pct,median_eval_at_88_75_pct_among_reached
+uniform,5,87.2,88.9,1.4853451,86.966,1.7,9,41,25,11,170,6.4705882,4,17,4,17,3,25
+normal,5,86.95,88.5,1.677051,86.841,1.55,12,49,32,15,170,8.8235294,4,15.5,2,23,2,23
+exponential,5,86.8,88.15,1.24499,86.087,1.35,15,48,42,13,170,7.6470588,3,15,3,15,1,12
+gamma,5,87.3,88.35,0.9617692,86.367,1.05,15,50,39,14,170,8.2352941,4,24.5,4,30,3,19

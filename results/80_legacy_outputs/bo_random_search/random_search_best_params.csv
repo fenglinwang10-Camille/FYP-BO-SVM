@@ -1,0 +1,2 @@
+iteration,f_low,f_high,window_size,C,gamma,validation_accuracy,validation_recall_Z,validation_recall_O,validation_recall_N,validation_recall_F,validation_recall_S,validation_seizure_sensitivity,test_accuracy,test_recall_Z,test_recall_O,test_recall_N,test_recall_F,test_recall_S,test_seizure_sensitivity
+29.0,2.6899624887717217,44.72120983063563,4.751305819899931,5.190200762275255,0.007833531681967305,0.8325,0.8875,0.8375,0.85,0.6,0.9875,0.9875,0.795,0.8375,0.8,0.7625,0.5875,0.9875,0.9875

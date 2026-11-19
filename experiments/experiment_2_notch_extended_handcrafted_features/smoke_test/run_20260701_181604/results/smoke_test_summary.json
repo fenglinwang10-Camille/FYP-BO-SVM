@@ -1,0 +1,15 @@
+{
+  "notch_reduction_ok": true,
+  "feature_count_constant": true,
+  "no_nan_inf": true,
+  "group_leakage_ok": true,
+  "scaler_training_only_ok": true,
+  "majority_vote_ok": true,
+  "validation_values_finite": true,
+  "feature_count": 43,
+  "original_feature_count": 35,
+  "final_feature_count": 43,
+  "estimated_full_run_evaluations": 50,
+  "estimated_full_run_multiplier": 16.666666666666668,
+  "output_dir": "C:\\Users\\\u738b\u67ab\u6dcb\\Desktop\\FYP\\experiments\\experiment_2_notch_extended_handcrafted_features\\smoke_test\\run_20260701_181604"
+}

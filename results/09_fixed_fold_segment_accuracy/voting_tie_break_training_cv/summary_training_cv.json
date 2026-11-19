@@ -1,0 +1,12 @@
+{
+  "n_outer_training_splits": 5,
+  "majority_accuracy_mean": 0.889,
+  "confidence_tiebreak_accuracy_mean": 0.8925000000000001,
+  "accuracy_difference_mean": 0.003499999999999992,
+  "majority_F_recall_mean": 0.6975,
+  "confidence_tiebreak_F_recall_mean": 0.7224999999999999,
+  "total_tied_recordings": 97,
+  "total_changed_predictions": 46,
+  "held_out_test_evaluations": 0,
+  "note": "Training CV only; BO parameters were selected with the original majority rule."
+}

@@ -1,0 +1,6 @@
+seed,majority_accuracy,confidence_tiebreak_accuracy,accuracy_difference,majority_F_recall,confidence_tiebreak_F_recall,tied_recordings,changed_predictions
+42,0.9025,0.91,0.007500000000000062,0.775,0.8,4,4
+43,0.87,0.8825,0.012499999999999956,0.6375,0.7,50,22
+44,0.905,0.9075,0.0024999999999999467,0.75,0.75,5,3
+45,0.8875,0.8825,-0.0050000000000000044,0.7125,0.7375,32,13
+46,0.88,0.88,0.0,0.6125,0.625,6,4

@@ -1,0 +1,67 @@
+{
+  "seed": 45,
+  "method": "feature_mean",
+  "parameter_prior": "uniform",
+  "objective": "cv_recording_accuracy",
+  "bo_evaluations_used": 50,
+  "n_initial_points": 16,
+  "best_iteration": 50,
+  "best_cv_recording_accuracy": 0.8825,
+  "best_parameters": {
+    "f_low": 0.5,
+    "f_high": 30.0,
+    "window_size": 5.0,
+    "C": 100.0,
+    "gamma": 0.0013570708530037676
+  },
+  "train_recordings": 400,
+  "test_recordings": 100,
+  "feature_columns": 55,
+  "test_accuracy": 0.78,
+  "test_macro_f1": 0.7682577083476263,
+  "test_class_recall": {
+    "Z": 0.95,
+    "O": 0.7,
+    "N": 0.9,
+    "F": 0.4,
+    "S": 0.95
+  },
+  "test_confusion_matrix": [
+    [
+      19,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      5,
+      14,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      18,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      10,
+      8,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      19
+    ]
+  ],
+  "test_evaluations": 1
+}

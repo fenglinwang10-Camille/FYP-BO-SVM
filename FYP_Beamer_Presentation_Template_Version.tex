@@ -1,0 +1,502 @@
+\documentclass{beamer}
+\usepackage{listings,xcolor,epsf,mathrsfs}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usetheme{Madrid}
+
+\newcommand{\pa}{\partial}
+\newcommand{\di}{\displaystyle}
+\newcommand{\acc}{\mathrm{Accuracy}}
+
+\begin{document}
+ \mode<presentation>
+
+\title[BO-SVM EEG Classification]{EEG-Based Epileptic Signal Classification Using BO-SVM and Hierarchical SVM}
+\author{Your Name}
+\date{\today}
+\institute[XMUM]{Department of Mathematics\\ Xiamen University Malaysia}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Presentation Outline}
+\begin{enumerate}
+\item Background and dataset
+\item Preprocessing and feature extraction
+\item BO-SVM baseline
+\item Error analysis
+\item Hierarchical SVM improvement
+\item Experimental results
+\item Discussion and conclusion
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Background}
+\framesubtitle{\it{Automatic EEG classification for epilepsy analysis}}
+\begin{itemize}
+\item Epilepsy is a neurological disorder characterized by abnormal brain activity.
+\item Electroencephalography (EEG) records brain electrical signals directly.
+\item Automatic EEG classification can reduce manual workload and support clinical decision-making.
+\item This project develops a feature-based SVM pipeline for Bonn EEG classification.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bonn EEG Dataset}
+\begin{itemize}
+\item Dataset: University of Bonn EEG dataset.
+\item Five classes, with 100 EEG segments per class.
+\item Sampling frequency: 173.61 Hz.
+\item Each EEG segment contains 4097 samples.
+\end{itemize}
+
+\begin{table}
+\centering
+\begin{tabular}{cl}
+\toprule
+Class & Description\\
+\midrule
+Z & Healthy subject, eyes open\\
+O & Healthy subject, eyes closed\\
+N & Interictal EEG from epileptogenic zone\\
+F & Interictal EEG from non-epileptogenic zone\\
+S & Ictal / seizure EEG\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Project Objectives}
+\begin{enumerate}
+\item Build an EEG classification pipeline for the Bonn dataset.
+\item Compare SVM without optimization and Bayesian-Optimized SVM.
+\item Identify the main source of classification errors.
+\item Improve performance using hierarchical SVM.
+\item Evaluate both five-class and subset classification tasks.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Overall Methodology}
+\framesubtitle{\it{Feature-based machine learning pipeline}}
+\begin{center}
+\begin{tabular}{c}
+Raw EEG signal\\
+$\Downarrow$\\
+Band-pass filtering\\
+$\Downarrow$\\
+Window segmentation\\
+$\Downarrow$\\
+Feature extraction\\
+$\Downarrow$\\
+Feature scaling\\
+$\Downarrow$\\
+RBF-SVM classification\\
+$\Downarrow$\\
+Evaluation
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Signal Preprocessing}
+\begin{itemize}
+\item Band-pass filtering was applied to retain useful EEG frequency components.
+\item EEG segments were divided into fixed-length windows.
+\item Non-overlapping windows were used for conservative evaluation.
+\item 50\% overlapping windows were additionally tested to improve window-level performance.
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{block}{Evaluation Note}
+The 89.20\% result uses non-overlapping windows, while the 90.33\% result uses 50\% overlapping windows.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Feature Extraction}
+\begin{itemize}
+\item Frequency-domain features:
+\begin{itemize}
+\item PSD band power
+\item Relative band power
+\item Band power ratios
+\end{itemize}
+\item Statistical features:
+\begin{itemize}
+\item Mean, standard deviation, variance, RMS, line length
+\item Skewness and kurtosis
+\end{itemize}
+\item Nonlinear features:
+\begin{itemize}
+\item Shannon entropy, spectral entropy, approximate entropy
+\item Hjorth activity, mobility, and complexity
+\end{itemize}
+\item DWT features:
+\begin{itemize}
+\item Wavelet energy, relative wavelet energy, and wavelet entropy
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{PSD Normalization}
+\begin{itemize}
+\item PSD describes how signal power is distributed across frequency bands.
+\item Absolute band power may be affected by the overall signal amplitude.
+\item Therefore, relative band power was computed:
+\end{itemize}
+
+$$
+\text{Relative Power}_i =
+\frac{\text{Band Power}_i}
+{\sum_{j=1}^{5}\text{Band Power}_j}.
+$$
+
+\begin{block}{Purpose}
+PSD normalization helps the model focus on the frequency distribution pattern rather than only the absolute signal magnitude.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discrete Wavelet Transform}
+\begin{itemize}
+\item EEG signals are non-stationary, so time-frequency features are useful.
+\item DWT decomposes each EEG window into multiple wavelet sub-bands.
+\item In this project, db4 wavelet decomposition was used.
+\item From wavelet coefficients, energy, relative energy, entropy, mean, and standard deviation were extracted.
+\end{itemize}
+
+\begin{block}{Reason for Using DWT}
+Enhanced DWT features were mainly used for N/F refinement, because N and F were the most difficult classes to separate.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{BO-SVM Baseline}
+\begin{itemize}
+\item RBF-SVM was selected as the base classifier.
+\item SVM is suitable for small datasets and handcrafted high-dimensional features.
+\item Bayesian Optimization was used to tune important hyperparameters.
+\end{itemize}
+
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Parameter & Meaning\\
+\midrule
+$f_{low}$, $f_{high}$ & Band-pass frequency range\\
+Window size & EEG window length\\
+$C$ & SVM regularization parameter\\
+$\gamma$ & RBF kernel parameter\\
+Feature setting & Feature combination\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Error Analysis}
+\begin{itemize}
+\item Initial BO-SVM achieved around 84--86\% test accuracy.
+\item Confusion matrix analysis showed that class S was detected very well.
+\item Most remaining errors came from confusion between N and F.
+\end{itemize}
+
+\begin{block}{Key Observation}
+The main limitation was not seizure detection, but separating similar interictal EEG classes N and F.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Improved Method: Hierarchical SVM}
+\begin{itemize}
+\item A single five-class SVM must learn all class boundaries at once.
+\item To reduce N/F confusion, the task was decomposed into simpler stages.
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+Stage & Classification task\\
+\midrule
+1 & S vs non-S\\
+2 & Z/O/N/F classification\\
+3 & N vs F refinement\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{block}{Motivation}
+A dedicated N/F classifier was added to handle the most difficult pair.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Final Model Setting}
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Component & Setting\\
+\midrule
+Classifier & RBF-SVM\\
+Stage design & S vs non-S, Z/O/N/F, N vs F\\
+Main feature setting & entropy\_hjorth\\
+N/F feature setting & nf\_enhanced\\
+Feature selection & SelectKBest with mutual information\\
+Hyperparameter search & GridSearchCV for each stage\\
+Conservative evaluation & Non-overlapping windows\\
+Enhanced evaluation & 50\% overlapping windows\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Five-Class Classification Results}
+\begin{table}
+\centering
+\begin{tabular}{lc}
+\toprule
+Method & Test Accuracy\\
+\midrule
+BO-SVM baseline & around 84--86\%\\
+Hierarchical SVM, no overlap & \textbf{89.20\%}\\
+Hierarchical SVM, 50\% overlap & \textbf{90.33\%}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Interpretation}
+The hierarchical SVM improved performance by directly targeting the N/F confusion problem.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Best Five-Class Result}
+\framesubtitle{\it{Hierarchical SVM with 50\% overlapping windows}}
+\begin{table}
+\centering
+\begin{tabular}{lc}
+\toprule
+Metric & Value\\
+\midrule
+Test accuracy & \textbf{90.33\%}\\
+Macro recall & \textbf{90.33\%}\\
+Recall Z & 93.33\%\\
+Recall O & 89.44\%\\
+Recall N & 83.33\%\\
+Recall F & 86.67\%\\
+Recall S & 98.89\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Confusion Matrix: Five-Class Best Result}
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+True / Pred & Z & O & N & F & S\\
+\midrule
+Z & 168 & 10 & 1 & 1 & 0\\
+O & 18 & 161 & 1 & 0 & 0\\
+N & 2 & 0 & 150 & 28 & 0\\
+F & 4 & 0 & 20 & 156 & 0\\
+S & 0 & 1 & 0 & 1 & 178\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{block}{Observation}
+S was classified very accurately. Most remaining errors were still between N and F.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Subset Classification Experiments}
+\framesubtitle{\it{Non-overlapping windows}}
+\begin{table}
+\centering
+\begin{tabular}{llc}
+\toprule
+Task & Best Feature & Test Accuracy\\
+\midrule
+Z vs S & entropy\_hjorth & \textbf{100.00\%}\\
+F vs S & nf\_enhanced & \textbf{99.00\%}\\
+Z vs F vs S & nf\_enhanced & \textbf{98.67\%}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Conclusion}
+Subset tasks show that S is easy to distinguish from Z and F. The full five-class task is harder due to similar non-seizure classes.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Subset Confusion Matrices}
+\begin{columns}
+\begin{column}{0.31\textwidth}
+\centering
+\textbf{Z vs S}
+
+\vspace{0.1cm}
+\begin{tabular}{c|cc}
+ & Z & S\\
+\hline
+Z & 100 & 0\\
+S & 0 & 100\\
+\end{tabular}
+\end{column}
+
+\begin{column}{0.31\textwidth}
+\centering
+\textbf{F vs S}
+
+\vspace{0.1cm}
+\begin{tabular}{c|cc}
+ & F & S\\
+\hline
+F & 100 & 0\\
+S & 2 & 98\\
+\end{tabular}
+\end{column}
+
+\begin{column}{0.34\textwidth}
+\centering
+\textbf{Z vs F vs S}
+
+\vspace{0.1cm}
+\begin{tabular}{c|ccc}
+ & Z & F & S\\
+\hline
+Z & 97 & 3 & 0\\
+F & 0 & 99 & 1\\
+S & 0 & 0 & 100\\
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparison With Existing Studies}
+\begin{itemize}
+\item Many reported 99--100\% results use binary or ternary seizure detection tasks.
+\item Complete five-class Bonn EEG classification is more challenging.
+\item CNN-based methods can report around 92--93\% or higher.
+\item This project uses a lightweight and interpretable feature-based SVM approach.
+\end{itemize}
+
+\begin{block}{Position of This Work}
+The proposed method achieved 89.20\% without overlap and 90.33\% with 50\% overlap, which is competitive for a handcrafted feature-based SVM pipeline.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discussion}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\begin{block}{Advantages}
+\begin{itemize}
+\item Lightweight model
+\item Interpretable features
+\item BO-supported parameter tuning
+\item Hierarchical design targets N/F confusion
+\item Strong subset classification results
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{block}{Limitations}
+\begin{itemize}
+\item Main evaluation is window-level
+\item Overlap may increase train-test similarity
+\item File-level split can be tested in future work
+\item Deep learning may further improve performance
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+\begin{itemize}
+\item A complete BO-SVM pipeline was developed for Bonn EEG classification.
+\item Error analysis showed that N/F confusion was the main limitation.
+\item A hierarchical SVM with N/F refinement was proposed.
+\item Five-class accuracy improved to:
+\begin{itemize}
+\item 89.20\% using non-overlapping windows.
+\item 90.33\% using 50\% overlapping windows.
+\end{itemize}
+\item Subset tasks achieved 98.67--100\% accuracy without overlap.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Backup: Why SVM?}
+\begin{itemize}
+\item The Bonn dataset is relatively small.
+\item SVM works well with small-to-medium datasets and handcrafted features.
+\item RBF-SVM can model nonlinear decision boundaries.
+\item Compared with deep learning, SVM is more lightweight and interpretable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Backup: Window-Level Evaluation}
+\begin{itemize}
+\item Each original EEG segment is divided into smaller windows.
+\item Classification is performed at the window level.
+\item With overlapping windows, neighboring windows share part of the signal.
+\item Therefore, the 90.33\% result should be described as window-level accuracy.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{}
+\hspace{4cm}{\Huge Thank You}
+
+\vspace{0.8cm}
+\hspace{4.3cm}{\Large Questions?}
+\end{frame}
+
+\begin{frame}\frametitle{References}
+ \begin{thebibliography}{}
+
+\bibitem[Bonn]{Bonn}
+University of Bonn.
+\newblock Bonn EEG dataset for epileptic seizure analysis.
+
+\bibitem[CortesVapnik95]{SVM}
+Corinna Cortes and Vladimir Vapnik.
+\newblock Support-vector networks.
+\newblock {\em Machine Learning}, 20:273--297, 1995.
+
+\bibitem[Mallat89]{DWT}
+Stephane Mallat.
+\newblock A theory for multiresolution signal decomposition: the wavelet representation.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence}, 1989.
+
+\bibitem[Snoek12]{BO}
+Jasper Snoek, Hugo Larochelle, and Ryan Adams.
+\newblock Practical Bayesian optimization of machine learning algorithms.
+\newblock {\em NeurIPS}, 2012.
+
+\end{thebibliography}
+\end{frame}
+
+\end{document}

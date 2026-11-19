@@ -1,0 +1,24 @@
+{
+ "svg": "figures\\chapter4\\figgenie_overview\\fig.svg",
+ "spec": "figures/chapter4/figgenie_overview/spec.json",
+ "width": 480.0,
+ "height": 260.0,
+ "errors": 0,
+ "warnings": 1,
+ "findings": [
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"Bayesian optimisatio\" of c:bo sits -7.5 pt off the centre of its headroom (8–48); shift it by +7.5 pt",
+   "elements": [
+    "c:bo"
+   ],
+   "bbox": [
+    194.390625,
+    16.150000381469727,
+    291.1025390625,
+    24.850000381469727
+   ]
+  }
+ ]
+}

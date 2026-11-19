@@ -1,0 +1,3 @@
+kernel,best_validation_accuracy,best_test_accuracy,best_test_recall_Z,best_test_recall_O,best_test_recall_N,best_test_recall_F,best_test_recall_S,best_test_seizure_sensitivity,best_parameters,iteration_reached_best,iteration_to_validation_accuracy_0.80,iteration_to_validation_accuracy_0.83
+Matérn GP,0.8575,0.835,0.8375,0.8375,0.7875,0.7125,1.0,1.0,"{""f_low"": 3.3718629049747095, ""f_high"": 55.593722638133976, ""window_size"": 5.0, ""C"": 100.0, ""gamma"": 0.006652870591998152}",31,2,14
+RBF GP,0.852,0.84,0.91,0.89,0.79,0.62,0.99,0.99,"{""f_low"": 4.548498286489187, ""f_high"": 53.17431165819552, ""window_size"": 4.538281064771571, ""C"": 15.421427766422829, ""gamma"": 0.07092754576003765}",38,2,29

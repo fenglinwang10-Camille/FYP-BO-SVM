@@ -1,0 +1,47 @@
+# Local assistant and editor settings
+/.codex/
+/.agents/
+/.aws/
+/.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and generated caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# LaTeX build intermediates
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# Temporary previews, extracted pages, and installation helpers
+/tmp/*
+!/tmp/analyze_search_behaviour.py
+!/tmp/build_chapter5_seed44_figures.py
+!/tmp/generate_bo_flowchart.py
+!/tmp/regenerate_grouped_classwise_recall_plot.py
+/tmp_pdf_pages/
+/tmp_pdf_review.txt
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,162 @@
+{
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "main_features": 55,
+  "supplementary_features": 53,
+  "objective": "Negative mean fold recording-level validation accuracy; majority vote",
+  "split": "Stratified 80/20 original recordings; 400 training, 100 test",
+  "cv": "Fixed five recording-level folds per seed; fold-local scaling and SVM",
+  "budget": 50,
+  "bo_initial": 16,
+  "bo_guided": 34,
+  "acquisition": "EI",
+  "preprocessing": {
+    "filter": "Butterworth order argument 4; SOS forward/backward",
+    "overlap": 0,
+    "wavelet": "db4 level 3"
+  },
+  "bounds": {
+    "f_low": [
+      0.5,
+      5
+    ],
+    "f_high": [
+      30,
+      60
+    ],
+    "window_seconds": [
+      1,
+      5
+    ],
+    "C": [
+      0.1,
+      100
+    ],
+    "gamma": [
+      0.0001,
+      1
+    ]
+  },
+  "svm_distribution": "log-uniform for C and gamma",
+  "mappings": {
+    "uniform": "linear",
+    "normal": "loc midpoint; scale width/4",
+    "exponential": "loc lower bound; scale width/3",
+    "gamma": "shape 2; loc lower bound; scale width/4"
+  },
+  "truncation": "Nonuniform distributions restricted to parameter bounds; u in [1e-6,1-1e-6]",
+  "baseline_status": {
+    "BO_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "random_search_seeds": [
+      42
+    ],
+    "missing_random_search_seeds": [
+      43,
+      44,
+      45,
+      46
+    ]
+  },
+  "aggregation": "Per-run cumulative maximum, then mean and sample SD (ddof=1); percentages",
+  "paired_difference": "Nonuniform mapping minus uniform, same seed; percentage points",
+  "limits": [
+    "Seeds change partition and search randomness.",
+    "Outer splits overlap; development exposure acknowledged.",
+    "55-feature and 53-feature results are separate experiments.",
+    "No five-run random-search summary is available."
+  ],
+  "source_sha256": {
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\uniform\\grouped_bo_history.csv": "72e390ec90a12d7c7002c57ab9d47aabcec705497472fdf5d31317d1c501659c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\uniform\\grouped_bo_final_result.json": "5c9d8fd7c63989ccf1548eeaabb5ac30b7e63aabdbd4c70a484b6efa5e02715d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\uniform\\grouped_split_manifest.json": "98d066d0a9e2988cd02e4c55a909a41de10e71b63c6e33f2d9df1027b78cacd0",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\uniform\\grouped_cv_folds.json": "29794258861a6925b27bcf4ddc7b14303d40d382b26d2a00f14e0cea84bf577c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\normal\\grouped_bo_history.csv": "35d6457081eec7f8d1a2cb41b1d3b6ba967f0ea1fb582eb352a7d79a21ba30ab",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\normal\\grouped_bo_final_result.json": "482050b670bac268774a064ba08080bbd7240f060a500654f9318bc8d40a3f5c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\normal\\grouped_split_manifest.json": "98d066d0a9e2988cd02e4c55a909a41de10e71b63c6e33f2d9df1027b78cacd0",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\normal\\grouped_cv_folds.json": "29794258861a6925b27bcf4ddc7b14303d40d382b26d2a00f14e0cea84bf577c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\exponential\\grouped_bo_history.csv": "33dd4e24f77dd5223551e8ddb9e388c477e94bc3f499578a0a4f524885976bba",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\exponential\\grouped_bo_final_result.json": "63396203de9ac2e1cae71c2c7020460713aa0887c7a402c67e307a311e09c4b2",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\exponential\\grouped_split_manifest.json": "98d066d0a9e2988cd02e4c55a909a41de10e71b63c6e33f2d9df1027b78cacd0",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\exponential\\grouped_cv_folds.json": "29794258861a6925b27bcf4ddc7b14303d40d382b26d2a00f14e0cea84bf577c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\gamma\\grouped_bo_history.csv": "50dbaa2f447f27ca47a41fb2b9cb717c60753c4960a4742fa258a91c405ffb7c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\gamma\\grouped_bo_final_result.json": "7f3abb2a0b06c5d628fadf15150c0b3d757f92e49825dc5256bae0e2c79e88f8",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\gamma\\grouped_split_manifest.json": "98d066d0a9e2988cd02e4c55a909a41de10e71b63c6e33f2d9df1027b78cacd0",
+    "results\\09_fixed_fold_segment_accuracy\\seed_42\\gamma\\grouped_cv_folds.json": "29794258861a6925b27bcf4ddc7b14303d40d382b26d2a00f14e0cea84bf577c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\uniform\\grouped_bo_history.csv": "8ea23c9914fb829e4080cd219534ac6938028211b1f223858de8ce455cf9c2c0",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\uniform\\grouped_bo_final_result.json": "54f7ecfa7259c6b965d780af3217e5ed07febb5d8f5eb7f58185ff14ad3c15ae",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\uniform\\grouped_split_manifest.json": "6783146f80bce4448d2ef58b936ab64e8a6885074a22b08bfe987884e16138af",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\uniform\\grouped_cv_folds.json": "a2992aea63834aee1752158f3144e574148d2ae77b565154e8c0a9176487885d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\normal\\grouped_bo_history.csv": "d6223865b94e33d3031315df8656a1929b7b27b77c605c43f98c96094d1cead6",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\normal\\grouped_bo_final_result.json": "f494bca14dd1c3ddb7731889a14d5aa6af8a11e763b2e9913b30da6127b2fc22",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\normal\\grouped_split_manifest.json": "6783146f80bce4448d2ef58b936ab64e8a6885074a22b08bfe987884e16138af",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\normal\\grouped_cv_folds.json": "a2992aea63834aee1752158f3144e574148d2ae77b565154e8c0a9176487885d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\exponential\\grouped_bo_history.csv": "ba6ce017668a9811b15f31e758fcbc57fc03bee79de9698fc26db2da21485d7b",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\exponential\\grouped_bo_final_result.json": "15337c62ccd97e80362668a2b4dfad831a141c25271b806a6085337da4cbfd30",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\exponential\\grouped_split_manifest.json": "6783146f80bce4448d2ef58b936ab64e8a6885074a22b08bfe987884e16138af",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\exponential\\grouped_cv_folds.json": "a2992aea63834aee1752158f3144e574148d2ae77b565154e8c0a9176487885d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\gamma\\grouped_bo_history.csv": "1cb686a7e58158337ed03cca09f14055d3c7d2184d6f8fd29a2e77fe41647bc2",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\gamma\\grouped_bo_final_result.json": "28b059a6f50895d8a2935966027950d54252b98a9c1fa92ac2d9df29cbabee3a",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\gamma\\grouped_split_manifest.json": "6783146f80bce4448d2ef58b936ab64e8a6885074a22b08bfe987884e16138af",
+    "results\\09_fixed_fold_segment_accuracy\\seed_43\\gamma\\grouped_cv_folds.json": "a2992aea63834aee1752158f3144e574148d2ae77b565154e8c0a9176487885d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\uniform\\grouped_bo_history.csv": "ab2ec14e2168e0f928e14a3fdff0a224dfd24616beaacf9c5592109997437a76",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\uniform\\grouped_bo_final_result.json": "5b7ccfcd67076ffd298ecc56146b5fd70bd34ec7ef91ebb2aefaf6059648cd30",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\uniform\\grouped_split_manifest.json": "e63cd6a8b632e271f561bdf584ea761e8e16e6e1c353433245553916d783abab",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\uniform\\grouped_cv_folds.json": "215a2a325d0a1fc0d366d7e3082f6176652fe3085e205738de9747e075ce637c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\normal\\grouped_bo_history.csv": "f665aa109a254cd1fbec025d7b56f80c80d1518d1621d6b77ac626fda5860b12",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\normal\\grouped_bo_final_result.json": "fdc56b095945c2447d844ec320d855b59b0b1e80e978febf20cdddc93807d88d",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\normal\\grouped_split_manifest.json": "e63cd6a8b632e271f561bdf584ea761e8e16e6e1c353433245553916d783abab",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\normal\\grouped_cv_folds.json": "215a2a325d0a1fc0d366d7e3082f6176652fe3085e205738de9747e075ce637c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\exponential\\grouped_bo_history.csv": "083c8a589f572135854cee565505256a83bbb6ea97299d4ca3a4a644f7c7b36c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\exponential\\grouped_bo_final_result.json": "fa88379b0b32957ae7ec5c0e9bd0ae4f91a2bb524085672a57b1c57fecb83540",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\exponential\\grouped_split_manifest.json": "e63cd6a8b632e271f561bdf584ea761e8e16e6e1c353433245553916d783abab",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\exponential\\grouped_cv_folds.json": "215a2a325d0a1fc0d366d7e3082f6176652fe3085e205738de9747e075ce637c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\gamma\\grouped_bo_history.csv": "958c705f557d50971ad32734a7a1aea2e4006fa9a220d0ce585fd417fd609f7e",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\gamma\\grouped_bo_final_result.json": "6bf809a001eb9f8dffd4da093793713f2ed344b4d3c1a4435bad2d44c495d399",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\gamma\\grouped_split_manifest.json": "e63cd6a8b632e271f561bdf584ea761e8e16e6e1c353433245553916d783abab",
+    "results\\09_fixed_fold_segment_accuracy\\seed_44\\gamma\\grouped_cv_folds.json": "215a2a325d0a1fc0d366d7e3082f6176652fe3085e205738de9747e075ce637c",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\uniform\\grouped_bo_history.csv": "dfaf6f611e39ffaf582bd61fbc1773bc7d7ca01a2b9e39181a203fe08065627b",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\uniform\\grouped_bo_final_result.json": "5f08785a552db3659f456ad3d0791d9d87e01b44031a5ee7fb3327403661af0a",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\uniform\\grouped_split_manifest.json": "7a6a30ddfc2e689c621965132958311648882d7e3e959526047f7f7d8ce71fed",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\uniform\\grouped_cv_folds.json": "f7ed4f47aa8d2b795763fc829d0dd68a8ab4feab0079d7c9c4bc9bc91009d7bb",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\normal\\grouped_bo_history.csv": "1e3b80a4b0399607b45ede49753613b6c0d876b96c4c85cafdac4068d023116a",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\normal\\grouped_bo_final_result.json": "925c697c6caa1483f17da27350b9c9e57953fd5d1442a0a70cf0ba6a6b79c3b7",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\normal\\grouped_split_manifest.json": "7a6a30ddfc2e689c621965132958311648882d7e3e959526047f7f7d8ce71fed",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\normal\\grouped_cv_folds.json": "f7ed4f47aa8d2b795763fc829d0dd68a8ab4feab0079d7c9c4bc9bc91009d7bb",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\exponential\\grouped_bo_history.csv": "2ad6fcab61232ecc76b4541a8e8b93f0e94d16ab889d3b87a601a1843b882240",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\exponential\\grouped_bo_final_result.json": "3f310995b125b9a953f341322d3f0c3eafc1292286d69b1243f8547debe38f8a",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\exponential\\grouped_split_manifest.json": "7a6a30ddfc2e689c621965132958311648882d7e3e959526047f7f7d8ce71fed",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\exponential\\grouped_cv_folds.json": "f7ed4f47aa8d2b795763fc829d0dd68a8ab4feab0079d7c9c4bc9bc91009d7bb",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\gamma\\grouped_bo_history.csv": "9fdb3690057f84975f7192c5871d121860c4cb250e7de807a030c93786a69a75",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\gamma\\grouped_bo_final_result.json": "4d585634dd415d2e702ff3aa9f6237d9d2895b0cb8832682cd9321d5962370c1",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\gamma\\grouped_split_manifest.json": "7a6a30ddfc2e689c621965132958311648882d7e3e959526047f7f7d8ce71fed",
+    "results\\09_fixed_fold_segment_accuracy\\seed_45\\gamma\\grouped_cv_folds.json": "f7ed4f47aa8d2b795763fc829d0dd68a8ab4feab0079d7c9c4bc9bc91009d7bb",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\uniform\\grouped_bo_history.csv": "6e2c6a77adadc4d9bb58a4b5a9ae33c6beba0bfa20bf21a63f214b72fa6de943",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\uniform\\grouped_bo_final_result.json": "f9a302776e64b13a6aa690923b22f7f03c14715e95bf828a0ac10fa4eca25cfd",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\uniform\\grouped_split_manifest.json": "2d9d7cde0925b792ed7a6e50989d7a77615a2ee4e8996625ebea25c8cd429198",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\uniform\\grouped_cv_folds.json": "3f45a88d2dd0f3773e542d1dbbbee4b86cfc472c5075202dcfc6990f42cd9b86",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\normal\\grouped_bo_history.csv": "7568c053a1735adbaa3608fd1fa9cc5a5422760c318223a347abdec366f49524",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\normal\\grouped_bo_final_result.json": "5b9affd1e7bc7443d5c342dfccab8800b342c27e79ea7a179b47b547bd14f545",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\normal\\grouped_split_manifest.json": "2d9d7cde0925b792ed7a6e50989d7a77615a2ee4e8996625ebea25c8cd429198",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\normal\\grouped_cv_folds.json": "3f45a88d2dd0f3773e542d1dbbbee4b86cfc472c5075202dcfc6990f42cd9b86",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\exponential\\grouped_bo_history.csv": "1f7018a0a9f7ea0da042d3123a3ca68c8bf51b493b0786fa5b595280e8a2c82b",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\exponential\\grouped_bo_final_result.json": "7097066ad7467519f1092e8af04cb0170608e096ae0e0e3a195e68a3cf02f2a8",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\exponential\\grouped_split_manifest.json": "2d9d7cde0925b792ed7a6e50989d7a77615a2ee4e8996625ebea25c8cd429198",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\exponential\\grouped_cv_folds.json": "3f45a88d2dd0f3773e542d1dbbbee4b86cfc472c5075202dcfc6990f42cd9b86",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\gamma\\grouped_bo_history.csv": "59a0f1069475855d193be2087edb6b1d2cbe92ee49d4b3a560578f4f66342c33",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\gamma\\grouped_bo_final_result.json": "0e28a1068aaa6d906d3e54a695210dd88a147b20815eeeaaeb2bdbf2a570c7fa",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\gamma\\grouped_split_manifest.json": "2d9d7cde0925b792ed7a6e50989d7a77615a2ee4e8996625ebea25c8cd429198",
+    "results\\09_fixed_fold_segment_accuracy\\seed_46\\gamma\\grouped_cv_folds.json": "3f45a88d2dd0f3773e542d1dbbbee4b86cfc472c5075202dcfc6990f42cd9b86",
+    "results\\09_fixed_fold_segment_accuracy\\method_comparison_seed_42\\grouped_random_search_history.csv": "540b661b8d43e10159dc2a0bfa94aeca482e3e12b2ca84e6006d7066c0df1cb5"
+  }
+}

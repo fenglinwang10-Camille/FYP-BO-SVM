@@ -1,0 +1,4 @@
+method,test_accuracy,test_recall_Z,test_recall_O,test_recall_N,test_recall_F,test_recall_S,test_seizure_sensitivity,best_parameters
+SVM without BO,0.7645454545454545,0.7909090909090909,0.8227272727272728,0.6818181818181818,0.5409090909090909,0.9863636363636364,0.9863636363636364,"{""f_low"": 0.5, ""f_high"": 40.0, ""window_size"": 2.0, ""C"": 10.0, ""gamma"": 0.1}"
+SVM with BO,0.8375,0.9,0.8625,0.8,0.625,1.0,1.0,"{""f_low"": 5.0, ""f_high"": 60.0, ""window_size"": 5.0, ""C"": 4.104259495916657, ""gamma"": 0.0542007834592451}"
+Random Search SVM,0.795,0.8375,0.8,0.7625,0.5875,0.9875,0.9875,"{""f_low"": 2.6899624887717217, ""f_high"": 44.72120983063563, ""window_size"": 4.751305819899931, ""C"": 5.190200762275255, ""gamma"": 0.0078335316819673}"

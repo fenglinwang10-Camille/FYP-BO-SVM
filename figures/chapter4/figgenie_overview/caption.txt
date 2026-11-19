@@ -1,0 +1,1 @@
+Implementation workflow of the Bayesian optimisation-controlled EEG classification pipeline. Solid blue arrows show data processing and evaluation; dashed orange arrows show parameter selection and feedback.

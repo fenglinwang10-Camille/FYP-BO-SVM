@@ -1,0 +1,133 @@
+{
+  "method": "Random Search SVM",
+  "search_evaluations": 50,
+  "validation_score": 0.8800000000000001,
+  "validation_accuracy": 0.821875,
+  "validation_macro_recall": 0.8210367647058824,
+  "validation_macro_f1": 0.8191021412031801,
+  "validation_segment_accuracy": 0.8800000000000001,
+  "validation_segment_macro_f1": 0.8760120286872336,
+  "validation_per_class_recall": {
+    "Z": 0.8739950980392157,
+    "O": 0.8507352941176471,
+    "N": 0.7586642156862744,
+    "F": 0.6533210784313725,
+    "S": 0.968468137254902
+  },
+  "parameters": {
+    "f_low": 4.7972127383082475,
+    "f_high": 42.342023426021214,
+    "window_size": 4.758567247913578,
+    "C": 60.29011028032854,
+    "gamma": 0.07282608568480599
+  },
+  "class_weight": "balanced",
+  "feature_setting": "nf_enhanced",
+  "feature_columns": 55,
+  "window_overlap": 0.0,
+  "cv_folds": 5,
+  "window_level_test_metrics": {
+    "accuracy": 0.785,
+    "macro_recall": 0.7849999999999999,
+    "macro_f1": 0.7813300228082126,
+    "per_class_recall": {
+      "Z": 0.8625,
+      "O": 0.7875,
+      "N": 0.6875,
+      "F": 0.5875,
+      "S": 1.0
+    },
+    "confusion_matrix": [
+      [
+        69,
+        10,
+        0,
+        0,
+        1
+      ],
+      [
+        16,
+        63,
+        0,
+        1,
+        0
+      ],
+      [
+        3,
+        1,
+        55,
+        21,
+        0
+      ],
+      [
+        6,
+        0,
+        22,
+        47,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        80
+      ]
+    ]
+  },
+  "segment_level_test_metrics": {
+    "accuracy": 0.83,
+    "macro_recall": 0.8300000000000001,
+    "macro_f1": 0.8187968994596778,
+    "per_class_recall": {
+      "Z": 1.0,
+      "O": 0.75,
+      "N": 0.95,
+      "F": 0.45,
+      "S": 1.0
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        15,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        19,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        9,
+        9,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        20
+      ]
+    ]
+  },
+  "test_evaluations": 1,
+  "best_iteration": 3,
+  "random_state": 44,
+  "objective_mode": "segment_accuracy",
+  "cv_split_protocol": "recording_fixed_v2",
+  "parameter_prior": "uniform"
+}

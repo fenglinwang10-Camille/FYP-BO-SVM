@@ -1,0 +1,6 @@
+seed,f_low,f_high,window_size,C,gamma,samples_per_window,training_windows,welch_nperseg,welch_bin_spacing_hz,training_cv_segment_accuracy_pct,tied_validation_segments,validation_segments
+42,0.5,40.0,1.0,10.0,0.1,174,9200,174,0.9978,85.5,6,400
+42,0.5,40.0,2.0,10.0,0.1,347,4400,256,0.6782,86.25,4,400
+42,0.5,40.0,3.0,10.0,0.1,521,2800,256,0.6782,88.0,7,400
+42,0.5,40.0,4.0,10.0,0.1,694,2000,256,0.6782,86.25,2,400
+42,0.5,40.0,5.0,10.0,0.1,868,1600,256,0.6782,85.25,40,400

@@ -1,0 +1,151 @@
+{
+  "runs": [
+    {
+      "seed": 42,
+      "mapping": "uniform",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 42,
+      "mapping": "normal",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 42,
+      "mapping": "exponential",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 42,
+      "mapping": "gamma",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 43,
+      "mapping": "uniform",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 43,
+      "mapping": "normal",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 43,
+      "mapping": "exponential",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 43,
+      "mapping": "gamma",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 44,
+      "mapping": "uniform",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 44,
+      "mapping": "normal",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 44,
+      "mapping": "exponential",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 44,
+      "mapping": "gamma",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 45,
+      "mapping": "uniform",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 45,
+      "mapping": "normal",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 45,
+      "mapping": "exponential",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 45,
+      "mapping": "gamma",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 46,
+      "mapping": "uniform",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 46,
+      "mapping": "normal",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 46,
+      "mapping": "exponential",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    },
+    {
+      "seed": 46,
+      "mapping": "gamma",
+      "evaluations": 50,
+      "initial_points": 16,
+      "feature_columns": 55
+    }
+  ],
+  "shared_folds_and_splits_within_seed": true,
+  "fold_sizes": [
+    320,
+    80
+  ],
+  "feature_column_sum": 55,
+  "source": "Existing manifests and metadata; no experiment rerun"
+}
