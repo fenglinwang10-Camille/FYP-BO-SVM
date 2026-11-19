@@ -32,11 +32,33 @@ venv/
 *.bbl
 *.blg
 
+# Manuscripts, presentations, reference papers, and export bundles
+*.pdf
+*.tex
+*.bib
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.zip
+/sources/
+/template_import/
+/overleaf_upload/
+/overleaf_grouped_unified/
+/figures/chapter3/
+/figures/chapter4/
+/chapter4_draft/revised_setup_20261109/
+/handover.md
+/chapter4_draft/writing_notes.md
+/chapter4_draft/sections_4_1_4_2.md
+/chapter4_draft/revise_setup.py
+/chapter4_draft/make_figures.py
+/plot_previous_version_presentation.py
+
 # Temporary previews, extracted pages, and installation helpers
 /tmp/*
 !/tmp/analyze_search_behaviour.py
 !/tmp/build_chapter5_seed44_figures.py
-!/tmp/generate_bo_flowchart.py
 !/tmp/regenerate_grouped_classwise_recall_plot.py
 /tmp_pdf_pages/
 /tmp_pdf_review.txt
