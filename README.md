@@ -73,14 +73,26 @@ git push
 
 ## 当前实验状态
 
-新增实验使用外层五折评估和内层五折选参，BO 与 RS 共享前 16 个候选及分数，每种方法共 50 次评价。特征、搜索边界和投票规则沿用原设置。运行 `powershell -ExecutionPolicy Bypass -File .\run_nested_experiment.ps1` 可在后台开始或续跑，完成后自动生成五折汇总。输出单独写入 `results/10_nested_cv_shared_initialization/`，运行状态以该目录中的文件为准。详见 `README_NESTED_EXPERIMENT.md`。
+三个完整实验均已完成，协议和结果分别保存，不能混用不同投票规则的结果。
 
-原有重复划分实验保留为探索性结果：
+| 实验 | 规则与范围 | 五折外层 accuracy，均值 ± SD |
+| --- | --- | --- |
+| `results/10_nested_cv_shared_initialization/` | 原多数投票，平票取最小编号；uniform BO/RS 与固定参考 | BO 89.4 ± 3.36%，RS 86.6 ± 5.27%，固定参考 86.8 ± 8.11% |
+| `results/11_nested_mapping_comparison/` | 原投票规则；四种映射使用相同嵌套划分 | uniform 89.4 ± 3.36%，normal 85.8 ± 6.22%，exponential 86.8 ± 3.27%，gamma 87.0 ± 5.34% |
+| `results/13_nested_score_tiebreak/` | 平票时比较平均 SVM 决策分数；uniform BO/RS 与固定参考 | BO 88.0 ± 2.83%，RS 87.4 ± 5.22%，固定参考 86.6 ± 7.50% |
 
-另外三种映射的嵌套补跑使用完全相同的外层和内层划分，沿用分布参数和 50 次预算，结果写入 `results/11_nested_mapping_comparison/`。已完成的 uniform 结果直接复用。运行 `powershell -ExecutionPolicy Bypass -File .\run_nested_mappings.ps1` 可后台启动或续跑；完成状态以 `run_status.json` 和最终 `summary.json` 为准。
+实验 13 的规则根据训练集内层试跑确定，是补充性再分析，并非全新独立验证。不能根据哪套外层测试分数更高来选择最终协议。实现、后台启动和断点恢复分别见 `nested_score_tiebreak.py`、`run_nested_score_tiebreak.ps1` 和 `README_NESTED_SCORE_TIEBREAK.md`。原实验完整说明见 `README_NESTED_EXPERIMENT.md`；映射比较见 `README_NESTED_MAPPINGS.md`。
 
-原重复划分实验使用 55 维特征、片段固定五折验证、片段级 accuracy 目标，每次搜索评价 50 个配置。Uniform BO 和 RS 已保存 seeds 42–46 的配对结果，四种映射各有五组 BO 结果。固定参考在 seeds 42 和 44 上已保存结果。未采用的旧协议和补充实验已删除，保留范围见 `results/README_RESULTS.md`。
+`results/12_training_feature_pilot/` 保存 55 维、catch24、23 维和投票规则的训练集内层筛选记录。三种特征的最高内层 CV 分别为 85.25%、84.50%、80.50%。这些是固定预处理下的十二组参数试跑，不是外层测试结果，也不是完整五参数 BO 搜索。细节见 `README_GITHUB_FEATURE_PILOT.md`。
 
-`figures/chapter5/` 中的图 5.1 展示五组 uniform BO，图 5.2 和 5.3 展示 seed 44，图 5.4 展示 seed 44 的四种映射。其他参数可视化的 seed 和实验口径见图片及对应脚本。
+换设备后若需重做投票试跑，先运行 `python -B rebuild_training_feature_cache.py`，重建未上传的训练特征缓存。只有 catch24 相关试跑需要额外安装 `pycatch22==1.0.2`，主实验不需要。
 
-`.gitignore` 保持仓库聚焦实验，排除本机设置、缓存、临时预览、论文稿件、演示文稿、PDF 和打包导出文件。实验脚本生成的 PNG、CSV 和 JSON 可随代码一起提交。
+## 当前绘图代码
+
+`plot_nested_chapter5.py` 读取原实验 10 的结果。图 5.1 为五折 BO 搜索历史和候选阶段分布；图 5.2 为三种方法的外层准确率均值、样本标准差、散点及 BO/RS 配对比较；图 5.3 为合并五个外层折的混淆矩阵。图 5.2 也可单独用 `plot_nested_outer_performance.py` 生成。该脚本还可生成逐类 recall、specificity 图及 CSV 表，但不要求把所有生成图放进论文。
+
+`plot_nested_candidate_scores.py --fold 5` 展示单折候选分数。`plot_example_signals.py` 生成第四章五类 EEG 示例信号，使用各行独立纵轴。旧版 seed 44 图保留为探索性记录，不应与新的嵌套结果混用。旧的 `fig5_4_exploratory_mapping_test_accuracy.png` 来自实验 09，不代表实验 11 的新映射结果。
+
+原重复划分实验保留在 `results/09_fixed_fold_segment_accuracy/`，划分间有重叠且开发阶段曾查看测试结果。它们仅作为探索性记录。完整目录说明见 `results/README_RESULTS.md`。
+
+`.gitignore` 排除本机设置、临时依赖、特征缓存、日志、论文稿件、演示文稿和 PDF。保留实验代码、必要 PNG、CSV/JSON 结果和搜索断点。

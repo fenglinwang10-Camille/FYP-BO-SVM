@@ -46,7 +46,8 @@ venv/
 /overleaf_upload/
 /overleaf_grouped_unified/
 /figures/chapter3/
-/figures/chapter4/
+/figures/chapter4/*
+!/figures/chapter4/example_signals.png
 /chapter4_draft/revised_setup_20261109/
 /handover.md
 /chapter4_draft/writing_notes.md
@@ -77,3 +78,13 @@ desktop.ini
 /results/11_nested_mapping_comparison/**/run.lock
 /results/11_nested_mapping_comparison/**/background_process.json
 /results/11_nested_mapping_comparison/**/run_status.json
+
+/results/12_training_feature_pilot/**/*.tmp
+/results/12_training_feature_pilot/**/background_process.json
+/results/12_training_feature_pilot/**/status.json
+/results/12_training_feature_pilot/**/*_training_features.joblib
+
+/results/13_nested_score_tiebreak/**/*.tmp
+/results/13_nested_score_tiebreak/**/run.lock
+/results/13_nested_score_tiebreak/**/background_process.json
+/results/13_nested_score_tiebreak/**/run_status.json

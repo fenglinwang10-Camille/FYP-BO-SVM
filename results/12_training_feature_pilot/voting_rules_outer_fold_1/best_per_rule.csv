@@ -1,0 +1,4 @@
+rule,candidate,C,gamma,mean_inner_cv_accuracy,fold_accuracy,vote_tie_count,changed_vs_majority,corrected_vs_majority,harmed_vs_majority,shared_fit_and_prediction_seconds,recall_Z,recall_O,recall_N,recall_F,recall_S
+majority_lowest_index,8,10.0,0.1,0.8525,"[0.875, 0.8625, 0.8375, 0.875, 0.8125]",11,0,0,0,5.381361600011587,0.975,0.875,0.825,0.625,0.9625
+majority_score_tiebreak,8,10.0,0.1,0.86,"[0.875, 0.8625, 0.85, 0.8875, 0.825]",11,10,5,2,5.386304000014206,0.975,0.875,0.8125,0.675,0.9625
+mean_decision_score,8,10.0,0.1,0.8574999999999999,"[0.8625, 0.875, 0.85, 0.875, 0.825]",11,18,9,7,5.391964000009466,0.975,0.875,0.775,0.7,0.9625

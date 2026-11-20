@@ -103,32 +103,9 @@ def main(figure_51_only=False):
     if figure_51_only:
         return
 
-    fig, axes = plt.subplots(2, 1, figsize=(7.15, 6.3), layout='constrained')
-    for method, color, label, line in [('rs', ORANGE, 'Random search', '--'), ('bo', BLUE, 'BO', '-')]:
-        q1, median, q3 = np.percentile(best[method], [25, 50, 75], axis=0)
-        axes[0].fill_between(x, q1, q3, step='post', color=color, alpha=.13, linewidth=0)
-        axes[0].step(x, median, where='post', color=color, lw=1.9, ls=line, label=label)
-    search_axis(axes[0])
-    axes[0].set_ylim(np.floor(min(b.min() for b in best.values())/5)*5-1, 90)
-    axes[0].set_title('(a) Median best-so-far inner-CV accuracy and IQR', loc='left', fontsize=10)
-    axes[0].legend(loc='lower right', frameon=False)
-    for k in range(1, 6):
-        pair = results[results.outer_fold == k].set_index('method')
-        axes[1].plot([k, k+.20], [pair.loc['rs', 'outer_accuracy']*100,
-                                  pair.loc['bo', 'outer_accuracy']*100], color='#8C959E', lw=1.2)
-    for method, offset, color, label, marker in [
-        ('fixed_reference', -.20, GREEN, 'Fixed reference', 's'),
-        ('rs', 0, ORANGE, 'Random search', 'o'), ('bo', .20, BLUE, 'BO', 'D')]:
-        subset = results[results.method == method].sort_values('outer_fold')
-        axes[1].scatter(subset.outer_fold+offset, subset.outer_accuracy*100, s=39,
-                        color=color, marker=marker, zorder=3,
-                        label=f'{label} (mean {subset.outer_accuracy.mean()*100:.1f}%)')
-    axes[1].set(xlim=(.5, 5.5), ylim=(70, 100), yticks=range(70, 101, 5),
-                xticks=range(1, 6), xlabel='Outer fold', ylabel='Outer test accuracy (%)')
-    axes[1].grid(axis='y', color='#DFE6EC', lw=.65)
-    axes[1].set_title('(b) Outer test accuracy: paired BO and RS predictions', loc='left', fontsize=10)
-    axes[1].legend(loc='lower right', frameon=False, fontsize=8)
-    save(fig, 'fig5_2_nested_search_and_outer_accuracy.png')
+    from plot_nested_outer_performance import plot_accuracy, plot_recall
+    plot_accuracy(results)
+    plot_recall(summary)
 
     methods = {m['method']: m['pooled_outer_metrics'] for m in summary['methods']}
     fig, axes = plt.subplots(1, 3, figsize=(9.2, 3.15), layout='constrained')

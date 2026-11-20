@@ -1,0 +1,6 @@
+{
+  "logical_cpus": 16,
+  "available_memory_gb": 1.8154792785644531,
+  "workers": 1,
+  "blas_threads": 1
+}

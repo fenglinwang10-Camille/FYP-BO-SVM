@@ -1,0 +1,8 @@
+# Keep frozen experiment source bytes stable across Windows/macOS/Linux.
+*.py text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.ps1 text eol=lf
+*.png -text
+*.joblib -text

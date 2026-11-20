@@ -1,0 +1,51 @@
+{
+  "results": [
+    {
+      "feature_setting": "original_55",
+      "feature_columns": 55,
+      "extraction_seconds": 39.855736700003035,
+      "search_seconds": 35.78477289996226,
+      "candidate": 8,
+      "C": 10.0,
+      "gamma": 0.1,
+      "mean_inner_cv_accuracy": 0.8525,
+      "fold_accuracy": [
+        0.875,
+        0.8625,
+        0.8375,
+        0.875,
+        0.8125
+      ],
+      "candidate_seconds": 3.695871200005058,
+      "recall_Z": 0.975,
+      "recall_O": 0.875,
+      "recall_N": 0.825,
+      "recall_F": 0.625,
+      "recall_S": 0.9625
+    },
+    {
+      "feature_setting": "catch24",
+      "feature_columns": 24,
+      "extraction_seconds": 5.022264700004598,
+      "search_seconds": 28.777393800002756,
+      "candidate": 8,
+      "C": 10.0,
+      "gamma": 0.1,
+      "mean_inner_cv_accuracy": 0.845,
+      "fold_accuracy": [
+        0.875,
+        0.9,
+        0.8,
+        0.8625,
+        0.7875
+      ],
+      "candidate_seconds": 2.7821393000194803,
+      "recall_Z": 0.9625,
+      "recall_O": 0.8625,
+      "recall_N": 0.7625,
+      "recall_F": 0.675,
+      "recall_S": 0.9625
+    }
+  ],
+  "outer_test_access": false
+}

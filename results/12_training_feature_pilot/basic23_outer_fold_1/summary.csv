@@ -1,0 +1,2 @@
+feature_setting,candidate,C,gamma,mean_inner_cv_accuracy,fold_accuracy,candidate_seconds,recall_Z,recall_O,recall_N,recall_F,recall_S,feature_columns,extraction_seconds,preprocessing_seconds,search_seconds
+basic23,8,10.0,0.1,0.805,"[0.8125, 0.8625, 0.775, 0.85, 0.725]",2.28637209997396,0.95,0.8125,0.875,0.4375,0.95,23,7.135000499984017,0.5693817000137642,31.489010799967218

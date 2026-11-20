@@ -1,0 +1,4 @@
+method,macro_recall_percent,macro_specificity_percent,seizure_sensitivity_percent,seizure_specificity_percent
+fixed_reference,86.8,96.7,99.0,98.0
+rs,86.6,96.65,97.0,98.25
+bo,89.4,97.35,97.0,99.25

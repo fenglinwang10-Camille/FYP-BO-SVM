@@ -1,0 +1,35 @@
+{
+  "bo": {
+    "best_iteration": 37,
+    "best_inner_cv_accuracy": 0.8925000000000001,
+    "parameters": {
+      "f_low": 4.9942374551504285,
+      "f_high": 60.0,
+      "window_size": 5.0,
+      "C": 100.0,
+      "gamma": 0.023742397947590303
+    }
+  },
+  "rs": {
+    "best_iteration": 11,
+    "best_inner_cv_accuracy": 0.8825,
+    "parameters": {
+      "f_low": 1.3995869111379875,
+      "f_high": 30.220868092530164,
+      "window_size": 4.147697510008554,
+      "C": 9.875351660720856,
+      "gamma": 0.06617005787654172
+    }
+  },
+  "fixed_reference": {
+    "parameters": {
+      "f_low": 0.5,
+      "f_high": 40.0,
+      "window_size": 2.0,
+      "C": 10.0,
+      "gamma": 0.1
+    },
+    "best_iteration": null,
+    "best_inner_cv_accuracy": null
+  }
+}

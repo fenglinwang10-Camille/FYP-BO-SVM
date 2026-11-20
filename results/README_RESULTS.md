@@ -1,5 +1,23 @@
 # Retained experiment results
 
+## 13_nested_score_tiebreak
+
+Completed supplementary nested BO/RS/reference comparison using the same
+splits, bounds and budgets as experiment 10, but resolving recording majority
+vote ties by mean SVM OVR scores among tied classes. The rule was selected
+after a training-only pilot, so these are exploratory results. Five-fold outer
+accuracy: BO 88.0% (SD 2.83), RS 87.4% (SD 5.22), fixed reference 86.6%
+(SD 7.50). Original experiment 10 remains unchanged. See
+`../README_NESTED_SCORE_TIEBREAK.md`.
+
+## 12_training_feature_pilot
+
+Training-only screens on the 400 outer-fold-1 training recordings and the
+same five inner folds, with twelve matched SVM settings. Contains original55
+versus catch24, basic23, and three recording-vote rules. No outer evaluation.
+CSV/JSON records are retained; regenerable feature matrices are excluded.
+See `../README_GITHUB_FEATURE_PILOT.md`.
+
 ## 11_nested_mapping_comparison
 
 Adds normal, exponential and Gamma BO on the same frozen outer/inner folds as
