@@ -1,5 +1,15 @@
 # Retained experiment results
 
+## 11_nested_mapping_comparison
+
+Adds normal, exponential and Gamma BO on the same frozen outer/inner folds as
+10_nested_cv_shared_initialization. Five 50-candidate searches per new mapping,
+16 initial candidates and 34 EI-guided candidates. Initial preprocessing
+quantiles and C/gamma draws are matched; physical preprocessing values differ
+by the bounded inverse-CDF mapping. Existing uniform results are reused.
+See ../README_NESTED_MAPPINGS.md. Only the final summary.json represents the
+complete four-mapping comparison; intermediate per-fold tables may be partial.
+
 ## 10_nested_cv_shared_initialization
 
 Outer five-fold evaluation with fixed inner five-fold CV. BO and RS share 16

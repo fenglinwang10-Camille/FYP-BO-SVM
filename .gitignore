@@ -72,3 +72,8 @@ desktop.ini
 /results/10_nested_cv_shared_initialization/**/run.lock
 /results/10_nested_cv_shared_initialization/**/background_process.json
 /results/10_nested_cv_shared_initialization/**/run_status.json
+
+/results/11_nested_mapping_comparison/**/*.tmp
+/results/11_nested_mapping_comparison/**/run.lock
+/results/11_nested_mapping_comparison/**/background_process.json
+/results/11_nested_mapping_comparison/**/run_status.json

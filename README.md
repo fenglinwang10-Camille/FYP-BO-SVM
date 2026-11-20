@@ -56,6 +56,9 @@ git push
 | `nested_bo_rs.py` | 外层五折、内层五折的 BO/RS 配对实验，共享 16 个初始候选 |
 | `run_nested_experiment.ps1` | 后台启动或断点续跑新实验 |
 | `README_NESTED_EXPERIMENT.md` | 新实验的固定协议、输出和运行说明 |
+| `nested_mapping_comparison.py` | 沿用新嵌套划分，补跑 normal、exponential 和 Gamma BO |
+| `run_nested_mappings.ps1` | 后台启动或续跑三种映射的 15 次 BO 搜索 |
+| `README_NESTED_MAPPINGS.md` | 四种映射同协议比较的实现与输出说明 |
 | `parameter_priors.py` | 四种预处理参数映射 |
 | `Dataset/` | 项目实际使用的 500 个 Bonn EEG 片段 |
 | `results/09_fixed_fold_segment_accuracy/` | 保留的 55 维 BO/RS、四种映射及相关分析结果 |
@@ -73,6 +76,8 @@ git push
 新增实验使用外层五折评估和内层五折选参，BO 与 RS 共享前 16 个候选及分数，每种方法共 50 次评价。特征、搜索边界和投票规则沿用原设置。运行 `powershell -ExecutionPolicy Bypass -File .\run_nested_experiment.ps1` 可在后台开始或续跑，完成后自动生成五折汇总。输出单独写入 `results/10_nested_cv_shared_initialization/`，运行状态以该目录中的文件为准。详见 `README_NESTED_EXPERIMENT.md`。
 
 原有重复划分实验保留为探索性结果：
+
+另外三种映射的嵌套补跑使用完全相同的外层和内层划分，沿用分布参数和 50 次预算，结果写入 `results/11_nested_mapping_comparison/`。已完成的 uniform 结果直接复用。运行 `powershell -ExecutionPolicy Bypass -File .\run_nested_mappings.ps1` 可后台启动或续跑；完成状态以 `run_status.json` 和最终 `summary.json` 为准。
 
 原重复划分实验使用 55 维特征、片段固定五折验证、片段级 accuracy 目标，每次搜索评价 50 个配置。Uniform BO 和 RS 已保存 seeds 42–46 的配对结果，四种映射各有五组 BO 结果。固定参考在 seeds 42 和 44 上已保存结果。未采用的旧协议和补充实验已删除，保留范围见 `results/README_RESULTS.md`。
 

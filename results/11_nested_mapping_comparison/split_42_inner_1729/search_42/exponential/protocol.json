@@ -1,0 +1,88 @@
+{
+  "protocol": "nested_mapping_comparison_v1",
+  "outer_folds": 5,
+  "inner_folds": 5,
+  "outer_split_seed": 42,
+  "inner_split_seed": 1729,
+  "search_seed": 42,
+  "evaluations_per_method": 50,
+  "parameter_mapping": "exponential",
+  "search_space": {
+    "f_low": {
+      "low": 0.5,
+      "high": 5.0,
+      "prior": "uniform"
+    },
+    "f_high": {
+      "low": 30.0,
+      "high": 60.0,
+      "prior": "uniform"
+    },
+    "window_size": {
+      "low": 1.0,
+      "high": 5.0,
+      "prior": "uniform"
+    },
+    "C": {
+      "low": 0.1,
+      "high": 100.0,
+      "prior": "log-uniform"
+    },
+    "gamma": {
+      "low": 0.0001,
+      "high": 1.0,
+      "prior": "log-uniform"
+    }
+  },
+  "acquisition_function": "EI",
+  "xi": 0.01,
+  "acquisition_optimizer": "lbfgs",
+  "feature_setting": "nf_enhanced",
+  "feature_columns": 55,
+  "sampling_frequency": 173.61,
+  "class_weight": "balanced",
+  "window_overlap": 0.0,
+  "vote_rule": "majority_vote; ties use smallest class index, unchanged from original study",
+  "objective": "mean inner-fold recording accuracy after window majority vote",
+  "selection_ties": "earliest candidate with the highest inner CV accuracy",
+  "fixed_reference_parameters": {
+    "f_low": 0.5,
+    "f_high": 40.0,
+    "window_size": 2.0,
+    "C": 10.0,
+    "gamma": 0.1
+  },
+  "dataset_sha256": "4dd105e350c6ffd25fcdaf4b7734b1c6ecbd3954f93fbd5c98e5979ef29affd2",
+  "source_sha256": {
+    "nested_bo_rs.py": "9b1fcf809b05cc75a480bdd536a253c21f4cbab2677c76ed59f0a170ae9a057d",
+    "grouped_bo_optimizer.py": "6e91596bd257ae7417aa9f0db5ea33b2f62d250b11d9bc50f73af7aea968468c",
+    "grouped_method_comparison.py": "4e793bfa0a74ba8d8565e09d0cc75d223fa0c2e46afa6b72688ad185c1f3e07b",
+    "features.py": "5ccdcd97c6252e4bd73b9d74b4dbd734759278e35dc1a57c5c0cc94a0a5a94e9",
+    "preprocessing.py": "9693906ce891b2fee1894c5bdddfa887713a8a52d13e1a2c3240c8cbd95e157b",
+    "data_loader.py": "b5e8a46fea28c5153890246723e52604d50c748575b12a4fe4486d05227be3b2",
+    "parameter_priors.py": "629d1d1762c9f6baf4abb86d06625a26af7c3e5a3649e684399ebbb797848b3e",
+    "nested_mapping_comparison.py": "d2f54409823fc0993c15beb26b6913b379592e866bf1518d8fcd530999af0012"
+  },
+  "versions": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "scikit-optimize": "0.10.2",
+    "PyWavelets": "1.8.0",
+    "joblib": "1.5.3"
+  },
+  "python": "3.10.20",
+  "limitations": "Recording IDs are not subject IDs. Data were inspected in earlier development; this is a prospectively fixed reanalysis of the existing dataset, not new external data.",
+  "initial_evaluations": 16,
+  "reference_uniform_protocol_sha256": "59316e462eb7c2e429b523208d31dcfe4a179607f652b928c7c80eecbf300293",
+  "initialisation": "Common random quantiles for preprocessing; identical C/gamma to uniform. Physical preprocessing configurations differ by mapping.",
+  "scope": "BO only; existing uniform results reused, no RS or fixed-reference reruns.",
+  "mapping_rules": {
+    "normal": "Truncated normal: midpoint location, range/4 scale",
+    "exponential": "Truncated exponential: lower-bound location, range/3 scale",
+    "gamma": "Truncated Gamma: shape=2, lower-bound location, range/4 scale"
+  },
+  "latent_space": "First three coordinates in [0,1]; inverse truncated CDF; C and SVM gamma remain log-uniform in original bounds.",
+  "cdf_endpoint_clipping": 1e-06
+}
