@@ -1,0 +1,6 @@
+outer_fold,same_configuration,bo_best_iteration,rs_best_iteration,both_correct,bo_only_correct,rs_only_correct,both_wrong,accuracy_difference_pp,mcnemar_exact_two_sided_p
+1,False,47,32,85,7,5,3,2.0000000000000018,0.7744140625
+2,True,13,13,85,0,0,15,0.0,1.0
+3,False,50,11,77,10,1,12,8.999999999999996,0.01171875
+4,True,3,3,90,0,0,10,0.0,1.0
+5,False,48,11,89,4,1,6,3.0000000000000027,0.375

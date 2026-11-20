@@ -1,0 +1,80 @@
+{
+  "analysis": "Post-hoc paired out-of-fold prediction analysis",
+  "n_recordings": 500,
+  "pooled": {
+    "both_correct": 426,
+    "bo_only_correct": 21,
+    "rs_only_correct": 7,
+    "both_wrong": 46,
+    "accuracy_difference_pp": 2.8000000000000025,
+    "mcnemar_exact_two_sided_p": 0.012540951371192932
+  },
+  "folds": [
+    {
+      "outer_fold": 1,
+      "same_configuration": false,
+      "bo_best_iteration": 47,
+      "rs_best_iteration": 32,
+      "both_correct": 85,
+      "bo_only_correct": 7,
+      "rs_only_correct": 5,
+      "both_wrong": 3,
+      "accuracy_difference_pp": 2.0000000000000018,
+      "mcnemar_exact_two_sided_p": 0.7744140625
+    },
+    {
+      "outer_fold": 2,
+      "same_configuration": true,
+      "bo_best_iteration": 13,
+      "rs_best_iteration": 13,
+      "both_correct": 85,
+      "bo_only_correct": 0,
+      "rs_only_correct": 0,
+      "both_wrong": 15,
+      "accuracy_difference_pp": 0.0,
+      "mcnemar_exact_two_sided_p": 1.0
+    },
+    {
+      "outer_fold": 3,
+      "same_configuration": false,
+      "bo_best_iteration": 50,
+      "rs_best_iteration": 11,
+      "both_correct": 77,
+      "bo_only_correct": 10,
+      "rs_only_correct": 1,
+      "both_wrong": 12,
+      "accuracy_difference_pp": 8.999999999999996,
+      "mcnemar_exact_two_sided_p": 0.01171875
+    },
+    {
+      "outer_fold": 4,
+      "same_configuration": true,
+      "bo_best_iteration": 3,
+      "rs_best_iteration": 3,
+      "both_correct": 90,
+      "bo_only_correct": 0,
+      "rs_only_correct": 0,
+      "both_wrong": 10,
+      "accuracy_difference_pp": 0.0,
+      "mcnemar_exact_two_sided_p": 1.0
+    },
+    {
+      "outer_fold": 5,
+      "same_configuration": false,
+      "bo_best_iteration": 48,
+      "rs_best_iteration": 11,
+      "both_correct": 89,
+      "bo_only_correct": 4,
+      "rs_only_correct": 1,
+      "both_wrong": 6,
+      "accuracy_difference_pp": 3.0000000000000027,
+      "mcnemar_exact_two_sided_p": 0.375
+    }
+  ],
+  "identical_configuration_folds": [
+    2,
+    4
+  ],
+  "caveat": "The McNemar p-value is nominal and assumes independent recording pairs. Overlapping outer training sets and unavailable subject IDs limit this assumption. It is not a definitive test of superiority across subjects or datasets.",
+  "prediction_sha256": "f5fb292a33d7bee20093918abfd7537a2e52a54e6386533930e3f9fb5dcc9390"
+}

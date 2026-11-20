@@ -1,0 +1,618 @@
+{
+  "segment_level_test_metrics": {
+    "accuracy": 0.85,
+    "macro_recall": 0.85,
+    "macro_f1": 0.8461207822909952,
+    "per_class_recall": {
+      "Z": 1.0,
+      "O": 0.8,
+      "N": 0.9,
+      "F": 0.55,
+      "S": 1.0
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        16,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        18,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        9,
+        11,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        20
+      ]
+    ]
+  },
+  "window_level_test_metrics": {
+    "accuracy": 0.8057142857142857,
+    "macro_recall": 0.8057142857142857,
+    "macro_f1": 0.8042446456381176,
+    "per_class_recall": {
+      "Z": 0.8928571428571429,
+      "O": 0.7714285714285715,
+      "N": 0.8071428571428572,
+      "F": 0.5714285714285714,
+      "S": 0.9857142857142858
+    },
+    "confusion_matrix": [
+      [
+        125,
+        7,
+        3,
+        3,
+        2
+      ],
+      [
+        31,
+        108,
+        1,
+        0,
+        0
+      ],
+      [
+        5,
+        0,
+        113,
+        22,
+        0
+      ],
+      [
+        5,
+        0,
+        55,
+        80,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        138
+      ]
+    ]
+  },
+  "outer_evaluation_seconds": 10.208358100004261,
+  "recording_predictions": [
+    {
+      "recording_id": 5,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 6,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 11,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 13,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 19,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 22,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 33,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 38,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 41,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 44,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 47,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 50,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 53,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 58,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 77,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 82,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 83,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 86,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 88,
+      "true_label": 3,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 94,
+      "true_label": 3,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 101,
+      "true_label": 2,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 105,
+      "true_label": 2,
+      "predicted_label": 3
+    },
+    {
+      "recording_id": 107,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 116,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 117,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 123,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 139,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 142,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 153,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 156,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 158,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 159,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 163,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 172,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 182,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 184,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 187,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 192,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 195,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 197,
+      "true_label": 2,
+      "predicted_label": 2
+    },
+    {
+      "recording_id": 201,
+      "true_label": 1,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 207,
+      "true_label": 1,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 211,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 214,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 231,
+      "true_label": 1,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 241,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 246,
+      "true_label": 1,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 249,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 251,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 252,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 253,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 255,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 257,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 262,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 264,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 265,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 271,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 282,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 283,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 291,
+      "true_label": 1,
+      "predicted_label": 1
+    },
+    {
+      "recording_id": 302,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 328,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 337,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 338,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 343,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 348,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 355,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 358,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 360,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 364,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 365,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 370,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 371,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 379,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 386,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 388,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 390,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 394,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 395,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 396,
+      "true_label": 4,
+      "predicted_label": 4
+    },
+    {
+      "recording_id": 403,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 408,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 414,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 423,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 428,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 429,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 434,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 442,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 443,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 444,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 445,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 456,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 458,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 461,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 464,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 465,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 472,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 478,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 486,
+      "true_label": 0,
+      "predicted_label": 0
+    },
+    {
+      "recording_id": 490,
+      "true_label": 0,
+      "predicted_label": 0
+    }
+  ],
+  "signature": "dd3e0d9ed63f02552e722d8b82726e2e28d73e14bc7d5a0453d9b3cd27b79d09",
+  "method": "rs",
+  "outer_fold": 2,
+  "selection": {
+    "best_iteration": 13,
+    "best_inner_cv_accuracy": 0.8825,
+    "parameters": {
+      "f_low": 3.5078133280571224,
+      "f_high": 44.13288618429398,
+      "window_size": 3.2609444259247553,
+      "C": 19.72407168454135,
+      "gamma": 0.03458384531216491
+    }
+  },
+  "completed_outer_evaluations": 1
+}
