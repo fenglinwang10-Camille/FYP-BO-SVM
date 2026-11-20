@@ -1,0 +1,267 @@
+{
+  "protocol": {
+    "protocol": "frozen_extended_100_outer_evaluation_v1",
+    "outer_folds": 5,
+    "inner_folds": 5,
+    "outer_split_seed": 42,
+    "inner_split_seed": 1729,
+    "search_seed": 42,
+    "evaluations_per_method": 100,
+    "shared_initial_evaluations": 16,
+    "parameter_mapping": "uniform",
+    "search_space": {
+      "f_low": {
+        "low": 0.5,
+        "high": 5.0,
+        "prior": "uniform"
+      },
+      "f_high": {
+        "low": 30.0,
+        "high": 60.0,
+        "prior": "uniform"
+      },
+      "window_size": {
+        "low": 1.0,
+        "high": 5.0,
+        "prior": "uniform"
+      },
+      "C": {
+        "low": 0.1,
+        "high": 100.0,
+        "prior": "log-uniform"
+      },
+      "gamma": {
+        "low": 0.0001,
+        "high": 1.0,
+        "prior": "log-uniform"
+      }
+    },
+    "acquisition_function": "EI",
+    "xi": 0.01,
+    "acquisition_optimizer": "lbfgs",
+    "feature_setting": "nf_enhanced",
+    "feature_columns": 55,
+    "sampling_frequency": 173.61,
+    "class_weight": "balanced",
+    "window_overlap": 0.0,
+    "vote_rule": "majority vote; ties use maximum mean OVR decision score among vote-tied classes; exact score ties use lowest index",
+    "objective": "mean inner-fold recording accuracy after window majority vote",
+    "selection_ties": "earliest candidate with the highest inner CV accuracy",
+    "fixed_reference_parameters": {
+      "f_low": 0.5,
+      "f_high": 40.0,
+      "window_size": 2.0,
+      "C": 10.0,
+      "gamma": 0.1
+    },
+    "dataset_sha256": "4dd105e350c6ffd25fcdaf4b7734b1c6ecbd3954f93fbd5c98e5979ef29affd2",
+    "source_sha256": {
+      "nested_bo_rs.py": "9b1fcf809b05cc75a480bdd536a253c21f4cbab2677c76ed59f0a170ae9a057d",
+      "grouped_bo_optimizer.py": "6e91596bd257ae7417aa9f0db5ea33b2f62d250b11d9bc50f73af7aea968468c",
+      "grouped_method_comparison.py": "4e793bfa0a74ba8d8565e09d0cc75d223fa0c2e46afa6b72688ad185c1f3e07b",
+      "features.py": "5ccdcd97c6252e4bd73b9d74b4dbd734759278e35dc1a57c5c0cc94a0a5a94e9",
+      "preprocessing.py": "9693906ce891b2fee1894c5bdddfa887713a8a52d13e1a2c3240c8cbd95e157b",
+      "data_loader.py": "b5e8a46fea28c5153890246723e52604d50c748575b12a4fe4486d05227be3b2",
+      "parameter_priors.py": "629d1d1762c9f6baf4abb86d06625a26af7c3e5a3649e684399ebbb797848b3e",
+      "nested_score_tiebreak.py": "d74af7e785e7e2c03f20ef5d8b995e39fccf05fc1ba0d3d7116f8c34bec9bfb3",
+      "extend_nested_search.py": "0de96dac5b0536aa9b17deb590be9c1dc1e7e3eb1d92ee71af39f8d69a7d09fe",
+      "evaluate_extended_outer.py": "a15a177c183c99a60c407696d7511d18499ed7fe82539c6b9f0d902de757e77b"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2",
+      "scikit-optimize": "0.10.2",
+      "PyWavelets": "1.8.0",
+      "joblib": "1.5.3"
+    },
+    "python": "3.10.20",
+    "limitations": "Recording IDs are not subject IDs. Data were inspected in earlier development; this is a prospectively fixed reanalysis of the existing dataset, not new external data.",
+    "score_semantics": "SVC OVR decision scores are not calibrated probabilities",
+    "exploratory": true,
+    "development_note": "Tie rule selected after a 12-configuration inner-CV pilot on outer fold 1 training recordings. Existing dataset had been inspected in earlier experiments; supplementary reanalysis, not untouched external validation.",
+    "source_evaluations_per_method": 50,
+    "source_protocol_sha256": "8427fb56e7549ab0dc68aa560eb94e98d87a00cebbd7ed14676878976c0550d7",
+    "source_checkpoint_sha256": {
+      "1": "b8656bf20f7a305fd009e92d8fa65a969bdce690a6e3ca172fa3471ba56f1758",
+      "2": "1095ebae7976aa472a8d2384f95f9a06c53ef9d5e4d2e9f5e2ae5d536bae327b",
+      "3": "4de7f4a39069d38edca4eae38175f93bf6d9ce49d0aea1e7169958eecb6442c6",
+      "4": "f09dc6bdc198e94fdb9f278ff1580fefe5d0bd63a049beae527aa5c5b0ce28e5",
+      "5": "f97507a0a27ac9cf61d0310c2ddd04b091396eae7dda1fa6056b11c5dfd32bdc"
+    },
+    "outer_test_access": true,
+    "purpose": "Exploratory outer evaluation of frozen 100-candidate selections; not new external validation",
+    "continuation": "Preserve first 50 scores, GP and RNG state; continue both methods without reinitialisation",
+    "selection_source": "results\\14_training_search_extension_100\\split_42_inner_1729\\search_42",
+    "reuse_policy": "Identical selected parameters reuse verified experiment-13 outer predictions; others refitted once"
+  },
+  "methods": [
+    {
+      "method": "bo",
+      "folds": 5,
+      "mean_outer_accuracy": 0.8800000000000001,
+      "sd_outer_accuracy": 0.033166247903554026,
+      "pooled_outer_metrics": {
+        "accuracy": 0.88,
+        "macro_recall": 0.8800000000000001,
+        "macro_f1": 0.879274158558022,
+        "per_class_recall": {
+          "Z": 0.97,
+          "O": 0.85,
+          "N": 0.89,
+          "F": 0.71,
+          "S": 0.98
+        },
+        "confusion_matrix": [
+          [
+            97,
+            2,
+            0,
+            1,
+            0
+          ],
+          [
+            15,
+            85,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            89,
+            10,
+            0
+          ],
+          [
+            1,
+            0,
+            27,
+            71,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            98
+          ]
+        ]
+      }
+    },
+    {
+      "method": "rs",
+      "folds": 5,
+      "mean_outer_accuracy": 0.892,
+      "sd_outer_accuracy": 0.037013511046643494,
+      "pooled_outer_metrics": {
+        "accuracy": 0.892,
+        "macro_recall": 0.892,
+        "macro_f1": 0.890344460749547,
+        "per_class_recall": {
+          "Z": 0.99,
+          "O": 0.9,
+          "N": 0.9,
+          "F": 0.69,
+          "S": 0.98
+        },
+        "confusion_matrix": [
+          [
+            99,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            90,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            90,
+            9,
+            0
+          ],
+          [
+            0,
+            0,
+            27,
+            69,
+            4
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            98
+          ]
+        ]
+      }
+    },
+    {
+      "method": "fixed_reference",
+      "folds": 5,
+      "mean_outer_accuracy": 0.866,
+      "sd_outer_accuracy": 0.07503332592921627,
+      "pooled_outer_metrics": {
+        "accuracy": 0.866,
+        "macro_recall": 0.866,
+        "macro_f1": 0.8637167346933309,
+        "per_class_recall": {
+          "Z": 0.94,
+          "O": 0.88,
+          "N": 0.84,
+          "F": 0.68,
+          "S": 0.99
+        },
+        "confusion_matrix": [
+          [
+            94,
+            4,
+            0,
+            1,
+            1
+          ],
+          [
+            11,
+            88,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            84,
+            14,
+            1
+          ],
+          [
+            1,
+            0,
+            24,
+            68,
+            7
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            99
+          ]
+        ]
+      }
+    }
+  ],
+  "fold_variability_is_descriptive": true
+}

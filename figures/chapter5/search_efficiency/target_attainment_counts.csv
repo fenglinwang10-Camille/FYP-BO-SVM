@@ -1,0 +1,13 @@
+protocol,target_percent,method,reached_folds,total_folds
+original,87.0,bo,3,5
+original,87.0,rs,2,5
+original,88.0,bo,2,5
+original,88.0,rs,1,5
+original,89.0,bo,0,5
+original,89.0,rs,0,5
+score_tiebreak,87.0,bo,5,5
+score_tiebreak,87.0,rs,4,5
+score_tiebreak,88.0,bo,4,5
+score_tiebreak,88.0,rs,3,5
+score_tiebreak,89.0,bo,1,5
+score_tiebreak,89.0,rs,0,5

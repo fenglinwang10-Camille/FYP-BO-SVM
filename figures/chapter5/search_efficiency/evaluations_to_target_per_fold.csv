@@ -1,0 +1,61 @@
+protocol,outer_fold,method,target_percent,reached,first_evaluation,budget,not_reached_note
+original,1,bo,87.0,False,,50,Not reached within 50; right-censored
+original,1,bo,88.0,False,,50,Not reached within 50; right-censored
+original,1,bo,89.0,False,,50,Not reached within 50; right-censored
+original,1,rs,87.0,False,,50,Not reached within 50; right-censored
+original,1,rs,88.0,False,,50,Not reached within 50; right-censored
+original,1,rs,89.0,False,,50,Not reached within 50; right-censored
+original,2,bo,87.0,True,13,50,
+original,2,bo,88.0,True,13,50,
+original,2,bo,89.0,False,,50,Not reached within 50; right-censored
+original,2,rs,87.0,True,13,50,
+original,2,rs,88.0,True,13,50,
+original,2,rs,89.0,False,,50,Not reached within 50; right-censored
+original,3,bo,87.0,True,11,50,
+original,3,bo,88.0,True,50,50,
+original,3,bo,89.0,False,,50,Not reached within 50; right-censored
+original,3,rs,87.0,True,11,50,
+original,3,rs,88.0,False,,50,Not reached within 50; right-censored
+original,3,rs,89.0,False,,50,Not reached within 50; right-censored
+original,4,bo,87.0,False,,50,Not reached within 50; right-censored
+original,4,bo,88.0,False,,50,Not reached within 50; right-censored
+original,4,bo,89.0,False,,50,Not reached within 50; right-censored
+original,4,rs,87.0,False,,50,Not reached within 50; right-censored
+original,4,rs,88.0,False,,50,Not reached within 50; right-censored
+original,4,rs,89.0,False,,50,Not reached within 50; right-censored
+original,5,bo,87.0,True,48,50,
+original,5,bo,88.0,False,,50,Not reached within 50; right-censored
+original,5,bo,89.0,False,,50,Not reached within 50; right-censored
+original,5,rs,87.0,False,,50,Not reached within 50; right-censored
+original,5,rs,88.0,False,,50,Not reached within 50; right-censored
+original,5,rs,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,1,bo,87.0,True,11,50,
+score_tiebreak,1,bo,88.0,True,20,50,
+score_tiebreak,1,bo,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,1,rs,87.0,True,11,50,
+score_tiebreak,1,rs,88.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,1,rs,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,2,bo,87.0,True,3,50,
+score_tiebreak,2,bo,88.0,True,3,50,
+score_tiebreak,2,bo,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,2,rs,87.0,True,3,50,
+score_tiebreak,2,rs,88.0,True,3,50,
+score_tiebreak,2,rs,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,3,bo,87.0,True,11,50,
+score_tiebreak,3,bo,88.0,True,11,50,
+score_tiebreak,3,bo,89.0,True,37,50,
+score_tiebreak,3,rs,87.0,True,11,50,
+score_tiebreak,3,rs,88.0,True,11,50,
+score_tiebreak,3,rs,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,4,bo,87.0,True,33,50,
+score_tiebreak,4,bo,88.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,4,bo,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,4,rs,87.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,4,rs,88.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,4,rs,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,5,bo,87.0,True,3,50,
+score_tiebreak,5,bo,88.0,True,11,50,
+score_tiebreak,5,bo,89.0,False,,50,Not reached within 50; right-censored
+score_tiebreak,5,rs,87.0,True,3,50,
+score_tiebreak,5,rs,88.0,True,11,50,
+score_tiebreak,5,rs,89.0,False,,50,Not reached within 50; right-censored

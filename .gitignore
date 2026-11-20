@@ -88,3 +88,13 @@ desktop.ini
 /results/13_nested_score_tiebreak/**/run.lock
 /results/13_nested_score_tiebreak/**/background_process.json
 /results/13_nested_score_tiebreak/**/run_status.json
+
+/results/14_training_search_extension_100/**/*.tmp
+/results/14_training_search_extension_100/**/run.lock
+/results/14_training_search_extension_100/**/background_process.json
+/results/14_training_search_extension_100/**/run_status.json
+
+/results/16_extended_100_outer_evaluation/**/*.tmp
+/results/16_extended_100_outer_evaluation/**/run.lock
+/results/16_extended_100_outer_evaluation/**/background_process.json
+/results/16_extended_100_outer_evaluation/**/run_status.json

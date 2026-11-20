@@ -1,0 +1,13 @@
+target_percent,,87.0,88.0,89.0,87.0,88.0,89.0
+method,,bo,bo,bo,rs,rs,rs
+protocol,outer_fold,,,,,,
+original,1,Not reached,Not reached,Not reached,Not reached,Not reached,Not reached
+original,2,13,13,Not reached,13,13,Not reached
+original,3,11,50,Not reached,11,Not reached,Not reached
+original,4,Not reached,Not reached,Not reached,Not reached,Not reached,Not reached
+original,5,48,Not reached,Not reached,Not reached,Not reached,Not reached
+score_tiebreak,1,11,20,Not reached,11,Not reached,Not reached
+score_tiebreak,2,3,3,Not reached,3,3,Not reached
+score_tiebreak,3,11,11,37,11,11,Not reached
+score_tiebreak,4,33,Not reached,Not reached,Not reached,Not reached,Not reached
+score_tiebreak,5,3,11,Not reached,3,11,Not reached

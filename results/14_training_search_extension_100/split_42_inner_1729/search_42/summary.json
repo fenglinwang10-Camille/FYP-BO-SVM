@@ -1,0 +1,107 @@
+{
+  "training_only": true,
+  "outer_test_access": false,
+  "evaluations_per_method": 100,
+  "results": [
+    {
+      "outer_fold": 1,
+      "method": "bo",
+      "evaluations": 100,
+      "best_at_50": 0.8825000000000001,
+      "best_current": 0.8850000000000001,
+      "gain_after_50_pp": 0.2500000000000058,
+      "last_improvement": 96,
+      "evaluations_since_improvement": 4
+    },
+    {
+      "outer_fold": 1,
+      "method": "rs",
+      "evaluations": 100,
+      "best_at_50": 0.8724999999999999,
+      "best_current": 0.8825000000000001,
+      "gain_after_50_pp": 1.000000000000012,
+      "last_improvement": 88,
+      "evaluations_since_improvement": 12
+    },
+    {
+      "outer_fold": 2,
+      "method": "bo",
+      "evaluations": 100,
+      "best_at_50": 0.8825,
+      "best_current": 0.9,
+      "gain_after_50_pp": 1.750000000000007,
+      "last_improvement": 80,
+      "evaluations_since_improvement": 20
+    },
+    {
+      "outer_fold": 2,
+      "method": "rs",
+      "evaluations": 100,
+      "best_at_50": 0.8825,
+      "best_current": 0.8825000000000001,
+      "gain_after_50_pp": 1.1102230246251565e-14,
+      "last_improvement": 13,
+      "evaluations_since_improvement": 87
+    },
+    {
+      "outer_fold": 3,
+      "method": "bo",
+      "evaluations": 100,
+      "best_at_50": 0.8925000000000001,
+      "best_current": 0.8925000000000001,
+      "gain_after_50_pp": 0.0,
+      "last_improvement": 37,
+      "evaluations_since_improvement": 63
+    },
+    {
+      "outer_fold": 3,
+      "method": "rs",
+      "evaluations": 100,
+      "best_at_50": 0.8825,
+      "best_current": 0.8949999999999999,
+      "gain_after_50_pp": 1.2499999999999956,
+      "last_improvement": 88,
+      "evaluations_since_improvement": 12
+    },
+    {
+      "outer_fold": 4,
+      "method": "bo",
+      "evaluations": 100,
+      "best_at_50": 0.8775000000000001,
+      "best_current": 0.8775000000000001,
+      "gain_after_50_pp": 0.0,
+      "last_improvement": 36,
+      "evaluations_since_improvement": 64
+    },
+    {
+      "outer_fold": 4,
+      "method": "rs",
+      "evaluations": 100,
+      "best_at_50": 0.8674999999999999,
+      "best_current": 0.875,
+      "gain_after_50_pp": 0.7500000000000062,
+      "last_improvement": 88,
+      "evaluations_since_improvement": 12
+    },
+    {
+      "outer_fold": 5,
+      "method": "bo",
+      "evaluations": 100,
+      "best_at_50": 0.885,
+      "best_current": 0.9,
+      "gain_after_50_pp": 1.5000000000000013,
+      "last_improvement": 100,
+      "evaluations_since_improvement": 0
+    },
+    {
+      "outer_fold": 5,
+      "method": "rs",
+      "evaluations": 100,
+      "best_at_50": 0.8799999999999999,
+      "best_current": 0.8799999999999999,
+      "gain_after_50_pp": 0.0,
+      "last_improvement": 11,
+      "evaluations_since_improvement": 89
+    }
+  ]
+}
