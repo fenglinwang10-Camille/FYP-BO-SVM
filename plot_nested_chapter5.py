@@ -28,7 +28,7 @@ def search_axis(ax):
     ax.grid(axis='y', color='#DFE6EC', lw=.65)
 
 
-def main():
+def main(figure_51_only=False):
     OUT.mkdir(exist_ok=True)
     histories = {method: [] for method in ['bo', 'rs']}
     for k in range(1, 6):
@@ -49,34 +49,57 @@ def main():
     plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9,
                          'axes.spines.top': False, 'axes.spines.right': False,
                          'axes.axisbelow': True})
-    fig, axes = plt.subplots(2, 1, figsize=(7.15, 6.5), layout='constrained')
-    colors = ['#096398', '#B4522A', '#12836F', '#835691', '#686C32']
-    for k, (values, color) in enumerate(zip(best['bo'], colors), 1):
-        axes[0].step(x, values, where='post', lw=1.6, color=color, label=f'Fold {k}')
-    search_axis(axes[0])
-    axes[0].set_ylim(np.floor(best['bo'].min()/5)*5-1, 90)
-    axes[0].set_title('(a) BO search history in each outer fold', loc='left', fontsize=10)
-    axes[0].legend(ncols=3, frameon=False, fontsize=8, loc='lower right')
+    fig = plt.figure(figsize=(7.15, 7.0), layout='constrained')
+    layout = fig.add_gridspec(2, 1, height_ratios=[1, 1.08])
+    history = fig.add_subplot(layout[0])
+    phase_layout = layout[1].subgridspec(2, 1, height_ratios=[4.8, 1], hspace=.04)
+    upper = fig.add_subplot(phase_layout[0])
+    lower = fig.add_subplot(phase_layout[1], sharex=upper)
+    mean = best['bo'].mean(axis=0)
+    sd = best['bo'].std(axis=0, ddof=1)
+    for k, values in enumerate(best['bo']):
+        history.step(x, values, where='post', lw=.9, color=BLUE, alpha=.30,
+                     label='Individual outer fold' if k == 0 else None)
+    history.fill_between(x, mean-sd, mean+sd, step='post', color=BLUE,
+                         alpha=.13, linewidth=0, label='Mean ± sample SD')
+    history.step(x, mean, where='post', color=BLUE, lw=2.2, label='Mean')
+    search_axis(history)
+    history.set_ylim(75, 90)
+    history.set_yticks([75, 80, 85, 90])
+    history.set_title('(a) Uniform BO search histories', loc='left', fontsize=10)
+    history.legend(ncols=2, frameon=False, fontsize=8, loc='lower right')
     rng = np.random.default_rng(42)
     positions = np.arange(1, 6)
     for values, offset, color, fill in [(histories['bo'][:, :16], -.18, ORANGE, '#F4E2D8'),
                                        (histories['bo'][:, 16:], .18, BLUE, '#DDECF6')]:
-        axes[1].boxplot(values.T, positions=positions+offset, widths=.28,
-                        manage_ticks=False, patch_artist=True, showfliers=False,
-                        boxprops={'facecolor': fill, 'edgecolor': color},
-                        medianprops={'color': color, 'linewidth': 1.5},
-                        whiskerprops={'color': color}, capprops={'color': color})
-        for position, run in zip(positions+offset, values):
-            axes[1].scatter(position+rng.uniform(-.075, .075, len(run)), run,
-                            s=10, color=color, alpha=.45, linewidths=0)
-    axes[1].set(xlim=(.5, 5.5), ylim=(0, 100), yticks=range(0, 101, 20),
-                xticks=positions, xlabel='Outer fold', ylabel='Candidate inner-CV accuracy (%)')
-    axes[1].grid(axis='y', color='#DFE6EC', lw=.65)
-    axes[1].set_title('(b) BO candidate scores before and after initialisation', loc='left', fontsize=10)
-    axes[1].legend(handles=[Patch(facecolor='#F4E2D8', edgecolor=ORANGE, label='Evaluations 1–16'),
-                            Patch(facecolor='#DDECF6', edgecolor=BLUE, label='Evaluations 17–50')],
-                   loc='lower right', ncols=2, frameon=False, fontsize=8)
-    save(fig, 'fig5_1_nested_bo_history_and_phases.png')
+        jitter = rng.uniform(-.075, .075, values.shape)
+        for ax in (upper, lower):
+            ax.boxplot(values.T, positions=positions+offset, widths=.28,
+                       manage_ticks=False, patch_artist=True, showfliers=False,
+                       boxprops={'facecolor': fill, 'edgecolor': color},
+                       medianprops={'color': color, 'linewidth': 1.5},
+                       whiskerprops={'color': color}, capprops={'color': color})
+            for position, run, noise in zip(positions+offset, values, jitter):
+                ax.scatter(position+noise, run, s=11, color=color, alpha=.45, linewidths=0)
+    upper.set(xlim=(.5, 5.5), ylim=(40, 92), yticks=range(40, 91, 10),
+              ylabel='Candidate inner-CV accuracy (%)')
+    lower.set(ylim=(18, 40), yticks=[20, 30], xticks=positions, xlabel='Outer fold')
+    upper.tick_params(axis='x', bottom=False, labelbottom=False)
+    upper.spines['bottom'].set_visible(False)
+    lower.spines['top'].set_visible(False)
+    for ax, edge in ((upper, 0), (lower, 1)):
+        ax.grid(axis='y', color='#DFE6EC', lw=.65)
+        ax.plot([0], [edge], transform=ax.transAxes, marker=[(-1,-.6), (1,.6)],
+                markersize=7, color='#333333', linestyle='none', clip_on=False)
+    upper.set_title('(b) BO candidate scores by phase', loc='left', fontsize=10)
+    upper.legend(handles=[Patch(facecolor='#F4E2D8', edgecolor=ORANGE, label='Evaluations 1–16'),
+                           Patch(facecolor='#DDECF6', edgecolor=BLUE, label='Evaluations 17–50')],
+                  loc='lower right', bbox_to_anchor=(1, 1.02), ncols=2,
+                  frameon=False, fontsize=7.2, borderaxespad=0,
+                  handlelength=1.7, columnspacing=1.0)
+    save(fig, 'fig5_1_nested_bo_history_mean_sd.png')
+    if figure_51_only:
+        return
 
     fig, axes = plt.subplots(2, 1, figsize=(7.15, 6.3), layout='constrained')
     for method, color, label, line in [('rs', ORANGE, 'Random search', '--'), ('bo', BLUE, 'BO', '-')]:
@@ -143,4 +166,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--figure-51-only', action='store_true')
+    main(figure_51_only=parser.parse_args().figure_51_only)
