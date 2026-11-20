@@ -23,7 +23,7 @@ def save(fig, name):
 
 def search_axis(ax):
     ax.axvline(16, color='#67707A', lw=1, ls=(0, (3, 3)))
-    ax.set(xlim=(1, 50), xticks=[1, 10, 16, 20, 30, 40, 50],
+    ax.set(xlim=(.5, 50.5), xticks=[1, 10, 16, 20, 30, 40, 50],
            xlabel='Candidate evaluations', ylabel='Best inner-CV accuracy (%)')
     ax.grid(axis='y', color='#DFE6EC', lw=.65)
 
@@ -80,7 +80,9 @@ def main(figure_51_only=False):
                        medianprops={'color': color, 'linewidth': 1.5},
                        whiskerprops={'color': color}, capprops={'color': color})
             for position, run, noise in zip(positions+offset, values, jitter):
-                ax.scatter(position+noise, run, s=11, color=color, alpha=.45, linewidths=0)
+                mask = run >= 70 if ax is upper else run < 70
+                ax.scatter((position+noise)[mask], run[mask], s=11,
+                           color=color, alpha=.45, linewidths=0)
     upper.set(xlim=(.5, 5.5), ylim=(70, 90), yticks=range(70, 91, 5),
               ylabel='Candidate inner-CV accuracy (%)')
     lower.set(ylim=(18, 70), yticks=[20, 40, 60], xticks=positions, xlabel='Outer fold')
