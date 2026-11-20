@@ -81,9 +81,9 @@ def main(figure_51_only=False):
                        whiskerprops={'color': color}, capprops={'color': color})
             for position, run, noise in zip(positions+offset, values, jitter):
                 ax.scatter(position+noise, run, s=11, color=color, alpha=.45, linewidths=0)
-    upper.set(xlim=(.5, 5.5), ylim=(40, 92), yticks=range(40, 91, 10),
+    upper.set(xlim=(.5, 5.5), ylim=(70, 90), yticks=range(70, 91, 5),
               ylabel='Candidate inner-CV accuracy (%)')
-    lower.set(ylim=(18, 40), yticks=[20, 30], xticks=positions, xlabel='Outer fold')
+    lower.set(ylim=(18, 70), yticks=[20, 40, 60], xticks=positions, xlabel='Outer fold')
     upper.tick_params(axis='x', bottom=False, labelbottom=False)
     upper.spines['bottom'].set_visible(False)
     lower.spines['top'].set_visible(False)
